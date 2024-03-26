@@ -35,5 +35,11 @@ namespace WindowsFormsApp1
             abrir1.Show();
             this.Hide();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Conexion objetoconexion = new Conexion();
+            objetoconexion.establecerconexion();
+        }
     }
 }
