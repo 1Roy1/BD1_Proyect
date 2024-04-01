@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,6 +41,39 @@ namespace WindowsFormsApp1
         {
             Conexion objetoconexion = new Conexion();
             objetoconexion.establecerconexion();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void VentanaInventario_Load(object sender, EventArgs e)
+        {
+            string servidor = "localhost";
+            string bd = "proyecto";
+            string usuario = "root";
+            string password = "Rod2102777";
+            string puerto = "3306";
+            string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            try
+            {
+                connection.Open();
+                string sqlQuery = "SELECT * FROM inventario";
+                DataTable dataTable = new DataTable();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
+                adapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }
