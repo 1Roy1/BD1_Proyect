@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp1
 {
@@ -16,6 +17,7 @@ namespace WindowsFormsApp1
         public VentanaVentas()
         {
             InitializeComponent();
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,6 +45,21 @@ namespace WindowsFormsApp1
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                textBox1.Text = selectedRow.Cells["ID"].Value.ToString();
+                textBox2.Text = selectedRow.Cells["Nombre"].Value.ToString();
+                textBox3.Text = selectedRow.Cells["Descripcion"].Value.ToString();
+                textBox4.Text = selectedRow.Cells["Existencias"].Value.ToString();
+                textBox6.Text = selectedRow.Cells["Precio"].Value.ToString();
+                textBox7.Text = selectedRow.Cells["Marca"].Value.ToString();
+            }
         }
 
         private void VentanaVentas_Load(object sender, EventArgs e)
