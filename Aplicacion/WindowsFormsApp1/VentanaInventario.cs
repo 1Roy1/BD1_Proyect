@@ -54,17 +54,17 @@ namespace WindowsFormsApp1
         }
         private void CargarDatos()
         {
-            string servidor = "127.0.0.3";
-            string bd = "catalog";
+            string servidor = "localhost";
+            string bd = "proyecto";
             string usuario = "root";
-            string password = "root123";
+            string password = "Rod2102777";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT * FROM catalog.producto";
+                string sqlQuery = "SELECT * FROM inventario";
 
                 if (comboBox1.SelectedItem != null)
                 {
@@ -75,13 +75,32 @@ namespace WindowsFormsApp1
                     }
                     else if (sortBy == "Cantidad de Producto (Mayor)")
                     {
-                        sqlQuery += " ORDER BY Existencia DESC";
+                        sqlQuery += " ORDER BY Existencias DESC";
                     }
                     else if (sortBy == "Cantidad de Producto (Menor)")
                     {
-                        sqlQuery += " ORDER BY Existencia ASC";
+                        sqlQuery += " ORDER BY Existencias ASC";
                     }
-                    
+                    else if (sortBy == "ID")
+                    {
+                        sqlQuery += " ORDER BY ID ASC";
+                    }
+                    else if (sortBy == "Costo (Mayor)")
+                    {
+                        sqlQuery += " ORDER BY Costo DESC";
+                    }
+                    else if (sortBy == "Costo (Menor)")
+                    {
+                        sqlQuery += " ORDER BY Costo ASC";
+                    }
+                    else if (sortBy == "Precio (Mayor)")
+                    {
+                        sqlQuery += " ORDER BY Precio DESC";
+                    }
+                    else if (sortBy == "Precio (Menor)")
+                    {
+                        sqlQuery += " ORDER BY Precio ASC";
+                    }
                 }
 
                 DataTable dataTable = new DataTable();
