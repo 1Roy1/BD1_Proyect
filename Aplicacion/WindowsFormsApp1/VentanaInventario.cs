@@ -80,7 +80,8 @@ namespace WindowsFormsApp1
                     else if (sortBy == "Cantidad de Producto (Menor)")
                     {
                         sqlQuery += " ORDER BY Existencia ASC";
-                    }   
+                    }
+                    
                 }
 
                 DataTable dataTable = new DataTable();
