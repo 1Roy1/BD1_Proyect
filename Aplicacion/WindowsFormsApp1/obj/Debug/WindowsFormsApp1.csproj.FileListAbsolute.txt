@@ -184,3 +184,6 @@ C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\BouncyCastle.Crypto.dll
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\itextsharp.dll
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\itextsharp.xml
+C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\itextsharp.dll
+C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\itextsharp.xml

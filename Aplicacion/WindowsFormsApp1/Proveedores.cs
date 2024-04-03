@@ -49,11 +49,9 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "INSERT INTO proveedores(ID, Proveedor, Asesor, Numero) VALUES (@ID, @Proveedor, @Asesor, @Numero)";
+                    string sqlQuery = "INSERT INTO proveedores(Proveedor, Asesor, Numero) VALUES (@Proveedor, @Asesor, @Numero)";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                    int id = Convert.ToInt32(textBox4.Text);
                     int numero = Convert.ToInt32(textBox5.Text);
-                    cmd.Parameters.AddWithValue("@ID", id);
                     cmd.Parameters.AddWithValue("@Proveedor", textBox2.Text);
                     cmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
                     cmd.Parameters.AddWithValue("@Numero", numero);
@@ -254,7 +252,7 @@ namespace WindowsFormsApp1
             {
                 e.Handled = false;
             }
-            else if (char.IsControl(e.KeyChar))
+            else if (char.IsControl(e.KeyChar) || e.KeyChar == ' ')
             {
                 e.Handled = false;
             }
@@ -293,7 +291,7 @@ namespace WindowsFormsApp1
             {
                 e.Handled = false;
             }
-            else if (char.IsControl(e.KeyChar))
+            else if (char.IsControl(e.KeyChar) || e.KeyChar == ' ')
             {
                 e.Handled = false;
             }
