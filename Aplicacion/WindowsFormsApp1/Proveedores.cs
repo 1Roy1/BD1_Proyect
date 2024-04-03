@@ -23,60 +23,32 @@ namespace WindowsFormsApp1
             InitializeComponent();
             CargarDatos();
         }
-        private void RespaldarProveedor(int id)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
-                {
-                    connection.Open();
-                    // Obtener los datos del proveedor que se va a respaldar
-                    string obtenerQuery = "SELECT * FROM proveedores WHERE ID = @ID";
-                    MySqlCommand obtenerCmd = new MySqlCommand(obtenerQuery, connection);
-                    obtenerCmd.Parameters.AddWithValue("@ID", id);
-                    MySqlDataReader reader = obtenerCmd.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        // Insertar los datos del proveedor en la tabla de respaldo
-                        string respaldoQuery = "INSERT INTO proveedores_respaldo (Proveedor, Asesor, Numero) VALUES (@Proveedor, @Asesor, @Numero)";
-                        MySqlCommand respaldoCmd = new MySqlCommand(respaldoQuery, connection);
-                        respaldoCmd.Parameters.AddWithValue("@Proveedor", reader["Proveedor"]);
-                        respaldoCmd.Parameters.AddWithValue("@Asesor", reader["Asesor"]);
-                        respaldoCmd.Parameters.AddWithValue("@Numero", reader["Numero"]);
-                        respaldoCmd.ExecuteNonQuery();
-                    }
-                    reader.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al respaldar el proveedor: " + ex.Message);
-            }
-        }
 
         private void EliminarProveedor(int id)
         {
             try
             {
-                // Respaldar el proveedor antes de eliminarlo
-                RespaldarProveedor(id);
-
-                // Eliminar el proveedor de la tabla principal
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "DELETE FROM proveedores WHERE ID = @ID";
+                    string sqlQuery2 = "DELETE FROM proveedores WHERE ID = @ID";
+                    MySqlCommand cmd2 = new MySqlCommand(sqlQuery2, connection);
+                    cmd2.Parameters.AddWithValue("@ID", textBox4.Text);
+                    cmd2.ExecuteNonQuery(); 
+                    string sqlQuery = "INSERT INTO proveedores_respaldo(Proveedor, Asesor, Numero) VALUES (@Proveedor, @Asesor, @Numero)";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                    cmd.Parameters.AddWithValue("@ID", id);
+                    int numero = Convert.ToInt32(textBox5.Text);
+                    cmd.Parameters.AddWithValue("@Proveedor", textBox2.Text);
+                    cmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
+                    cmd.Parameters.AddWithValue("@Numero", numero);
                     cmd.ExecuteNonQuery();
                 }
-                CargarDatos(); // Recargar los datos en el DataGridView después de la eliminación
-                LimpiarCampos(); // Limpiar los campos de texto después de la eliminación
+                CargarDatos(); // Recargar los datos en el DataGridView después de la inserción
+                LimpiarCampos(); // Limpiar los campos de texto después de la inserción
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar el proveedor: " + ex.Message);
+                MessageBox.Show("Error al insertar el proveedor: " + ex.Message);
             }
         }
         private void CargarDatos()
