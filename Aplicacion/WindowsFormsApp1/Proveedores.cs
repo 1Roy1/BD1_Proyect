@@ -173,5 +173,23 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_SelectionChanged_1(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                textBox4.Text = selectedRow.Cells["ID"].Value.ToString();
+                textBox2.Text = selectedRow.Cells["Proveedor"].Value.ToString();
+                textBox3.Text = selectedRow.Cells["Asesor"].Value.ToString();
+                textBox5.Text = selectedRow.Cells["Numero"].Value.ToString();
+            }
+        }
     }
 }
