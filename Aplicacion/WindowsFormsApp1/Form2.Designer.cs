@@ -66,10 +66,11 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(133, 383);
+            this.textBox5.Location = new System.Drawing.Point(133, 301);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(355, 20);
             this.textBox5.TabIndex = 4;
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // textBox6
             // 
@@ -80,7 +81,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(133, 301);
+            this.textBox7.Location = new System.Drawing.Point(133, 383);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(355, 20);
             this.textBox7.TabIndex = 6;
@@ -176,6 +177,7 @@
             this.button1.TabIndex = 16;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
