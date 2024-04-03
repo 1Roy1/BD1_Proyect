@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -111,6 +112,70 @@ namespace WindowsFormsApp1
         }
 
         private void NuevoProducto_Load(object sender, EventArgs e)
+        {
+            MySqlConnection connection;
+            string servidor = "localhost";
+            string bd = "proyecto";
+            string usuario = "root";
+            string password = "Rod2102777";
+            string puerto = "3306";
+            string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
+            connection = new MySqlConnection(cadenaConexion);
+
+            try
+            {
+                String id_str = textBox1.Text;
+                int id = Convert.ToInt32(id_str);
+
+                String name = textBox2.Text;
+                String desc = textBox3.Text;
+                String exist_str = textBox4.Text;
+                int exist = Convert.ToInt32(exist_str);
+
+                String price_str = textBox5.Text;
+                float price = Convert.ToSingle(price_str);
+
+                String cost_str = textBox6.Text;
+                float cost = Convert.ToSingle(cost_str);
+
+                String marca = textBox7.Text;
+
+                connection.Open();
+
+                string sqlQuery = $"INSERT INTO inventario(ID, Nombre, Descripcion, Existencias, Precio, Costo, Marca) VALUES (@ID, @Name, @descrip, @exist, @price, @cost, @mar ) ";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@descrip", desc);
+                cmd.Parameters.AddWithValue("@exist", exist);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@cost", cost);
+                cmd.Parameters.AddWithValue("@mar", marca);
+
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Datos actualizados correctamente.");
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el registro con el ID proporcionado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }
