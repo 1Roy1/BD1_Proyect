@@ -1,10 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\",
+  "WorkspaceRootPath": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|c:\\users\\luist\\onedrive\\escritorio\\1er semestre 2024\\base de datos i\\proyecto_db\\bd1_proyect\\aplicacion\\windowsformsapp1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|c:\\users\\luist\\onedrive\\escritorio\\1er semestre 2024\\base de datos i\\proyecto_db\\bd1_proyect\\aplicacion\\windowsformsapp1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanaventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanaventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|c:\\users\\luist\\onedrive\\escritorio\\1er semestre 2024\\base de datos i\\proyecto_db\\bd1_proyect\\aplicacion\\windowsformsapp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,12 +51,99 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Form2.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form2.cs",
+              "RelativeDocumentMoniker": "Form2.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form2.cs*",
+              "RelativeToolTip": "Form2.cs*",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAgwEQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T01:00:55.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form2.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form2.cs",
+              "RelativeDocumentMoniker": "Form2.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form2.cs [Dise\u00F1o]*",
+              "RelativeToolTip": "Form2.cs [Dise\u00F1o]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T00:58:08.637Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAgwBkAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T00:36:10.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VentanaVentas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaVentas.cs",
+              "RelativeDocumentMoniker": "VentanaVentas.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaVentas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "VentanaVentas.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-23T21:40:14.685Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "VentanaInventario.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaInventario.cs",
+              "RelativeDocumentMoniker": "VentanaInventario.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaInventario.cs [Dise\u00F1o]",
+              "RelativeToolTip": "VentanaInventario.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-23T21:37:39.611Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-23T20:42:15.231Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "VentanaInventario.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaInventario.cs",
+              "RelativeDocumentMoniker": "VentanaInventario.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaInventario.cs",
+              "RelativeToolTip": "VentanaInventario.cs",
+              "ViewState": "AQIAAGIAAAAAAAAAAAAgwG4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-26T01:15:50.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Conexion.cs",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
               "RelativeDocumentMoniker": "Conexion.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\proyecto_DB\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
               "RelativeToolTip": "Conexion.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAoAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-26T01:05:24.517Z",
               "EditorCaption": ""

@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+    
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -40,6 +40,32 @@ namespace WindowsFormsApp1
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo numeros", "Advertencia", MessageBoxButtons.OK);
+            }
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo numeros", "Advertencia", MessageBoxButtons.OK);
+            }
         }
     }
 }
