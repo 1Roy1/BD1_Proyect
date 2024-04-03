@@ -181,3 +181,6 @@ C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\Nueva carpe
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.NuevoProducto.resources
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.NuevoProducto.resources
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Proveedores.resources
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\BouncyCastle.Crypto.dll
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\itextsharp.dll
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\itextsharp.xml
