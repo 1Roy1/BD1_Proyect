@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form2 : Form
+    public partial class NuevoProducto : Form
     {
-        public Form2()
+        public NuevoProducto()
         {
             InitializeComponent();
         }
@@ -48,6 +48,10 @@ namespace WindowsFormsApp1
             {
                 e.Handled = false;
             }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false ;
+            }
             else
             {
                 e.Handled = true;
@@ -61,11 +65,54 @@ namespace WindowsFormsApp1
             {
                 e.Handled = false;
             }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
             else
             {
                 e.Handled = true;
                 MessageBox.Show("Ingrese solo numeros", "Advertencia", MessageBoxButtons.OK);
             }
+        }
+
+        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsControl(e.KeyChar)|| e.KeyChar == '.')
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo numeros o punto", "Advertencia", MessageBoxButtons.OK);
+            }
+        }
+
+        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsControl(e.KeyChar) || e.KeyChar == '.')
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo numeros o punto", "Advertencia", MessageBoxButtons.OK);
+            }
+        }
+
+        private void NuevoProducto_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
