@@ -125,7 +125,6 @@ D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Diagnostics.Diagnost
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Memory.xml
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Numerics.Vectors.xml
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Extensions.xml
-D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\MySql.Data.dll
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Configuration.ConfigurationManager.dll
@@ -180,3 +179,4 @@ C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\Nueva carpe
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\Nueva carpeta\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\Nueva carpeta\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\Nueva carpeta\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.NuevoProducto.resources
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.NuevoProducto.resources
