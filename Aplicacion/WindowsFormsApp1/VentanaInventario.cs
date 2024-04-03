@@ -148,5 +148,13 @@ namespace WindowsFormsApp1
         {
             CargarDatos();
         }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Proveedores abrir1 = new Proveedores();
+            abrir1.Show();
+            this.Hide();
+
+        }
     }
 }

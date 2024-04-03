@@ -193,5 +193,12 @@ namespace WindowsFormsApp1
                 connection.Close();
             }
         }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Proveedores abrir = new Proveedores();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }

@@ -38,5 +38,12 @@ namespace WindowsFormsApp1
             abrir1.Show();
             this.Hide();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Proveedores abrir1 = new Proveedores();
+            abrir1.Show();
+            this.Hide();
+        }
     }
 }

@@ -133,3 +133,4 @@ C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Proveedores.resources
