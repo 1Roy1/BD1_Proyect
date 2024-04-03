@@ -80,5 +80,12 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form2 nuevoProd = new Form2();
+            nuevoProd.ShowDialog();
+
+        }
     }
 }
