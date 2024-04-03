@@ -156,5 +156,10 @@ namespace WindowsFormsApp1
             this.Hide();
 
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            CargarDatos();
+        }
     }
 }

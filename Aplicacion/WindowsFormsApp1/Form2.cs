@@ -79,19 +79,7 @@ namespace WindowsFormsApp1
 
         private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (char.IsControl(e.KeyChar)|| e.KeyChar == '.')
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo numeros o punto", "Advertencia", MessageBoxButtons.OK);
-            }
+            
         }
 
         private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
@@ -112,6 +100,38 @@ namespace WindowsFormsApp1
         }
 
         private void NuevoProducto_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsControl(e.KeyChar) || e.KeyChar == '.')
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo numeros o punto", "Advertencia", MessageBoxButtons.OK);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             MySqlConnection connection;
             string servidor = "localhost";
@@ -159,6 +179,7 @@ namespace WindowsFormsApp1
                 if (rowsAffected > 0)
                 {
                     MessageBox.Show("Datos actualizados correctamente.");
+                    this.Close();
                 }
                 else
                 {
@@ -173,11 +194,6 @@ namespace WindowsFormsApp1
             {
                 connection.Close();
             }
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
