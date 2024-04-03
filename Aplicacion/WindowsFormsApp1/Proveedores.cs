@@ -46,12 +46,14 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "INSERT INTO proveedores (ID, Proveedor, Asesor, Numero) VALUES (@ID, @Nombre, @Asesor, @Numero)";
+                    string sqlQuery = "INSERT INTO proveedores(ID, Proveedor, Asesor, Numero) VALUES (@ID, @Proveedor, @Asesor, @Numero)";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                    cmd.Parameters.AddWithValue("@ID", textBox4.Text);
+                    int id = Convert.ToInt32(textBox4.Text);
+                    int numero = Convert.ToInt32(textBox5.Text);
+                    cmd.Parameters.AddWithValue("@ID", id);
                     cmd.Parameters.AddWithValue("@Proveedor", textBox2.Text);
                     cmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
-                    cmd.Parameters.AddWithValue("@Numero", textBox5.Text);
+                    cmd.Parameters.AddWithValue("@Numero", numero);
                     cmd.ExecuteNonQuery();
                 }
                 CargarDatos(); // Recargar los datos en el DataGridView después de la inserción
@@ -88,12 +90,11 @@ namespace WindowsFormsApp1
         // Método para limpiar los campos de texto
         private void LimpiarCampos()
         {
-            textBox4.Text = "";
-            textBox3.Text = "";
-            textBox2.Text = "";
-            textBox5.Text = "";
+            textBox4.Clear();
+            textBox3.Clear();
+            textBox2.Clear();
+            textBox5.Clear();
         }
-        // Método para buscar un proveedor por nombre
         // Método para buscar un proveedor por nombre
         private void BuscarPorNombre()
         {
@@ -102,7 +103,7 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT * FROM proveedores WHERE Nombre LIKE @Nombre";
+                    string sqlQuery = "SELECT * FROM proveedores WHERE Proveedor LIKE @Nombre";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
                     cmd.Parameters.AddWithValue("@Nombre", "%" + textBox1.Text + "%");
                     DataTable dataTable = new DataTable();
@@ -164,6 +165,11 @@ namespace WindowsFormsApp1
         }
 
         private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Proveedores_Load(object sender, EventArgs e)
         {
 
         }
