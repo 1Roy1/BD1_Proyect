@@ -50,17 +50,39 @@ namespace WindowsFormsApp1
 
         private void VentanaInventario_Load(object sender, EventArgs e)
         {
-            string servidor = "localhost";
-            string bd = "proyecto";
+            CargarDatos();
+        }
+        private void CargarDatos()
+        {
+            string servidor = "127.0.0.3";
+            string bd = "catalog";
             string usuario = "root";
-            string password = "Rod2102777";
+            string password = "root123";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT * FROM inventario";
+                string sqlQuery = "SELECT * FROM catalog.producto";
+
+                if (comboBox1.SelectedItem != null)
+                {
+                    string sortBy = comboBox1.SelectedItem.ToString();
+                    if (sortBy == "Nombre de producto")
+                    {
+                        sqlQuery += " ORDER BY Nombre ASC";
+                    }
+                    else if (sortBy == "Cantidad de Producto (Mayor)")
+                    {
+                        sqlQuery += " ORDER BY Existencia DESC";
+                    }
+                    else if (sortBy == "Cantidad de Producto (Menor)")
+                    {
+                        sqlQuery += " ORDER BY Existencia ASC";
+                    }   
+                }
+
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
@@ -86,6 +108,25 @@ namespace WindowsFormsApp1
             Form2 nuevoProd = new Form2();
             nuevoProd.ShowDialog();
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = textBox1.Text.Trim();
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("Nombre LIKE '%{0}%'", filtro);
+            }
+            else
+            {
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarDatos();
         }
     }
 }

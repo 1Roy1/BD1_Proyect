@@ -33,8 +33,6 @@ D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Buffers.xml
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\K4os.Compression.LZ4.xml
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.IO.Pipelines.xml
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\K4os.Hash.xxHash.xml
-D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
-D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.config
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsF.A1EEDF9B.Up2Date
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
@@ -121,3 +119,12 @@ C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\proyecto_DB
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\proyecto_DB\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\proyecto_DB\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsF.A1EEDF9B.Up2Date
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\proyecto_DB\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Memory.xml
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Numerics.Vectors.xml
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
