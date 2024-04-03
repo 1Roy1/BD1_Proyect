@@ -45,5 +45,10 @@ namespace WindowsFormsApp1
             abrir1.Show();
             this.Hide();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
