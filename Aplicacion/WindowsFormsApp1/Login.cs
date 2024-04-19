@@ -16,5 +16,29 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            string user = " ";
+            string pass = " ";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            textBox1.Text = "Usuario";
+            textBox1.ForeColor = Color.Gray;
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            textBox2.Text = "Usuario";
+            textBox2.ForeColor = Color.Gray;
+        }
     }
 }
