@@ -338,5 +338,15 @@ namespace WindowsFormsApp1
                 MessageBox.Show("¡Ingrese solo letras!", "Advertencia", MessageBoxButtons.OK);
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            InsertarProveedor();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -161,5 +161,11 @@ namespace WindowsFormsApp1
         {
             CargarDatos();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            NuevoProducto nuevoProd = new NuevoProducto();
+            nuevoProd.ShowDialog();
+        }
     }
 }
