@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
 {
     public partial class Proveedores : Form
     {
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
         public Proveedores()
         {
             InitializeComponent();
@@ -31,24 +31,17 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery2 = "DELETE FROM proveedores WHERE ID = @ID";
-                    MySqlCommand cmd2 = new MySqlCommand(sqlQuery2, connection);
-                    cmd2.Parameters.AddWithValue("@ID", textBox4.Text);
-                    cmd2.ExecuteNonQuery(); 
-                    string sqlQuery = "INSERT INTO proveedores_respaldo(Proveedor, Asesor, Numero) VALUES (@Proveedor, @Asesor, @Numero)";
+                    string sqlQuery = "UPDATE proveedores SET Activo = 0 WHERE ID = @ID";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                    int numero = Convert.ToInt32(textBox5.Text);
-                    cmd.Parameters.AddWithValue("@Proveedor", textBox2.Text);
-                    cmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
-                    cmd.Parameters.AddWithValue("@Numero", numero);
+                    cmd.Parameters.AddWithValue("@ID", id);
                     cmd.ExecuteNonQuery();
                 }
-                CargarDatos(); // Recargar los datos en el DataGridView después de la inserción
-                LimpiarCampos(); // Limpiar los campos de texto después de la inserción
+                CargarDatos(); // Recargar los datos en el DataGridView después de la actualización
+                LimpiarCampos(); // Limpiar los campos de texto después de la actualización
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar el proveedor: " + ex.Message);
+                MessageBox.Show("Error al actualizar el estado del proveedor: " + ex.Message);
             }
         }
         private void CargarDatos()
@@ -58,7 +51,8 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT * FROM proveedores";
+                    string sqlQuery = "SELECT ID, Nombre as Proveedor, Asesor, Telefono " +
+                        "FROM proveedores where Activo = 1";
                     DataTable dataTable = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                     adapter.Fill(dataTable);
@@ -77,12 +71,13 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "INSERT INTO proveedores(Proveedor, Asesor, Numero) VALUES (@Proveedor, @Asesor, @Numero)";
+                    string sqlQuery = "INSERT INTO proveedores(Nombre, Asesor, Activo, Telefono) VALUES (@Nombre, @Asesor,@Activo, @Telefono)";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
                     int numero = Convert.ToInt32(textBox5.Text);
-                    cmd.Parameters.AddWithValue("@Proveedor", textBox2.Text);
+                    cmd.Parameters.AddWithValue("@Nombre", textBox2.Text);
                     cmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
-                    cmd.Parameters.AddWithValue("@Numero", numero);
+                    cmd.Parameters.AddWithValue("@Telefono", numero);
+                    cmd.Parameters.AddWithValue("@Activo", 1);
                     cmd.ExecuteNonQuery();
                 }
                 CargarDatos(); // Recargar los datos en el DataGridView después de la inserción
@@ -91,28 +86,6 @@ namespace WindowsFormsApp1
             catch (Exception ex)
             {
                 MessageBox.Show("Error al insertar el proveedor: " + ex.Message);
-            }
-        }
-
-        // Método para eliminar un proveedor de la base de datos
-        private void EliminarProveedor()
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
-                {
-                    connection.Open();
-                    string sqlQuery = "DELETE FROM proveedores WHERE ID = @ID";
-                    MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                    cmd.Parameters.AddWithValue("@ID", textBox4.Text);
-                    cmd.ExecuteNonQuery();
-                }
-                CargarDatos(); // Recargar los datos en el DataGridView después de la eliminación
-                LimpiarCampos(); // Limpiar los campos de texto después de la eliminación
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al eliminar el proveedor: " + ex.Message);
             }
         }
 
@@ -132,7 +105,8 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT * FROM proveedores WHERE Proveedor LIKE @Nombre";
+                    string sqlQuery = "SELECT ID, Nombre, Asesor, Telefono " +
+                        "FROM proveedores WHERE Nombre LIKE @Nombre";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
                     cmd.Parameters.AddWithValue("@Nombre", "%" + textBox1.Text + "%");
                     DataTable dataTable = new DataTable();
@@ -203,50 +177,54 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // Crear un documento PDF
-            Document doc = new Document();
+            Document doc = null; // Definir la variable doc fuera del bloque try
+
             try
             {
+                // Crear un documento PDF
+                doc = new Document();
+
                 // Abrir un diálogo para que el usuario seleccione la ubicación del archivo PDF
                 SaveFileDialog saveDialog = new SaveFileDialog();
                 saveDialog.Filter = "Archivo PDF|*.pdf";
                 saveDialog.Title = "Guardar PDF";
-                saveDialog.ShowDialog();
 
-                // Si el usuario cancela, sal del método
-                if (saveDialog.FileName == "")
-                    return;
-
-                // Crear un archivo PDF en la ubicación seleccionada
-                PdfWriter.GetInstance(doc, new FileStream(saveDialog.FileName, FileMode.Create));
-                doc.Open();
-
-                // Crear una tabla con los datos del DataGridView
-                PdfPTable pdfTable = new PdfPTable(dataGridView1.ColumnCount);
-                // Añadir las cabeceras de las columnas
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                if (saveDialog.ShowDialog() == DialogResult.OK)
                 {
-                    pdfTable.AddCell(new Phrase(dataGridView1.Columns[j].HeaderText));
-                }
-                // Añadir las filas de datos
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                {
-                    for (int k = 0; k < dataGridView1.Columns.Count; k++)
+                    // Crear un archivo PDF en la ubicación seleccionada
+                    using (FileStream stream = new FileStream(saveDialog.FileName, FileMode.Create))
                     {
-                        if (dataGridView1[k, i].Value != null)
+                        PdfWriter.GetInstance(doc, stream);
+                        doc.Open();
+
+                        // Crear una tabla con los datos del DataGridView
+                        PdfPTable pdfTable = new PdfPTable(dataGridView1.ColumnCount);
+
+                        // Añadir las cabeceras de las columnas
+                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
                         {
-                            pdfTable.AddCell(new Phrase(dataGridView1[k, i].Value.ToString()));
+                            pdfTable.AddCell(new Phrase(dataGridView1.Columns[j].HeaderText));
                         }
+
+                        // Añadir las filas de datos
+                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                        {
+                            for (int k = 0; k < dataGridView1.Columns.Count; k++)
+                            {
+                                if (dataGridView1[k, i].Value != null)
+                                {
+                                    pdfTable.AddCell(new Phrase(dataGridView1[k, i].Value.ToString()));
+                                }
+                            }
+                        }
+
+                        // Añadir la tabla al documento
+                        doc.Add(pdfTable);
+
+                        // Mostrar un mensaje de éxito
+                        MessageBox.Show("PDF generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-                // Añadir la tabla al documento
-                doc.Add(pdfTable);
-
-                // Cerrar el documento
-                doc.Close();
-
-                // Mostrar un mensaje de éxito
-                MessageBox.Show("PDF generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -255,7 +233,10 @@ namespace WindowsFormsApp1
             finally
             {
                 // Asegurarse de cerrar el documento incluso si ocurre una excepción
-                doc.Close();
+                if (doc != null)
+                {
+                    doc.Close();
+                }
             }
         }
 
@@ -278,7 +259,7 @@ namespace WindowsFormsApp1
                 textBox4.Text = selectedRow.Cells["ID"].Value.ToString();
                 textBox2.Text = selectedRow.Cells["Proveedor"].Value.ToString();
                 textBox3.Text = selectedRow.Cells["Asesor"].Value.ToString();
-                textBox5.Text = selectedRow.Cells["Numero"].Value.ToString();
+                textBox5.Text = selectedRow.Cells["Telefono"].Value.ToString();
             }
         }
 
@@ -345,6 +326,11 @@ namespace WindowsFormsApp1
         }
 
         private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
         }

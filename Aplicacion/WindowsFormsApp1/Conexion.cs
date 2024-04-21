@@ -11,8 +11,8 @@ namespace WindowsFormsApp1
     class Conexion
     {
         MySqlConnection cnx = new MySqlConnection();
-        static string servidor = "127.0.0.3";
-        static string bd= "catalog";
+        static string servidor = "localhost";
+        static string bd= "pro";
         static string usuario= "root";
         static string password= "root123";
         static string puerto= "3306";

@@ -25,6 +25,9 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Form1 abrir1 = new Form1();
+            abrir1.ShowDialog();
+            this.Close();
 
         }
 
