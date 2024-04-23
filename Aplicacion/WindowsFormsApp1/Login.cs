@@ -33,7 +33,15 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (user == "Admin" && pass == "123456")
+            EncryptMD5 encrypt = new EncryptMD5();
+            pass = encrypt.Encrypt("soyElAdmin");
+            // guardar en la base de datos
+
+            string pass_decrypt = encrypt.Decrypt(pass);
+
+            
+            
+            if (user == "Admin" && pass == pass_decrypt)
             {
                 Form1 abrir1 = new Form1();
                 abrir1.ShowDialog();
