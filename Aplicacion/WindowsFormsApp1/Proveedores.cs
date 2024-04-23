@@ -71,8 +71,26 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "INSERT INTO proveedores(Nombre, Asesor, Activo, Telefono) VALUES (@Nombre, @Asesor,@Activo, @Telefono)";
+
+                    // Consultar el último ID insertado
+                    string getLastIdQuery = "SELECT MAX(ID) FROM proveedores";
+                    MySqlCommand getLastIdCmd = new MySqlCommand(getLastIdQuery, connection);
+                    object lastIdObj = getLastIdCmd.ExecuteScalar();
+
+                    int lastId = 0;
+                    if (lastIdObj != null && lastIdObj != DBNull.Value)
+                    {
+                        lastId = Convert.ToInt32(lastIdObj);
+                    }
+
+                    // Incrementar el último ID para la próxima inserción
+                    int nextId = lastId + 1;
+
+                    string sqlQuery = "INSERT INTO proveedores(ID, Nombre, Asesor, Activo, Telefono) VALUES (@ID, @Nombre, @Asesor, @Activo, @Telefono)";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+
+                    // Asignar el ID para la próxima inserción
+                    cmd.Parameters.AddWithValue("@ID", nextId);
                     int numero = Convert.ToInt32(textBox5.Text);
                     cmd.Parameters.AddWithValue("@Nombre", textBox2.Text);
                     cmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
