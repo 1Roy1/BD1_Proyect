@@ -124,7 +124,7 @@ namespace WindowsFormsApp1
                 {
                     connection.Open();
                     string sqlQuery = "SELECT ID, Nombre, Asesor, Telefono " +
-                        "FROM proveedores WHERE Nombre LIKE @Nombre";
+                        "FROM proveedores WHERE Activo = 1 AND Nombre LIKE @Nombre";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
                     cmd.Parameters.AddWithValue("@Nombre", "%" + textBox1.Text + "%");
                     DataTable dataTable = new DataTable();
@@ -270,14 +270,34 @@ namespace WindowsFormsApp1
 
         private void dataGridView1_SelectionChanged_1(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0 && dataGridView1.SelectedRows[0].Index != -1)
             {
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
-                textBox4.Text = selectedRow.Cells["ID"].Value.ToString();
-                textBox2.Text = selectedRow.Cells["Proveedor"].Value.ToString();
-                textBox3.Text = selectedRow.Cells["Asesor"].Value.ToString();
-                textBox5.Text = selectedRow.Cells["Telefono"].Value.ToString();
+                // Verificar si la columna "Proveedor" existe antes de acceder a ella
+                if (dataGridView1.Columns.Contains("Proveedor"))
+                {
+                    int indexColumna = dataGridView1.Columns["Proveedor"].Index;
+
+                    string id = selectedRow.Cells["ID"].Value?.ToString();
+                    string proveedor = selectedRow.Cells[indexColumna].Value?.ToString();
+                    string asesor = selectedRow.Cells["Asesor"].Value?.ToString();
+                    string telefono = selectedRow.Cells["Telefono"].Value?.ToString();
+
+                    // Verificar si los valores son null antes de asignarlos a los TextBoxes
+                    textBox4.Text = id ?? "";
+                    textBox2.Text = proveedor ?? "";
+                    textBox3.Text = asesor ?? "";
+                    textBox5.Text = telefono ?? "";
+                }
+                else
+                {
+                    // Si la columna "Proveedor" no existe, limpiar los TextBoxes
+                    textBox4.Text = "";
+                    textBox2.Text = "";
+                    textBox3.Text = "";
+                    textBox5.Text = "";
+                }
             }
         }
 
