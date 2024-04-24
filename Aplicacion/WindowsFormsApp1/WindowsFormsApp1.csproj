@@ -264,5 +264,14 @@
   <ItemGroup>
     <None Include="Images\logox150.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\unnamed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\cerrar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\abrir.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

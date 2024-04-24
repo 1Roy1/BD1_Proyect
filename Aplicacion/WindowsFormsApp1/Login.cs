@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
 {
     public partial class Login : Form
     {
+     
         string user = " ";
         string pass = " ";
         string passintro = " ";
@@ -129,10 +130,27 @@ namespace WindowsFormsApp1
             else
             {
                 MessageBox.Show("Credenciales incorrectas");
-                MessageBox.Show(pass);
             }
 
 
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ver_Click(object sender, EventArgs e)
+        {
+            ocultar.BringToFront();
+            textBox2.PasswordChar = '\0';
+        }
+
+        private void ocultar_Click(object sender, EventArgs e)
+        {
+            ver.BringToFront();
+            textBox2.PasswordChar = '#';
 
         }
     }
