@@ -173,5 +173,32 @@ namespace WindowsFormsApp1
         {
             Process.Start("mailto:rosalesroy11@gmail.com");
         }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Realizar la verificación de las credenciales aquí
+                string passintro = textBox2.Text;
+                string userintro = textBox1.Text;
+
+                // Llamar al método BuscarUsuario para verificar las credenciales
+                (string usuarioEncontrado, string contraseñaEncontrada) = conexion.BuscarUsuario(userintro, passintro);
+
+                // Verificar si las credenciales son correctas
+                if (userintro == usuarioEncontrado && passintro == contraseñaEncontrada)
+                {
+                    // Abrir el formulario principal si las credenciales son correctas
+                    Form1 abrir1 = new Form1();
+                    abrir1.ShowDialog();
+                    this.Hide();
+                }
+                else
+                {
+                    // Mostrar un mensaje de error si las credenciales son incorrectas
+                    MessageBox.Show("Credenciales incorrectas");
+                }
+            }
+        }
     }
 }

@@ -231,6 +231,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "VentanaInventario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaInventario";
             this.Load += new System.EventHandler(this.VentanaInventario_Load);
             this.menuStrip1.ResumeLayout(false);
