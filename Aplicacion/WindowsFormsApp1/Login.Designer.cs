@@ -37,6 +37,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ocultar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -47,7 +48,7 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(557, 169);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(259, 35);
             this.textBox1.TabIndex = 1;
@@ -59,7 +60,7 @@
             // 
             this.textBox2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(557, 241);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '#';
             this.textBox2.Size = new System.Drawing.Size(259, 35);
@@ -74,7 +75,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(597, 309);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(161, 44);
             this.button1.TabIndex = 3;
@@ -97,7 +98,7 @@
             this.ver.Image = global::WindowsFormsApp1.Properties.Resources.abrir;
             this.ver.Location = new System.Drawing.Point(823, 241);
             this.ver.Name = "ver";
-            this.ver.Size = new System.Drawing.Size(69, 35);
+            this.ver.Size = new System.Drawing.Size(70, 50);
             this.ver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ver.TabIndex = 10;
             this.ver.TabStop = false;
@@ -108,7 +109,7 @@
             this.ocultar.Image = global::WindowsFormsApp1.Properties.Resources.ocultar;
             this.ocultar.Location = new System.Drawing.Point(823, 241);
             this.ocultar.Name = "ocultar";
-            this.ocultar.Size = new System.Drawing.Size(69, 35);
+            this.ocultar.Size = new System.Drawing.Size(70, 50);
             this.ocultar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ocultar.TabIndex = 9;
             this.ocultar.TabStop = false;
@@ -146,12 +147,25 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(564, 377);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(243, 24);
+            this.linkLabel1.TabIndex = 11;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "¿Ha olvidado su contraseña?";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Plum;
             this.ClientSize = new System.Drawing.Size(931, 426);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.ver);
             this.Controls.Add(this.ocultar);
             this.Controls.Add(this.button2);
@@ -162,7 +176,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -186,5 +200,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox ocultar;
         private System.Windows.Forms.PictureBox ver;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
