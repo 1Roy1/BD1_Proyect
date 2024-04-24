@@ -114,7 +114,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            user = "Admin";
             pass = encrypt.Encrypt("administracion");
             string pass_decrypt = encrypt.Decrypt(pass);
 
