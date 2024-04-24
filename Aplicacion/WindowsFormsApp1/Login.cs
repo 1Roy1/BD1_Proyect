@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
         public Login()
         {
             InitializeComponent();
+            conexion.establecerconexion();
             user = "Admin";
             pass = encrypt.Encrypt("administracion");
             conexion.InsertarUsuario(user, pass);

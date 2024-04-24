@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
                 command.Parameters.AddWithValue("@Usuario", usuario);
                 command.Parameters.AddWithValue("@Password", contraseña);
 
-                command.ExecuteNonQuery();
+                
             }
             catch (MySqlException ex)
             {
