@@ -14,6 +14,9 @@ namespace WindowsFormsApp1
     {
         string user = " ";
         string pass = " ";
+        EncryptMD5 encrypt = new EncryptMD5();
+        pass = encrypt.Encrypt("soyElAdmin");
+            // guardar en la base de datos
 
         public Login()
         {
@@ -33,9 +36,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EncryptMD5 encrypt = new EncryptMD5();
-            pass = encrypt.Encrypt("soyElAdmin");
-            // guardar en la base de datos
+            
 
             string pass_decrypt = encrypt.Decrypt(pass);
 
