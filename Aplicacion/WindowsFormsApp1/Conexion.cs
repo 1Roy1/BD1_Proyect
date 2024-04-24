@@ -10,9 +10,10 @@ namespace WindowsFormsApp1
 {
     class Conexion
     {
+        EncryptMD5 encrypt = new EncryptMD5();
         MySqlConnection cnx = new MySqlConnection();
         static string servidor = "localhost";
-        static string bd= "pro";
+        static string bd= "proyecto";
         static string usuario= "root";
         static string password= "root123";
         static string puerto= "3306";
@@ -29,6 +30,50 @@ namespace WindowsFormsApp1
                
             }
             return cnx;
+        }
+        public void InsertarUsuario(string usuario, string contraseña)
+        {
+            try
+            {
+                string query = "INSERT INTO usuarios (Usuario, Password) VALUES (@Usuario, @Password)";
+                MySqlCommand command = new MySqlCommand(query, cnx);
+                command.Parameters.AddWithValue("@Usuario", usuario);
+                command.Parameters.AddWithValue("@Password", contraseña);
+
+                command.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error al insertar usuario: " + ex.Message);
+            }
+        }
+        public (string usuario, string contraseña) BuscarUsuario(string usuario, string contraseña)
+        {
+            string usuarioEncontrado = null;
+            string contraseñaEncontrada = null;
+
+            try
+            {
+                string query = "SELECT Usuario, Password FROM usuarios WHERE Usuario = @Usuario";
+                MySqlCommand command = new MySqlCommand(query, cnx);
+                command.Parameters.AddWithValue("@Usuario", usuario);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        usuarioEncontrado = reader.GetString("Usuario");
+                        string passwordFromDB = reader.GetString("Password");
+                        contraseñaEncontrada = encrypt.Decrypt(passwordFromDB);
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error al buscar usuario: " + ex.Message);
+            }
+
+            return (usuarioEncontrado, contraseñaEncontrada);
         }
 
     }

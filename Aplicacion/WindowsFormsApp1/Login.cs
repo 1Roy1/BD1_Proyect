@@ -16,15 +16,21 @@ namespace WindowsFormsApp1
      
         string user = " ";
         string pass = " ";
-        string passintro = " ";
-        string userintro = " ";
+        string passintro = "";
+        string userintro = "";
+        bool igual = false;
         EncryptMD5 encrypt = new EncryptMD5();
-        
-            // guardar en la base de datos
+        Conexion conexion = new Conexion();
+
+        // guardar en la base de datos
 
         public Login()
         {
             InitializeComponent();
+            user = "Admin";
+            pass = encrypt.Encrypt("administracion");
+            conexion.InsertarUsuario(user, pass);
+            
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -113,29 +119,34 @@ namespace WindowsFormsApp1
             }
         }
 
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            user = "Admin";
-            pass = encrypt.Encrypt("administracion");
-            string pass_decrypt = encrypt.Decrypt(pass);
 
-            passintro = textBox2.Text;
-            userintro = textBox1.Text;
+            string passintro = textBox2.Text;
+            string userintro = textBox1.Text;
 
-            if (user == userintro && pass_decrypt == passintro)
+            // Llamar al método BuscarUsuario para verificar las credenciales
+            (string usuarioEncontrado, string contraseñaEncontrada) = conexion.BuscarUsuario(userintro, passintro);
+
+            // Verificar si las credenciales son correctas
+            if (userintro == usuarioEncontrado && passintro == contraseñaEncontrada)
             {
+                // Abrir el formulario principal si las credenciales son correctas
                 Form1 abrir1 = new Form1();
                 abrir1.ShowDialog();
                 this.Hide();
             }
             else
             {
+                // Mostrar un mensaje de error si las credenciales son incorrectas
                 MessageBox.Show("Credenciales incorrectas");
             }
 
 
-
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {

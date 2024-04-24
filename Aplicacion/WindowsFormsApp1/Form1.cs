@@ -15,8 +15,10 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-        }
+            
 
+        }
+     
         private void button1_Click(object sender, EventArgs e)
         {
             // Crear una instancia de tu ventana de inventario
