@@ -121,6 +121,9 @@
   <data name="inventory5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\inventory5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pngwing2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\pngwing2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="proveedor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\proveedor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,17 +133,20 @@
   <data name="klipartz.com" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\klipartz.com.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="inventory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\inventory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="boton-eliminar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\boton-eliminar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inventory4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\inventory4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="klipartz3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\klipartz3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="inventory3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\inventory3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="agregar-usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\agregar-usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agregar-usuario2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\agregar-usuario2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,19 +154,28 @@
   <data name="inventory2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\inventory2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="inventory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\inventory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inventory3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\inventory3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="klipartz2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\klipartz2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="inventory4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\inventory4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pngwing2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\pngwing2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="limpiar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\limpiar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logox150" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\logox150.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="limpiar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\limpiar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ocultar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ocultar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

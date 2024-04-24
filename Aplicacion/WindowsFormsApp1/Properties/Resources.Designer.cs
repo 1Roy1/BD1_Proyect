@@ -63,6 +63,26 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap agregar_usuario {
+            get {
+                object obj = ResourceManager.GetObject("agregar-usuario", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap agregar_usuario2 {
+            get {
+                object obj = ResourceManager.GetObject("agregar-usuario2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap boton_eliminar2 {
             get {
                 object obj = ResourceManager.GetObject("boton-eliminar2", resourceCulture);
@@ -153,6 +173,26 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap limpiar2 {
+            get {
+                object obj = ResourceManager.GetObject("limpiar2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap limpiar3 {
+            get {
+                object obj = ResourceManager.GetObject("limpiar3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
@@ -166,6 +206,16 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap logox150 {
             get {
                 object obj = ResourceManager.GetObject("logox150", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ocultar {
+            get {
+                object obj = ResourceManager.GetObject("ocultar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
