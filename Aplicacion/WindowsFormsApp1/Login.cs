@@ -16,6 +16,8 @@ namespace WindowsFormsApp1
      
         string user = " ";
         string pass = " ";
+        string user2 = " ";
+        string pass2 = " ";
         string passintro = "";
         string userintro = "";
         bool igual = false;
@@ -28,9 +30,9 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             conexion.establecerconexion();
-            user = "Admin";
-            pass = encrypt.Encrypt("administracion");
-            conexion.InsertarUsuario(user, pass);
+            //user2 = "Hola";
+            //pass2 = encrypt.Encrypt("hola123");
+            //conexion.InsertarUsuario(user2, pass2);
             
         }
 

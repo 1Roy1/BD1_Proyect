@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
             try {
                 cnx.ConnectionString = cadenaConexion;
                 cnx.Open();
-                MessageBox.Show("SE CONECTO CORRECTAMENTE");
+                
 
             }
             catch (MySqlException e){
@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
                 command.Parameters.AddWithValue("@Usuario", usuario);
                 command.Parameters.AddWithValue("@Password", contraseña);
 
-                
+                command.ExecuteNonQuery();
             }
             catch (MySqlException ex)
             {

@@ -3,11 +3,15 @@
   "WorkspaceRootPath": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -46,15 +46,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cs",
+              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
+              "RelativeDocumentMoniker": "Login.cs",
+              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
+              "RelativeToolTip": "Login.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAmwCIAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T01:06:31.295Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -66,39 +79,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Conexion.cs",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
               "RelativeDocumentMoniker": "Conexion.cs",
               "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
               "RelativeToolTip": "Conexion.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAcwCoAAAAQAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAcwBgAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T03:29:03.171Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.cs",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
-              "RelativeDocumentMoniker": "Login.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
-              "RelativeToolTip": "Login.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T01:06:31.295Z",
+              "WhenOpened": "2024-04-24T03:29:03.171Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Login.cs [Dise\u00F1o]",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
               "RelativeDocumentMoniker": "Login.cs",
               "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs [Dise\u00F1o]",
               "RelativeToolTip": "Login.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T01:06:25.027Z"
+              "WhenOpened": "2024-04-24T01:06:25.027Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
@@ -113,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
