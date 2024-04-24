@@ -14,8 +14,10 @@ namespace WindowsFormsApp1
     {
         string user = " ";
         string pass = " ";
+        string passintro = " ";
+        string userintro = " ";
         EncryptMD5 encrypt = new EncryptMD5();
-        pass = encrypt.Encrypt("soyElAdmin");
+        
             // guardar en la base de datos
 
         public Login()
@@ -32,29 +34,10 @@ namespace WindowsFormsApp1
             textBox2.ForeColor = Color.Gray;
 
             
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-
-            string pass_decrypt = encrypt.Decrypt(pass);
-
-            
-            
-            if (user == "Admin" && pass == pass_decrypt)
-            {
-                Form1 abrir1 = new Form1();
-                abrir1.ShowDialog();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Credenciales incorrectas");
-            }
 
 
         }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -126,6 +109,31 @@ namespace WindowsFormsApp1
                     textBox2.ForeColor = Color.Black;
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            pass = encrypt.Encrypt("administracion");
+            string pass_decrypt = encrypt.Decrypt(pass);
+
+            passintro = textBox2.Text;
+            userintro = textBox1.Text;
+
+            if (user == userintro && pass_decrypt == passintro)
+            {
+                Form1 abrir1 = new Form1();
+                abrir1.ShowDialog();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Credenciales incorrectas");
+                MessageBox.Show(pass);
+            }
+
+
+
         }
     }
 }
