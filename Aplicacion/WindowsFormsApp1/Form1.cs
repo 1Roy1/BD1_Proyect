@@ -56,5 +56,20 @@ namespace WindowsFormsApp1
         private void button4_Click(object sender, EventArgs e)
         {
         }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            NuevoProducto nuevoProd = new NuevoProducto();
+            nuevoProd.Show();
+            this.Close();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form4 abrir1 = new Form4();
+            abrir1.Show();
+            this.Close();
+        }
     }
 }

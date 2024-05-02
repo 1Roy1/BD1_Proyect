@@ -51,8 +51,9 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT ID, Nombre as Proveedor, Asesor, Telefono " +
-                        "FROM proveedores where Activo = 1";
+                    string sqlQuery = "SELECT p.ID, p.Nombre as Proveedor, p.Asesor, t.Telefono " +
+                        "FROM proveedores p INNER JOIN telefono t ON p.ID = t.proveedores_ID " +
+                        "WHERE p.Activo = 1";
                     DataTable dataTable = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                     adapter.Fill(dataTable);
@@ -86,17 +87,21 @@ namespace WindowsFormsApp1
                     // Incrementar el último ID para la próxima inserción
                     int nextId = lastId + 1;
 
-                    string sqlQuery = "INSERT INTO proveedores(ID, Nombre, Asesor, Activo, Telefono) VALUES (@ID, @Nombre, @Asesor, @Activo, @Telefono)";
-                    MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                    // Insertar el proveedor
+                    string sqlQueryProveedor = "INSERT INTO proveedores(ID, Nombre, Asesor, Activo) VALUES (@ID, @Nombre, @Asesor, @Activo)";
+                    MySqlCommand cmdProveedor = new MySqlCommand(sqlQueryProveedor, connection);
+                    cmdProveedor.Parameters.AddWithValue("@ID", nextId);
+                    cmdProveedor.Parameters.AddWithValue("@Nombre", textBox2.Text);
+                    cmdProveedor.Parameters.AddWithValue("@Asesor", textBox3.Text);
+                    cmdProveedor.Parameters.AddWithValue("@Activo", 1);
+                    cmdProveedor.ExecuteNonQuery();
 
-                    // Asignar el ID para la próxima inserción
-                    cmd.Parameters.AddWithValue("@ID", nextId);
-                    int numero = Convert.ToInt32(textBox5.Text);
-                    cmd.Parameters.AddWithValue("@Nombre", textBox2.Text);
-                    cmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
-                    cmd.Parameters.AddWithValue("@Telefono", numero);
-                    cmd.Parameters.AddWithValue("@Activo", 1);
-                    cmd.ExecuteNonQuery();
+                    // Insertar el teléfono
+                    string sqlQueryTelefono = "INSERT INTO telefono(Telefono, proveedores_ID, Clientes_ID) VALUES (@Telefono, @ProveedorId, NULL)";
+                    MySqlCommand cmdTelefono = new MySqlCommand(sqlQueryTelefono, connection);
+                    cmdTelefono.Parameters.AddWithValue("@Telefono", textBox5.Text);
+                    cmdTelefono.Parameters.AddWithValue("@ProveedorId", nextId);
+                    cmdTelefono.ExecuteNonQuery();
                 }
                 CargarDatos(); // Recargar los datos en el DataGridView después de la inserción
                 LimpiarCampos(); // Limpiar los campos de texto después de la inserción
@@ -123,10 +128,12 @@ namespace WindowsFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT ID, Nombre, Asesor, Telefono " +
-                        "FROM proveedores WHERE Activo = 1 AND Nombre LIKE @Nombre";
+                    string sqlQuery = "SELECT p.ID, p.Nombre, p.Asesor, t.Telefono " +
+                        "FROM proveedores p INNER JOIN telefono t ON p.ID = t.proveedores_ID " +
+                        "WHERE p.Activo = 1 AND (p.Nombre LIKE @Nombre OR t.Telefono LIKE @Telefono)";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
                     cmd.Parameters.AddWithValue("@Nombre", "%" + textBox1.Text + "%");
+                    cmd.Parameters.AddWithValue("@Telefono", "%" + textBox1.Text + "%");
                     DataTable dataTable = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     adapter.Fill(dataTable);

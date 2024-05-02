@@ -180,7 +180,7 @@
             this.button2.Font = new System.Drawing.Font("Comic Sans MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.button2.Image = global::WindowsFormsApp1.Properties.Resources.refresh;
-            this.button2.Location = new System.Drawing.Point(689, 90);
+            this.button2.Location = new System.Drawing.Point(635, 119);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(53, 49);
