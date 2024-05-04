@@ -13,9 +13,14 @@ namespace WindowsFormsApp1
 {
     public partial class NuevoProducto : Form
     {
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
         public NuevoProducto()
         {
             InitializeComponent();
+            CargarNombresProveedores();
+            CargarNombresProductos();
+
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -133,14 +138,8 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MySqlConnection connection;
-            string servidor = "localhost";
-            string bd = "proyecto";
-            string usuario = "root";
-            string password = "Rod2102777";
-            string puerto = "3306";
-            string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
-            connection = new MySqlConnection(cadenaConexion);
+
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
 
             try
             {
@@ -207,6 +206,91 @@ namespace WindowsFormsApp1
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+        private void CargarNombresProveedores()
+        {
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            comboBox1.Items.Clear(); // Limpiar los elementos existentes en el ComboBox antes de cargar nuevos
+
+            try
+            {
+                connection.Open();
+                string sqlQuery = "SELECT Nombre FROM proveedores WHERE Activo = 1";
+                MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string nombreProveedor = reader["Nombre"].ToString();
+                    comboBox1.Items.Add(nombreProveedor); // Agregar el nombre del proveedor al ComboBox
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los nombres de los proveedores: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        private void CargarNombresProductos()
+        {
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            comboBox2.Items.Clear(); // Limpiar los elementos existentes en el ComboBox antes de cargar nuevos
+
+            try
+            {
+                connection.Open();
+                string sqlQuery = "SELECT Nombre FROM producto";
+                MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string nombreProveedor = reader["Nombre"].ToString();
+                    comboBox2.Items.Add(nombreProveedor); // Agregar el nombre del proveedor al ComboBox
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los nombres de los proveedores: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            // Obtener la fecha seleccionada del MonthCalendar
+            DateTime selectedDate = monthCalendar1.SelectionStart;
+
+            // Obtener la fecha y hora actual
+            DateTime currentDateTime = DateTime.Now;
+
+            // Crear una nueva fecha combinando la fecha seleccionada del MonthCalendar con la hora actual
+            DateTime combinedDateTime = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day,
+                                                     currentDateTime.Hour, currentDateTime.Minute, currentDateTime.Second);
+
+            // Asignar la fecha y hora combinadas al TextBox en el formato deseado
+            textBox9.Text = combinedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
