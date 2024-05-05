@@ -42,8 +42,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,11 +60,16 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(245, 187);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -105,7 +108,9 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(445, 33);
             this.textBox6.TabIndex = 5;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             this.textBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox6_KeyPress);
+            this.textBox6.Leave += new System.EventHandler(this.textBox6_Leave);
             // 
             // label1
             // 
@@ -209,33 +214,6 @@
             this.label8.Text = "Añadir nuevos productos al inventario";
             this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
-            // button1
-            // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1018, 559);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 80);
-            this.button1.TabIndex = 16;
-            this.button1.Tag = "Guardar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.AccessibleName = "Cancelar";
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(1139, 559);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 80);
-            this.button2.TabIndex = 17;
-            this.button2.Tag = "Cancelar";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -245,6 +223,7 @@
             this.textBox4.Size = new System.Drawing.Size(472, 33);
             this.textBox4.TabIndex = 3;
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
+            this.textBox4.Leave += new System.EventHandler(this.textBox4_Leave);
             // 
             // label9
             // 
@@ -323,6 +302,8 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(445, 33);
             this.textBox7.TabIndex = 23;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged_1);
+            this.textBox7.Leave += new System.EventHandler(this.textBox7_Leave);
             // 
             // menuStrip1
             // 
@@ -337,7 +318,7 @@
             this.clientesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1290, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1253, 36);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -346,30 +327,35 @@
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
             this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(159, 32);
             this.menuPrincipalToolStripMenuItem.Text = "Menu Principal";
+            this.menuPrincipalToolStripMenuItem.Click += new System.EventHandler(this.menuPrincipalToolStripMenuItem_Click);
             // 
             // inventarioToolStripMenuItem
             // 
             this.inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
             this.inventarioToolStripMenuItem.Size = new System.Drawing.Size(123, 32);
             this.inventarioToolStripMenuItem.Text = "Inventario";
+            this.inventarioToolStripMenuItem.Click += new System.EventHandler(this.inventarioToolStripMenuItem_Click);
             // 
             // ventasToolStripMenuItem
             // 
             this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
             this.ventasToolStripMenuItem.Size = new System.Drawing.Size(88, 32);
             this.ventasToolStripMenuItem.Text = "Ventas";
+            this.ventasToolStripMenuItem.Click += new System.EventHandler(this.ventasToolStripMenuItem_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
             this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(143, 32);
             this.proveedoresToolStripMenuItem.Text = "Proveedores";
+            this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(99, 32);
             this.clientesToolStripMenuItem.Text = "Clientes";
+            this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // monthCalendar1
             // 
@@ -408,12 +394,66 @@
             this.label14.TabIndex = 28;
             this.label14.Text = "Producto Existente";
             // 
+            // button3
+            // 
+            this.button3.AccessibleName = "Cancelar";
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button3.Image = global::WindowsFormsApp1.Properties.Resources.limpiar5;
+            this.button3.Location = new System.Drawing.Point(1031, 559);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(101, 94);
+            this.button3.TabIndex = 30;
+            this.button3.Tag = "Cancelar";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.AccessibleName = "Cancelar";
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(1140, 559);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 94);
+            this.button2.TabIndex = 17;
+            this.button2.Tag = "Cancelar";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(936, 559);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 94);
+            this.button1.TabIndex = 16;
+            this.button1.Tag = "Guardar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(521, 112);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(344, 20);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "(Si es un producto nuevo, ingrese todo los datos)";
+            // 
             // NuevoProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1290, 666);
+            this.ClientSize = new System.Drawing.Size(1253, 666);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.textBox9);
@@ -491,5 +531,7 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label15;
     }
 }
