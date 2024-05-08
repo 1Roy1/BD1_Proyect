@@ -88,6 +88,12 @@ namespace WindowsFormsApp1
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
                 dataGridView1.DataSource = dataTable;
+
+                string sqlQuery2 = "SELECT * FROM detalle_ventas";
+                DataTable dataTable2 = new DataTable();
+                MySqlDataAdapter adapter2 = new MySqlDataAdapter(sqlQuery2, connection);
+                adapter2.Fill(dataTable2);
+                dataGridView2.DataSource = dataTable2;
             }
             catch (Exception ex)
             {
@@ -163,7 +169,20 @@ namespace WindowsFormsApp1
                 int id = Convert.ToInt32(textBox1.Text);
                 decimal nuevoValor = Convert.ToDecimal(textBox5.Text);
                 decimal viejoValor = Convert.ToDecimal(textBox4.Text);
-                decimal ValorFinal = viejoValor - nuevoValor;
+                decimal ValorFinal = 0;
+                if (viejoValor <= 0)
+                {
+                    MessageBox.Show("Se han agotado todas las existencias de este producto.");
+                }
+                else if (viejoValor < nuevoValor)
+                {
+                    MessageBox.Show("No se tienen las suficientes existencias de este producto.");
+                    ValorFinal = viejoValor;
+                }
+                else
+                {
+                    ValorFinal = viejoValor - nuevoValor;
+                }
 
                 connection.Open();
 
@@ -199,6 +218,16 @@ namespace WindowsFormsApp1
             Proveedores abrir = new Proveedores();
             abrir.Show();
             this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
