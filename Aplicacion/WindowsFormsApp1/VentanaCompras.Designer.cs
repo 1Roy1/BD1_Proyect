@@ -318,7 +318,7 @@
             this.clientesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1253, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1284, 36);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -451,7 +451,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1253, 666);
+            this.ClientSize = new System.Drawing.Size(1284, 666);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox2);
