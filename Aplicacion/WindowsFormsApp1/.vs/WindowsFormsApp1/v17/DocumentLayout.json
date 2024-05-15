@@ -1,25 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\",
+  "WorkspaceRootPath": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|c:\\users\\luist\\onedrive\\escritorio\\1er semestre 2024\\base de datos i\\proyecto\\bd1_proyect\\aplicacion\\windowsformsapp1\\resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|c:\\users\\luist\\onedrive\\escritorio\\1er semestre 2024\\base de datos i\\proyecto\\bd1_proyect\\aplicacion\\windowsformsapp1\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|c:\\users\\luist\\onedrive\\escritorio\\1er semestre 2024\\base de datos i\\proyecto\\bd1_proyect\\aplicacion\\windowsformsapp1\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|c:\\users\\luist\\onedrive\\escritorio\\1er semestre 2024\\base de datos i\\proyecto\\bd1_proyect\\aplicacion\\windowsformsapp1\\proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -30,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,37 +50,73 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Conexion.cs",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
-              "RelativeDocumentMoniker": "Conexion.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
-              "RelativeToolTip": "Conexion.cs",
-              "ViewState": "AQIAAGsAAAAAAAAAAAAgwHUAAAAlAAAA",
+              "DocumentIndex": 6,
+              "Title": "Proveedores.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Proveedores.cs",
+              "RelativeDocumentMoniker": "Proveedores.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Proveedores.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Proveedores.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T05:16:43.112Z",
+              "WhenOpened": "2024-05-15T06:34:30.092Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form4.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form4.cs",
+              "RelativeDocumentMoniker": "Form4.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form4.cs",
+              "RelativeToolTip": "Form4.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAqwBMAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T06:33:01.812Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "Form4.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form4.cs",
+              "RelativeDocumentMoniker": "Form4.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form4.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Form4.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T06:32:44.495Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Conexion.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
+              "RelativeDocumentMoniker": "Conexion.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
+              "RelativeToolTip": "Conexion.cs",
+              "ViewState": "AQIAAGsAAAAAAAAAAAAgwHUAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T05:16:43.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ResetPassword.cs",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs",
               "RelativeDocumentMoniker": "ResetPassword.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs",
               "RelativeToolTip": "ResetPassword.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAgwHcAAAAAAAAA",
+              "ViewState": "AQIAAFgAAAAAAAAAAIA9wI0AAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-15T04:25:12.211Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ResetPassword.cs [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs",
               "RelativeDocumentMoniker": "ResetPassword.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs [Dise\u00F1o]",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs [Dise\u00F1o]",
               "RelativeToolTip": "ResetPassword.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-15T04:12:28.531Z",
@@ -78,11 +126,11 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Login.cs",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
               "RelativeDocumentMoniker": "Login.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
               "RelativeToolTip": "Login.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAEwBEAAAAIAAAA",
+              "ViewState": "AQIAAKoAAAAAAAAAAADwvzwAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-09T05:16:32.919Z",
               "EditorCaption": ""
@@ -91,9 +139,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Login.cs [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
+              "DocumentMoniker": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs",
               "RelativeDocumentMoniker": "Login.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs [Dise\u00F1o]",
+              "ToolTip": "C:\\Users\\luist\\OneDrive\\Escritorio\\1er semestre 2024\\Base de datos I\\PROYECTO\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Login.cs [Dise\u00F1o]",
               "RelativeToolTip": "Login.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-09T05:16:31.184Z",

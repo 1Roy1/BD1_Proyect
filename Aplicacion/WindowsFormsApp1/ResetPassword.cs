@@ -66,7 +66,9 @@ namespace WindowsFormsApp1
             if (contraseñaActualizada)
             {
                 MessageBox.Show("Contraseña actualizada exitosamente");
-                this.Close();
+                Login abrir = new Login();
+                abrir.ShowDialog(); 
+                this.Hide();
             }
             else
             {
@@ -114,6 +116,30 @@ namespace WindowsFormsApp1
                     textBox2.ForeColor = Color.Black;
                 }
             }
+        }
+
+        private void ver_Click_1(object sender, EventArgs e)
+        {
+            ocultar.BringToFront();
+            textBox2.PasswordChar = '\0';
+        }
+
+        private void ver2_Click(object sender, EventArgs e)
+        {
+            ocultar2.BringToFront();
+            textBox3.PasswordChar = '\0';
+        }
+
+        private void ocultar2_Click(object sender, EventArgs e)
+        {
+            ver2.BringToFront();
+            textBox3.PasswordChar = '#';
+        }
+
+        private void ocultar_Click_1(object sender, EventArgs e)
+        {
+            ver.BringToFront();
+            textBox2.PasswordChar = '#';
         }
     }
 }
