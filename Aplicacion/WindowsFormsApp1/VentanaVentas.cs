@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
                 adapter.Fill(dataTable);
                 dataGridView1.DataSource = dataTable;
 
-                string sqlQuery2 = "SELECT * FROM detalle_ventas";
+                string sqlQuery2 = "SELECT * FROM venta";
                 DataTable dataTable2 = new DataTable();
                 MySqlDataAdapter adapter2 = new MySqlDataAdapter(sqlQuery2, connection);
                 adapter2.Fill(dataTable2);
@@ -166,35 +166,40 @@ namespace WindowsFormsApp1
 
             try
             {
-                int id = Convert.ToInt32(textBox1.Text);
-                decimal nuevoValor = Convert.ToDecimal(textBox5.Text);
-                decimal viejoValor = Convert.ToDecimal(textBox4.Text);
-                decimal ValorFinal = 0;
-                if (viejoValor <= 0)
-                {
-                    MessageBox.Show("Se han agotado todas las existencias de este producto.");
-                }
-                else if (viejoValor < nuevoValor)
-                {
-                    MessageBox.Show("No se tienen las suficientes existencias de este producto.");
-                    ValorFinal = viejoValor;
-                }
-                else
-                {
-                    ValorFinal = viejoValor - nuevoValor;
-                }
-
                 connection.Open();
+                float TotalFinal = 0;
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    int idVenta = Convert.ToInt32(row.Cells["idventa"].Value);
+                    int existencias = Convert.ToInt32(row.Cells["existencias"].Value);
+                    float total = Convert.ToSingle(row.Cells["total"].Value);
+                    TotalFinal = TotalFinal + total;
 
-                string sqlQuery = $"UPDATE inventario SET Existencias = @NuevoValor WHERE ID = @ID";
+                    string sqlQuery2 = "SELECT existencias FROM inventario WHERE ID = @ID";
+                    MySqlCommand cmd2 = new MySqlCommand(sqlQuery2, connection);
+                    cmd2.Parameters.AddWithValue("@ID", idVenta);
+                    int viejoValor = Convert.ToInt32(cmd2.ExecuteScalar());
 
-                MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                cmd.Parameters.AddWithValue("@NuevoValor", ValorFinal);
-                cmd.Parameters.AddWithValue("@ID", id);
+                    int valorFinal = viejoValor - existencias;
 
-                int rowsAffected = cmd.ExecuteNonQuery();
+                    string sqlQuery3 = "UPDATE inventario SET Existencias = @NuevoValor WHERE ID = @ID";
+                    MySqlCommand cmd3 = new MySqlCommand(sqlQuery3, connection);
+                    cmd3.Parameters.AddWithValue("@NuevoValor", valorFinal);
+                    cmd3.Parameters.AddWithValue("@ID", idVenta);
+                    int rowsAffected = cmd3.ExecuteNonQuery();
 
-                if (rowsAffected > 0)
+                    string sqlQuery4 = "DELETE FROM venta WHERE idventa=@ID";
+                    MySqlCommand cmd4 = new MySqlCommand(sqlQuery4, connection);
+                    cmd4.Parameters.AddWithValue("@ID", idVenta);
+                    int rowsAffected2 = cmd4.ExecuteNonQuery();
+
+                }
+                string sqlQuery5 = "INSERT INTO ventas(total, clientes_id) VALUES(@total, @cliente_id)";
+                MySqlCommand cmd5 = new MySqlCommand(sqlQuery5, connection);
+                cmd5.Parameters.AddWithValue("@total", TotalFinal);
+                cmd5.Parameters.AddWithValue("@cliente_id", 1);
+                int rowsAffected3 = cmd5.ExecuteNonQuery();
+                if (rowsAffected3 > 0)
                 {
                     MessageBox.Show("Datos actualizados correctamente.");
                 }
@@ -211,6 +216,14 @@ namespace WindowsFormsApp1
             {
                 connection.Close();
             }
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
+            CargarDatos();
         }
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
@@ -222,7 +235,71 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            MySqlConnection connection;
+            string servidor = "localhost";
+            string bd = "proyecto";
+            string usuario = "root";
+            string password = "Rod2102777";
+            string puerto = "3306";
+            string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
+            connection = new MySqlConnection(cadenaConexion);
 
+            try
+            {
+                int id = Convert.ToInt32(textBox1.Text);
+                float precio = float.Parse(textBox6.Text);
+                int nuevoValor = int.Parse(textBox5.Text);
+                int viejoValor = int.Parse(textBox4.Text);
+                if (viejoValor <= 0)
+                {
+                    MessageBox.Show("Se han agotado todas las existencias de este producto.");
+                }
+                else if (viejoValor < nuevoValor)
+                {
+                    MessageBox.Show("No se tienen las suficientes existencias de este producto.");
+                }
+                else
+                {
+                    connection.Open();
+
+                    string sqlQuery = $"INSERT INTO venta(idventa, nombre, existencias, precio, marca, total) VALUES (@idventa, @nombre, @existencias, @precio, @marca, @total)";
+
+                    MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                    cmd.Parameters.AddWithValue("@idventa", id);
+                    cmd.Parameters.AddWithValue("@nombre", textBox2.Text);
+                    cmd.Parameters.AddWithValue("@existencias", nuevoValor);
+                    cmd.Parameters.AddWithValue("@precio", precio);
+                    cmd.Parameters.AddWithValue("@marca", textBox7.Text);
+                    cmd.Parameters.AddWithValue("@total", (precio * nuevoValor));
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Datos actualizados correctamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró el registro con el ID proporcionado.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
+            CargarDatos();
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
