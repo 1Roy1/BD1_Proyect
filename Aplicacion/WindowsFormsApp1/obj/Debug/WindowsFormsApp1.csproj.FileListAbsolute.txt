@@ -293,3 +293,4 @@ C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\Newtonsoft.Json.xml
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.ValueTuple.xml
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Login.resources
+D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ResetPassword.resources

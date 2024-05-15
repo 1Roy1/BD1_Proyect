@@ -171,7 +171,9 @@ namespace WindowsFormsApp1
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto:rosalesroy11@gmail.com");
+            ResetPassword abrir = new ResetPassword();
+            abrir.ShowDialog();
+            this.Hide();
         }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
