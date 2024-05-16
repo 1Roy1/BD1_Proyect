@@ -66,9 +66,7 @@ namespace WindowsFormsApp1
             if (contraseñaActualizada)
             {
                 MessageBox.Show("Contraseña actualizada exitosamente");
-                Login abrir = new Login();
-                abrir.ShowDialog(); 
-                this.Hide();
+                this.Close();   
             }
             else
             {
@@ -80,50 +78,10 @@ namespace WindowsFormsApp1
         {
             this.Close();
         }
-        private void ver_Click(object sender, EventArgs e)
-        {
-            ocultar.BringToFront();
-            textBox2.PasswordChar = '\0';
-        }
-
-        private void ocultar_Click(object sender, EventArgs e)
-        {
-            ver.BringToFront();
-            textBox2.PasswordChar = '#';
-
-        }
-
         private void textBox2_Leave(object sender, EventArgs e)
         {
-            pass = textBox2.Text;
-            if (pass.Equals("Contraseña"))
-            {
-                textBox2.Text = "Contraseña";
-                textBox2.ForeColor = Color.Gray;
-            }
-            else
-            {
-                if (pass.Equals(""))
-                {
-                    textBox2.PasswordChar = '\0';
-                    textBox2.Text = "Contraseña";
-                    textBox2.ForeColor = Color.Gray;
-                }
-                else
-                {
-                    textBox2.PasswordChar = '#';
-                    textBox2.Text = pass;
-                    textBox2.ForeColor = Color.Black;
-                }
-            }
+          
         }
-
-        private void ver_Click_1(object sender, EventArgs e)
-        {
-            ocultar.BringToFront();
-            textBox2.PasswordChar = '\0';
-        }
-
         private void ver2_Click(object sender, EventArgs e)
         {
             ocultar2.BringToFront();
@@ -136,10 +94,21 @@ namespace WindowsFormsApp1
             textBox3.PasswordChar = '#';
         }
 
-        private void ocultar_Click_1(object sender, EventArgs e)
+        private void textBox3_Leave(object sender, EventArgs e)
         {
-            ver.BringToFront();
+
+        }
+
+        private void ocultar1_Click(object sender, EventArgs e)
+        {
+            ver1.BringToFront();
             textBox2.PasswordChar = '#';
+        }
+
+        private void ver1_Click(object sender, EventArgs e)
+        {
+            ocultar1.BringToFront();
+            textBox2.PasswordChar = '\0';
         }
     }
 }
