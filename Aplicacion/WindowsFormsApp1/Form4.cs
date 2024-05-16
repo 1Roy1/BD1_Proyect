@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,25 +23,34 @@ namespace WindowsFormsApp1
 
         private void CargarDatos()
         {
+            // Utiliza 'using' para asegurar que los recursos se liberen correctamente
+            string sqlQuery = @"SELECT Clientes.ID, Nombre AS Cliente, Apellido, Telefono, Direccion 
+                        FROM proyecto.telefono 
+                        INNER JOIN clientes ON telefono.Clientes_ID = Clientes.ID 
+                        INNER JOIN direccion ON direccion.Clientes_ID = Clientes.ID 
+                        WHERE Activo = 1";
+
+            // Inicializa el DataTable fuera del bloque 'using' para poder acceder a él después
+            DataTable dataTable = new DataTable();
+
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT Clientes.ID, Nombre AS Cliente, Apellido, Telefono, Direccion " +
-                                      "FROM proyecto.telefono INNER JOIN clientes on telefono.Clientes_ID = Clientes_ID " +
-                                      "INNER JOIN direccion on direccion.Clientes_ID = Clientes.ID WHERE Activo = 1";
-                    DataTable dataTable = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                     adapter.Fill(dataTable);
-                    dataGridView1.DataSource = dataTable;
                 }
+
+                // Establece el DataSource del DataGridView fuera del bloque 'using'
+                dataGridView1.DataSource = dataTable;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar los datos: " + ex.Message);
             }
         }
+
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -139,12 +149,14 @@ namespace WindowsFormsApp1
                     cmdCliente.Parameters.AddWithValue("@Apellido", textBox2.Text);
                     cmdCliente.Parameters.AddWithValue("@Activo", 1);
                     cmdCliente.ExecuteNonQuery();
+                    
 
                     // Insertar direccion
                     string sqlQueryDireccion = "INSERT INTO direccion(Direccion, Clientes_ID) VALUES (@Direccion, @ClienteId) ";
                     MySqlCommand cmdDir = new MySqlCommand(sqlQueryDireccion, connection);
-                    cmdDir.Parameters.AddWithValue("@Direccion", textBox3);
+                    cmdDir.Parameters.AddWithValue("@Direccion", textBox3.Text);
                     cmdDir.Parameters.AddWithValue("@ClienteId", nextId);
+                    cmdDir.ExecuteNonQuery();
 
                     // Insertar el teléfono
                     string sqlQueryTelefono = "INSERT INTO telefono(Telefono, proveedores_ID, Clientes_ID) VALUES (@Telefono, NULL, @ClienteId)";
@@ -232,6 +244,16 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("Ingrese un ID para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }

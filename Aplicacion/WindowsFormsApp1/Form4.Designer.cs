@@ -58,9 +58,9 @@
             // button5
             // 
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(62, 518);
+            this.button5.Location = new System.Drawing.Point(53, 513);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(65, 65);
+            this.button5.Size = new System.Drawing.Size(80, 70);
             this.button5.TabIndex = 39;
             this.button5.Tag = "Guardar";
             this.button5.UseVisualStyleBackColor = true;
@@ -136,6 +136,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(539, 341);
             this.dataGridView1.TabIndex = 32;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // textBox3
@@ -316,6 +317,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form4";
             this.Text = "Form4";
+            this.Load += new System.EventHandler(this.Form4_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
