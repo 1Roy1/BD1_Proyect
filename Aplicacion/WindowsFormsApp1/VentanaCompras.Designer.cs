@@ -60,10 +60,12 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.imprimircompras = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -394,6 +396,37 @@
             this.label14.TabIndex = 28;
             this.label14.Text = "Producto Existente";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(240, 141);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(344, 20);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "(Si es un producto nuevo, ingrese todo los datos)";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(894, 86);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(217, 20);
+            this.label16.TabIndex = 33;
+            this.label16.Text = "Imprimir Historial de Compras";
+            // 
+            // imprimircompras
+            // 
+            this.imprimircompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.imprimircompras.Image = global::WindowsFormsApp1.Properties.Resources.pdfimage32;
+            this.imprimircompras.Location = new System.Drawing.Point(1129, 54);
+            this.imprimircompras.Name = "imprimircompras";
+            this.imprimircompras.Size = new System.Drawing.Size(97, 107);
+            this.imprimircompras.TabIndex = 32;
+            this.imprimircompras.UseVisualStyleBackColor = true;
+            this.imprimircompras.Click += new System.EventHandler(this.imprimircompras_Click);
+            // 
             // button3
             // 
             this.button3.AccessibleName = "Cancelar";
@@ -436,22 +469,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(521, 112);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(344, 20);
-            this.label15.TabIndex = 31;
-            this.label15.Text = "(Si es un producto nuevo, ingrese todo los datos)";
-            // 
             // NuevoProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1284, 666);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.imprimircompras);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox2);
@@ -482,9 +507,11 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "NuevoProducto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nuevo Producto";
@@ -533,5 +560,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button imprimircompras;
+        private System.Windows.Forms.Label label16;
     }
 }

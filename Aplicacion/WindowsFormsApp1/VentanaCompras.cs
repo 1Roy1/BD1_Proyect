@@ -1,10 +1,13 @@
-﻿using MySql.Data.MySqlClient;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +18,7 @@ namespace WindowsFormsApp1
 {
     public partial class NuevoProducto : Form
     {
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
         public NuevoProducto()
         {
             InitializeComponent();
@@ -468,6 +471,72 @@ namespace WindowsFormsApp1
             Form1 abrir1 = new Form1();
             abrir1.Show();
             this.Hide();
+        }
+
+        private void imprimircompras_Click(object sender, EventArgs e)
+        {
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+
+            try
+            {
+                connection.Open();
+
+                // Consulta SQL con INNER JOIN para obtener la información requerida
+                string sqlQuery = @"SELECT c.Fecha, c.Total, p.Nombre AS NombreProveedor, dc.Cantidad, dc.Costo, pr.Nombre AS NombreProducto
+                                    FROM compras c
+                                    INNER JOIN detalle_compras dc ON c.ID = dc.compras_ID
+                                    INNER JOIN producto pr ON dc.Producto_ID = pr.ID
+                                    INNER JOIN proveedores p ON c.proveedores_ID = p.ID";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                // Crear el documento PDF
+                Document doc = new Document();
+                PdfWriter.GetInstance(doc, new FileStream("HistorialCompras.pdf", FileMode.Create));
+                doc.Open();
+
+                // Agregar título al documento
+                Paragraph title = new Paragraph("Historial de Compras\n\n");
+                title.Alignment = Element.ALIGN_CENTER;
+                doc.Add(title);
+
+                // Crear tabla para mostrar los datos
+                PdfPTable table = new PdfPTable(dataTable.Columns.Count);
+                table.WidthPercentage = 100;
+
+                // Agregar encabezados de columnas
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    PdfPCell cell = new PdfPCell(new Phrase(column.ColumnName));
+                    table.AddCell(cell);
+                }
+
+                // Agregar filas con datos
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    foreach (object item in row.ItemArray)
+                    {
+                        PdfPCell cell = new PdfPCell(new Phrase(item.ToString()));
+                        table.AddCell(cell);
+                    }
+                }
+
+                doc.Add(table);
+                doc.Close();
+
+                MessageBox.Show("Historial de compras generado correctamente como 'HistorialCompras.pdf'");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el historial de compras: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }
