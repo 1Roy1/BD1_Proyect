@@ -130,9 +130,6 @@
   <data name="agregar-usuario2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\agregar-usuario2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="proveedor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\proveedor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="clientes3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\clientes3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -147,6 +144,9 @@
   </data>
   <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inventory4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\inventory4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="boton-eliminar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\boton-eliminar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,8 +202,8 @@
   <data name="pdfimage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\pdfimage1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="inventory4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\inventory4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="proveedor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\proveedor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pdfimage31" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\pdfimage3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,10 +217,16 @@
   <data name="limpiar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\limpiar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pdfimage32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\pdfimage3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="limpiar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\limpiar5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pdfimage32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\pdfimage3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="save_i" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\save_i.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sin nombre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Sin nombre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

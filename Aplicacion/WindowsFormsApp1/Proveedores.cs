@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using System.Globalization;
 
 namespace WindowsFormsApp1
 {
@@ -202,66 +203,93 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Document doc = null; // Definir la variable doc fuera del bloque try
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+             // obtener mes y año
+            string nombreMesActual = DateTime.Now.ToString("MMMM", CultureInfo.CurrentCulture);
+            int añoActual = DateTime.Now.Year;
+            string fecha = DateTime.Now.ToString();
 
             try
             {
-                // Crear un documento PDF
-                doc = new Document();
+                connection.Open();
 
-                // Abrir un diálogo para que el usuario seleccione la ubicación del archivo PDF
-                SaveFileDialog saveDialog = new SaveFileDialog();
-                saveDialog.Filter = "Archivo PDF|*.pdf";
-                saveDialog.Title = "Guardar PDF";
+                // obtener la información requerida
+                string sqlQuery = @"SELECT p.ID, p.Nombre as Proveedor, p.Asesor, t.Telefono " +
+                        "FROM proveedores p INNER JOIN telefono t ON p.ID = t.proveedores_ID " +
+                        "WHERE p.Activo = 1";
 
-                if (saveDialog.ShowDialog() == DialogResult.OK)
+                MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                // Crear el documento PDF
+                Document doc = new Document();
+                PdfWriter writer;
+
+                // seleccionar dónde guardar el PDF
+                using (saveFileDialog)
                 {
-                    // Crear un archivo PDF en la ubicación seleccionada
-                    using (FileStream stream = new FileStream(saveDialog.FileName, FileMode.Create))
+                    saveFileDialog.Filter = "PDF Files|*.pdf";
+                    saveFileDialog.DefaultExt = "pdf";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        PdfWriter.GetInstance(doc, stream);
-                        doc.Open();
-
-                        // Crear una tabla con los datos del DataGridView
-                        PdfPTable pdfTable = new PdfPTable(dataGridView1.ColumnCount);
-
-                        // Añadir las cabeceras de las columnas
-                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                        {
-                            pdfTable.AddCell(new Phrase(dataGridView1.Columns[j].HeaderText));
-                        }
-
-                        // Añadir las filas de datos
-                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                        {
-                            for (int k = 0; k < dataGridView1.Columns.Count; k++)
-                            {
-                                if (dataGridView1[k, i].Value != null)
-                                {
-                                    pdfTable.AddCell(new Phrase(dataGridView1[k, i].Value.ToString()));
-                                }
-                            }
-                        }
-
-                        // Añadir la tabla al documento
-                        doc.Add(pdfTable);
-
-                        // Mostrar un mensaje de éxito
-                        MessageBox.Show("PDF generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        writer = PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName, FileMode.Create));
+                    }
+                    else
+                    {
+                        throw new Exception("Operación cancelada por el usuario.");
                     }
                 }
+
+                doc.Open();
+
+                // Agregar título al documento pdf
+                Paragraph title = new Paragraph("Proveedores Activos\n" + nombreMesActual + " " + añoActual + "\n\n");
+                title.Alignment = Element.ALIGN_CENTER;
+                doc.Add(title);
+
+                // Crear tabla para mostrar los datos
+                PdfPTable table = new PdfPTable(dataTable.Columns.Count);
+                table.WidthPercentage = 100;
+
+                // Agregar encabezados de columnas
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    PdfPCell cell = new PdfPCell(new Phrase(column.ColumnName));
+                    table.AddCell(cell);
+                }
+
+                // Agregar filas con datos
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    foreach (object item in row.ItemArray)
+                    {
+                        PdfPCell cell = new PdfPCell(new Phrase(item.ToString()));
+                        table.AddCell(cell);
+                    }
+                }
+
+                doc.Add(table);
+
+                // AGregar fecha de generacion
+                Paragraph Date = new Paragraph("\nGenerado: "+fecha);
+                Date.Alignment = Element.ALIGN_LEFT;
+                doc.Add(Date);
+
+
+                doc.Close();
+
+                MessageBox.Show("El archivo se guardo en '" + saveFileDialog.FileName + "'");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al generar el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al generar el archivo: " + ex.Message);
             }
             finally
             {
-                // Asegurarse de cerrar el documento incluso si ocurre una excepción
-                if (doc != null)
-                {
-                    doc.Close();
-                }
+                connection.Close();
             }
         }
 

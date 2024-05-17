@@ -179,29 +179,56 @@ namespace WindowsFormsApp1
 
         private void BuscarPorNombre()
         {
+            // Utiliza 'using' para asegurar que los recursos se liberen correctamente
+            string consulta = @"SELECT Clientes.ID, Nombre AS Cliente, Apellido, Telefono, Direccion 
+                        FROM proyecto.telefono 
+                        INNER JOIN clientes ON telefono.Clientes_ID = clientes.ID 
+                        INNER JOIN direccion ON direccion.Clientes_ID = clientes.ID 
+                        WHERE Activo = 1 AND (Nombre LIKE @busqueda OR Telefono LIKE @busqueda)";
+
+            // Encapsula la lógica de conexión y ejecución en un método separado
+            DataTable resultado = EjecutarConsulta(consulta, textBox1.Text);
+            if (resultado != null)
+            {
+                dataGridView1.DataSource = resultado;
+            }
+            else
+            {
+                MessageBox.Show("Error al buscar el cliente.");
+            }
+        }
+
+        // Método para ejecutar la consulta SQL
+        private DataTable EjecutarConsulta(string consulta, string parametroBusqueda)
+        {
+            DataTable dataTable = new DataTable();
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
                     connection.Open();
-                    string sqlQuery = "SELECT Clientes.ID, Nombre AS Cliente, Apellido, Telefono, Direccion " +
-                                      "FROM proyecto.telefono INNER JOIN clientes on telefono.Clientes_ID = Clientes_ID " +
-                                      "INNER JOIN direccion on direccion.Clientes_ID = Clientes.ID WHERE Activo = 1 " +
-                                      " AND (Nombre LIKE @Nombre OR Telefono LIKE @Telefono)";
-                    MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                    cmd.Parameters.AddWithValue("@Nombre", "%" + textBox1.Text + "%");
-                    cmd.Parameters.AddWithValue("@Telefono", "%" + textBox1.Text + "%");
-                    DataTable dataTable = new DataTable();
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                    adapter.Fill(dataTable);
-                    dataGridView1.DataSource = dataTable;
+                    using (MySqlCommand cmd = new MySqlCommand(consulta, connection))
+                    {
+                        // parámetros evita la duplicación
+                        string parametroLike = "%" + parametroBusqueda + "%";
+                        cmd.Parameters.AddWithValue("@busqueda", parametroLike);
+
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar el proveedor: " + ex.Message);
+                // Considera registrar el error en un archivo de log para no exponer detalles sensibles al usuario
+                MessageBox.Show("Error al buscar el cliente: " + ex.Message);
+                return null;
             }
+            return dataTable;
         }
+
         private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form1 abrir1 = new Form1();
@@ -254,6 +281,11 @@ namespace WindowsFormsApp1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos();
         }
     }
 }

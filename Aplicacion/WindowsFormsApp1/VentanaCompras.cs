@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Globalization;
 
 namespace WindowsFormsApp1
 {
@@ -476,6 +477,11 @@ namespace WindowsFormsApp1
         private void imprimircompras_Click(object sender, EventArgs e)
         {
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            // obtener mes y año
+            string nombreMesActual = DateTime.Now.ToString("MMMM", CultureInfo.CurrentCulture);
+            int añoActual = DateTime.Now.Year;
+            string fecha = DateTime.Now.ToString();
 
             try
             {
@@ -483,10 +489,10 @@ namespace WindowsFormsApp1
 
                 // Consulta SQL con INNER JOIN para obtener la información requerida
                 string sqlQuery = @"SELECT c.Fecha, c.Total, p.Nombre AS NombreProveedor, dc.Cantidad, dc.Costo, pr.Nombre AS NombreProducto
-                                    FROM compras c
-                                    INNER JOIN detalle_compras dc ON c.ID = dc.compras_ID
-                                    INNER JOIN producto pr ON dc.Producto_ID = pr.ID
-                                    INNER JOIN proveedores p ON c.proveedores_ID = p.ID";
+                            FROM compras c
+                            INNER JOIN detalle_compras dc ON c.ID = dc.compras_ID
+                            INNER JOIN producto pr ON dc.Producto_ID = pr.ID
+                            INNER JOIN proveedores p ON c.proveedores_ID = p.ID";
 
                 MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -495,11 +501,27 @@ namespace WindowsFormsApp1
 
                 // Crear el documento PDF
                 Document doc = new Document();
-                PdfWriter.GetInstance(doc, new FileStream("HistorialCompras.pdf", FileMode.Create));
+                PdfWriter writer;
+
+                // Iniciar el SaveFileDialog para seleccionar dónde guardar el PDF
+                using (saveFileDialog )
+                {
+                    saveFileDialog.Filter = "PDF Files|*.pdf";
+                    saveFileDialog.DefaultExt = "pdf";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        writer = PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName, FileMode.Create));
+                    }
+                    else
+                    {
+                        throw new Exception("Operación cancelada por el usuario.");
+                    }
+                }
+
                 doc.Open();
 
                 // Agregar título al documento
-                Paragraph title = new Paragraph("Historial de Compras\n\n");
+                Paragraph title = new Paragraph("Historial de Compras\n" +nombreMesActual+" "+añoActual+"\n\n");
                 title.Alignment = Element.ALIGN_CENTER;
                 doc.Add(title);
 
@@ -525,9 +547,15 @@ namespace WindowsFormsApp1
                 }
 
                 doc.Add(table);
+
+                // AGregar fecha de generacion
+                Paragraph Date = new Paragraph("\nGenerado: " + fecha);
+                Date.Alignment = Element.ALIGN_LEFT;
+                doc.Add(Date);
+
                 doc.Close();
 
-                MessageBox.Show("Historial de compras generado correctamente como 'HistorialCompras.pdf'");
+                MessageBox.Show("Historial de compras se guardo en '" + saveFileDialog.FileName + "'");
             }
             catch (Exception ex)
             {
