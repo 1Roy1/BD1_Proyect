@@ -149,7 +149,7 @@
             // 
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.ForeColor = System.Drawing.SystemColors.Control;
-            this.button4.Image = global::WindowsFormsApp1.Properties.Resources.compras3;
+            this.button4.Image = global::WindowsFormsApp1.Properties.Resources.ComEscalar;
             this.button4.Location = new System.Drawing.Point(444, 426);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
@@ -163,7 +163,7 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.ForeColor = System.Drawing.SystemColors.Control;
-            this.button5.Image = global::WindowsFormsApp1.Properties.Resources.clientes3;
+            this.button5.Image = global::WindowsFormsApp1.Properties.Resources.CEscalar;
             this.button5.Location = new System.Drawing.Point(189, 426);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
@@ -187,7 +187,7 @@
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.SystemColors.Control;
-            this.button3.Image = global::WindowsFormsApp1.Properties.Resources.proveedor1;
+            this.button3.Image = global::WindowsFormsApp1.Properties.Resources.PrEscalar;
             this.button3.Location = new System.Drawing.Point(563, 224);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
@@ -200,7 +200,7 @@
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.SystemColors.Control;
-            this.button2.Image = global::WindowsFormsApp1.Properties.Resources.pngwing2;
+            this.button2.Image = global::WindowsFormsApp1.Properties.Resources.VEscalar;
             this.button2.Location = new System.Drawing.Point(335, 224);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
@@ -214,7 +214,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Image = global::WindowsFormsApp1.Properties.Resources.inventory5;
+            this.button1.Image = global::WindowsFormsApp1.Properties.Resources.IEscalar;
             this.button1.Location = new System.Drawing.Point(92, 224);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
@@ -247,7 +247,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";

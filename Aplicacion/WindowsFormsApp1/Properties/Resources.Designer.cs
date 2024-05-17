@@ -113,6 +113,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CEscalar {
+            get {
+                object obj = ResourceManager.GetObject("CEscalar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap clientes2 {
             get {
                 object obj = ResourceManager.GetObject("clientes2", resourceCulture);
@@ -133,6 +143,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ComEscalar {
+            get {
+                object obj = ResourceManager.GetObject("ComEscalar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap compras2 {
             get {
                 object obj = ResourceManager.GetObject("compras2", resourceCulture);
@@ -146,6 +166,16 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap compras3 {
             get {
                 object obj = ResourceManager.GetObject("compras3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IEscalar {
+            get {
+                object obj = ResourceManager.GetObject("IEscalar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,6 +413,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PrEscalar {
+            get {
+                object obj = ResourceManager.GetObject("PrEscalar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap proveedor1 {
             get {
                 object obj = ResourceManager.GetObject("proveedor1", resourceCulture);
@@ -426,6 +466,16 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap unnamed {
             get {
                 object obj = ResourceManager.GetObject("unnamed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VEscalar {
+            get {
+                object obj = ResourceManager.GetObject("VEscalar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
