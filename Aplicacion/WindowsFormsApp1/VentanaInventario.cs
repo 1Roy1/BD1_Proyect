@@ -64,7 +64,7 @@ namespace WindowsFormsApp1
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT * FROM producto";
+                string sqlQuery = "SELECT p.ID as Codigo, p.Nombre, p.descripcion as Descripcion,p.Existencia, p.Precio, dc.Costo FROM producto p  inner join detalle_compras dc on p.ID = dc.Producto_ID group by p.ID";
 
                 if (comboBox1.SelectedItem != null)
                 {
@@ -73,13 +73,13 @@ namespace WindowsFormsApp1
                     {
                         sqlQuery += " ORDER BY Nombre ASC";
                     }
-                    else if (sortBy == "Cantidad de Producto (Mayor)")
+                    else if (sortBy == "Existencia de Producto (Mayor)")
                     {
-                        sqlQuery += " ORDER BY Existencias DESC";
+                        sqlQuery += " ORDER BY Existencia DESC";
                     }
-                    else if (sortBy == "Cantidad de Producto (Menor)")
+                    else if (sortBy == "Existencia de Producto (Menor)")
                     {
-                        sqlQuery += " ORDER BY Existencias ASC";
+                        sqlQuery += " ORDER BY Existencia ASC";
                     }
                     else if (sortBy == "ID")
                     {
