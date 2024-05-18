@@ -205,7 +205,7 @@ namespace WindowsFormsApp1
         {
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-             // obtener mes y año
+            // obtener mes y año
             string nombreMesActual = DateTime.Now.ToString("MMMM", CultureInfo.CurrentCulture);
             int añoActual = DateTime.Now.Year;
             string fecha = DateTime.Now.ToString();
@@ -274,7 +274,7 @@ namespace WindowsFormsApp1
                 doc.Add(table);
 
                 // AGregar fecha de generacion
-                Paragraph Date = new Paragraph("\nGenerado: "+fecha);
+                Paragraph Date = new Paragraph("\nGenerado: " + fecha);
                 Date.Alignment = Element.ALIGN_LEFT;
                 doc.Add(Date);
 
@@ -300,7 +300,7 @@ namespace WindowsFormsApp1
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void dataGridView1_SelectionChanged_1(object sender, EventArgs e)
@@ -407,5 +407,20 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void comprarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NuevoProducto abrir1 = new NuevoProducto();
+            abrir1.Show();
+            this.Hide();
+        }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 abrir1 = new Form4();
+            abrir1.Show();
+            this.Hide();
+        }
     }
+
 }

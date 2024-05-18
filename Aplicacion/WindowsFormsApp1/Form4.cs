@@ -287,5 +287,19 @@ namespace WindowsFormsApp1
         {
             LimpiarCampos();
         }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Proveedores abrir1 = new Proveedores();
+            abrir1.Show();
+            this.Hide();
+        }
+
+        private void cleintesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NuevoProducto abrir = new NuevoProducto();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }

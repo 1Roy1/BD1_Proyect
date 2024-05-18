@@ -57,14 +57,14 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "Rod2102777";
+            string password = "root123";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT * FROM inventario";
+                string sqlQuery = "SELECT * FROM producto";
 
                 if (comboBox1.SelectedItem != null)
                 {
@@ -166,6 +166,20 @@ namespace WindowsFormsApp1
         {
             NuevoProducto nuevoProd = new NuevoProducto();
             nuevoProd.ShowDialog();
+        }
+
+        private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NuevoProducto prod = new NuevoProducto();
+            prod.Show();
+            this.Hide();
+        }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 abrir = new Form4();
+            abrir.Show();
+            this.Hide();
         }
     }
 }
