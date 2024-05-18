@@ -197,8 +197,6 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al buscar el cliente.");
             }
         }
-
-        // Método para ejecutar la consulta SQL
         private DataTable EjecutarConsulta(string consulta, string parametroBusqueda)
         {
             DataTable dataTable = new DataTable();
@@ -209,7 +207,6 @@ namespace WindowsFormsApp1
                     connection.Open();
                     using (MySqlCommand cmd = new MySqlCommand(consulta, connection))
                     {
-                        // parámetros evita la duplicación
                         string parametroLike = "%" + parametroBusqueda + "%";
                         cmd.Parameters.AddWithValue("@busqueda", parametroLike);
 
@@ -222,7 +219,6 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex)
             {
-                // Considera registrar el error en un archivo de log para no exponer detalles sensibles al usuario
                 MessageBox.Show("Error al buscar el cliente: " + ex.Message);
                 return null;
             }

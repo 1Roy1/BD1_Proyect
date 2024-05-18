@@ -3,40 +3,48 @@
   "WorkspaceRootPath": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\ventanacompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanacompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanacompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanacompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\ventanaventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanaventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanacompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanacompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\ventanaventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanaventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|d:\\bd1_proyect\\aplicacion\\windowsformsapp1\\resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:ventanainventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE1E117E-076E-49BB-BA7D-070045F02952}|WindowsFormsApp1.csproj|solutionrelative:conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 214,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,20 +62,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VentanaCompras.cs",
-              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaCompras.cs",
-              "RelativeDocumentMoniker": "VentanaCompras.cs",
-              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaCompras.cs",
-              "RelativeToolTip": "VentanaCompras.cs",
-              "ViewState": "AQIAAL0BAAAAAAAAAAAkwMkBAAAkAAAA",
+              "DocumentIndex": 6,
+              "Title": "VentanaVentas.cs",
+              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaVentas.cs",
+              "RelativeDocumentMoniker": "VentanaVentas.cs",
+              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaVentas.cs",
+              "RelativeToolTip": "VentanaVentas.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAgwEABAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T22:02:56.278Z",
+              "WhenOpened": "2024-05-18T22:51:46.141Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
+              "Title": "VentanaVentas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaVentas.cs",
+              "RelativeDocumentMoniker": "VentanaVentas.cs",
+              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaVentas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "VentanaVentas.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T22:49:00.109Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ResetPassword.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs",
+              "RelativeDocumentMoniker": "ResetPassword.cs",
+              "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\ResetPassword.cs [Dise\u00F1o]",
+              "RelativeToolTip": "ResetPassword.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T22:48:53.792Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Conexion.cs",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Conexion.cs",
               "RelativeDocumentMoniker": "Conexion.cs",
@@ -75,12 +107,11 @@
               "RelativeToolTip": "Conexion.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAACNAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T21:56:47.682Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-18T21:56:47.682Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "VentanaInventario.cs",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaInventario.cs",
               "RelativeDocumentMoniker": "VentanaInventario.cs",
@@ -93,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "VentanaInventario.cs [Dise\u00F1o]",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaInventario.cs",
               "RelativeDocumentMoniker": "VentanaInventario.cs",
@@ -105,14 +136,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Dise\u00F1o]",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form1.cs [Dise\u00F1o]",
               "RelativeToolTip": "Form1.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T21:10:06.227Z"
+              "WhenOpened": "2024-05-18T21:10:06.227Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
@@ -122,24 +154,26 @@
               "RelativeDocumentMoniker": "Form4.cs",
               "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form4.cs",
               "RelativeToolTip": "Form4.cs",
-              "ViewState": "AQIAABkBAAAAAAAAAAArwC0BAAAYAAAA",
+              "ViewState": "AQIAAKsAAAAAAAAAAAAnwNAAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T02:57:48.433Z"
+              "WhenOpened": "2024-05-16T02:57:48.433Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "Form4.cs [Dise\u00F1o]",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form4.cs",
               "RelativeDocumentMoniker": "Form4.cs",
               "ToolTip": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Form4.cs [Dise\u00F1o]",
               "RelativeToolTip": "Form4.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T02:57:18.813Z"
+              "WhenOpened": "2024-05-16T02:57:18.813Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Proveedores.cs [Dise\u00F1o]",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\Proveedores.cs",
               "RelativeDocumentMoniker": "Proveedores.cs",
@@ -151,7 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "VentanaCompras.cs [Dise\u00F1o]",
               "DocumentMoniker": "D:\\BD1_Proyect\\Aplicacion\\WindowsFormsApp1\\VentanaCompras.cs",
               "RelativeDocumentMoniker": "VentanaCompras.cs",

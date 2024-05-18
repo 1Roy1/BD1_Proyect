@@ -320,7 +320,7 @@
             this.clientesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1284, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1299, 36);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -400,7 +400,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(240, 141);
+            this.label15.Location = new System.Drawing.Point(307, 163);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(344, 20);
             this.label15.TabIndex = 31;
@@ -420,9 +420,9 @@
             // 
             this.imprimircompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.imprimircompras.Image = global::WindowsFormsApp1.Properties.Resources.pdfimage32;
-            this.imprimircompras.Location = new System.Drawing.Point(1129, 54);
+            this.imprimircompras.Location = new System.Drawing.Point(1129, 46);
             this.imprimircompras.Name = "imprimircompras";
-            this.imprimircompras.Size = new System.Drawing.Size(97, 107);
+            this.imprimircompras.Size = new System.Drawing.Size(97, 102);
             this.imprimircompras.TabIndex = 32;
             this.imprimircompras.UseVisualStyleBackColor = true;
             this.imprimircompras.Click += new System.EventHandler(this.imprimircompras_Click);
@@ -432,7 +432,7 @@
             this.button3.AccessibleName = "Cancelar";
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Image = global::WindowsFormsApp1.Properties.Resources.limpiar5;
+            this.button3.Image = global::WindowsFormsApp1.Properties.Resources.limpiar6;
             this.button3.Location = new System.Drawing.Point(1031, 559);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
@@ -474,7 +474,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1284, 666);
+            this.ClientSize = new System.Drawing.Size(1299, 690);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.imprimircompras);
             this.Controls.Add(this.label15);

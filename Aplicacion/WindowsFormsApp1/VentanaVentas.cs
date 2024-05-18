@@ -306,5 +306,19 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NuevoProducto abrir = new NuevoProducto();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 a = new Form4();
+            a.Show();
+            this.Hide();
+        }
     }
 }

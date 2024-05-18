@@ -274,7 +274,7 @@
             this.MaximizeBox = false;
             this.Name = "VentanaInventario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "VentanaInventario";
+            this.Text = "Ventana Inventario";
             this.Load += new System.EventHandler(this.VentanaInventario_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
