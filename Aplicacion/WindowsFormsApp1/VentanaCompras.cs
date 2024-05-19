@@ -12,7 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Globalization;
 
 namespace WindowsFormsApp1
@@ -73,18 +72,10 @@ namespace WindowsFormsApp1
 
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
-                MessageBox.Show("Ingrese solo numeros", "Advertencia", MessageBoxButtons.OK);
+                MessageBox.Show("Ingrese solo números enteros.", "Advertencia", MessageBoxButtons.OK);
             }
         }
 
@@ -95,19 +86,18 @@ namespace WindowsFormsApp1
 
         private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (char.IsControl(e.KeyChar) || e.KeyChar == '.')
-            {
-                e.Handled = false;
-            }
-            else
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
-                MessageBox.Show("Ingrese solo numeros o punto", "Advertencia", MessageBoxButtons.OK);
+                MessageBox.Show("Ingrese solo números enteros o decimales.", "Advertencia", MessageBoxButtons.OK);
             }
+            // Permitir solo un punto decimal
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo un punto decimal.", "Advertencia", MessageBoxButtons.OK);
+            }
+
         }
 
         private void NuevoProducto_Load(object sender, EventArgs e)
@@ -127,18 +117,16 @@ namespace WindowsFormsApp1
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (char.IsControl(e.KeyChar) || e.KeyChar == '.')
-            {
-                e.Handled = false;
-            }
-            else
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
-                MessageBox.Show("Ingrese solo numeros o punto", "Advertencia", MessageBoxButtons.OK);
+                MessageBox.Show("Ingrese solo números enteros o decimales.", "Advertencia", MessageBoxButtons.OK);
+            }
+           
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo un punto decimal.", "Advertencia", MessageBoxButtons.OK);
             }
         }
 
@@ -564,6 +552,21 @@ namespace WindowsFormsApp1
             finally
             {
                 connection.Close();
+            }
+        }
+
+        private void textBox7_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo números enteros o decimales.", "Advertencia", MessageBoxButtons.OK);
+            }
+          
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+                MessageBox.Show("Ingrese solo un punto decimal.", "Advertencia", MessageBoxButtons.OK);
             }
         }
     }

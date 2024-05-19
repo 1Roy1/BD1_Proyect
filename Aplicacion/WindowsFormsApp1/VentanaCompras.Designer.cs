@@ -305,6 +305,7 @@
             this.textBox7.Size = new System.Drawing.Size(445, 33);
             this.textBox7.TabIndex = 23;
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged_1);
+            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox7_KeyPress_1);
             this.textBox7.Leave += new System.EventHandler(this.textBox7_Leave);
             // 
             // menuStrip1
@@ -418,25 +419,26 @@
             // 
             // imprimircompras
             // 
+            this.imprimircompras.BackColor = System.Drawing.Color.LavenderBlush;
             this.imprimircompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.imprimircompras.Image = global::WindowsFormsApp1.Properties.Resources.pdfimage32;
             this.imprimircompras.Location = new System.Drawing.Point(1129, 46);
             this.imprimircompras.Name = "imprimircompras";
             this.imprimircompras.Size = new System.Drawing.Size(97, 102);
             this.imprimircompras.TabIndex = 32;
-            this.imprimircompras.UseVisualStyleBackColor = true;
+            this.imprimircompras.UseVisualStyleBackColor = false;
             this.imprimircompras.Click += new System.EventHandler(this.imprimircompras_Click);
             // 
             // button3
             // 
             this.button3.AccessibleName = "Cancelar";
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button3.BackColor = System.Drawing.Color.LavenderBlush;
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button3.Image = global::WindowsFormsApp1.Properties.Resources.limpiar6;
-            this.button3.Location = new System.Drawing.Point(1031, 559);
+            this.button3.Location = new System.Drawing.Point(1003, 559);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 94);
+            this.button3.Size = new System.Drawing.Size(108, 104);
             this.button3.TabIndex = 30;
             this.button3.Tag = "Cancelar";
             this.button3.UseVisualStyleBackColor = false;
@@ -445,13 +447,13 @@
             // button2
             // 
             this.button2.AccessibleName = "Cancelar";
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button2.BackColor = System.Drawing.Color.LavenderBlush;
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(1140, 559);
+            this.button2.Location = new System.Drawing.Point(1129, 559);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 94);
+            this.button2.Size = new System.Drawing.Size(105, 104);
             this.button2.TabIndex = 17;
             this.button2.Tag = "Cancelar";
             this.button2.UseVisualStyleBackColor = false;
@@ -459,14 +461,16 @@
             // 
             // button1
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(936, 559);
+            this.button1.BackColor = System.Drawing.Color.LavenderBlush;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::WindowsFormsApp1.Properties.Resources.save_i;
+            this.button1.Location = new System.Drawing.Point(898, 559);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 94);
+            this.button1.Size = new System.Drawing.Size(97, 104);
             this.button1.TabIndex = 16;
             this.button1.Tag = "Guardar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // NuevoProducto
