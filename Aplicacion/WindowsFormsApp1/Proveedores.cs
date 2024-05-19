@@ -45,6 +45,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al actualizar el estado del proveedor: " + ex.Message);
             }
         }
+
         private void CargarDatos()
         {
             try
@@ -66,6 +67,28 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al cargar los datos: " + ex.Message);
             }
         }
+
+        private void GuardarProveedor()
+        {
+            DialogResult dialogResult = MessageBox.Show("¿Es un nuevo proveedor?", "Confirmar acción", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                InsertarProveedor();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                if (!string.IsNullOrEmpty(textBox4.Text))
+                {
+                    int id = Convert.ToInt32(textBox4.Text);
+                    ActualizarProveedor(id);
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un ID para actualizar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
         private void InsertarProveedor()
         {
             try
@@ -74,46 +97,128 @@ namespace WindowsFormsApp1
                 {
                     connection.Open();
 
-                    // Consultar el último ID insertado
-                    string getLastIdQuery = "SELECT MAX(ID) FROM proveedores";
-                    MySqlCommand getLastIdCmd = new MySqlCommand(getLastIdQuery, connection);
-                    object lastIdObj = getLastIdCmd.ExecuteScalar();
+                    // Obtener el ID máximo actual
+                    string maxIdQuery = "SELECT COALESCE(MAX(ID), 0) + 1 FROM proveedores";
+                    MySqlCommand maxIdCmd = new MySqlCommand(maxIdQuery, connection);
+                    int newId = Convert.ToInt32(maxIdCmd.ExecuteScalar());
 
-                    int lastId = 0;
-                    if (lastIdObj != null && lastIdObj != DBNull.Value)
+                    // Verificar si el nombre o el asesor ya existen
+                    string checkQuery = "SELECT ID FROM proveedores WHERE Nombre = @Nombre OR Asesor = @Asesor";
+                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, connection);
+                    checkCmd.Parameters.AddWithValue("@Nombre", textBox2.Text);
+                    checkCmd.Parameters.AddWithValue("@Asesor", textBox3.Text);
+
+                    object result = checkCmd.ExecuteScalar();
+                    if (result != null)
                     {
-                        lastId = Convert.ToInt32(lastIdObj);
+                        throw new Exception("El proveedor con ese nombre o asesor ya existe.");
                     }
 
-                    // Incrementar el último ID para la próxima inserción
-                    int nextId = lastId + 1;
-
-                    // Insertar el proveedor
+                    // Insertar el proveedor con el nuevo ID
                     string sqlQueryProveedor = "INSERT INTO proveedores(ID, Nombre, Asesor, Activo) VALUES (@ID, @Nombre, @Asesor, @Activo)";
                     MySqlCommand cmdProveedor = new MySqlCommand(sqlQueryProveedor, connection);
-                    cmdProveedor.Parameters.AddWithValue("@ID", nextId);
+                    cmdProveedor.Parameters.AddWithValue("@ID", newId);
                     cmdProveedor.Parameters.AddWithValue("@Nombre", textBox2.Text);
                     cmdProveedor.Parameters.AddWithValue("@Asesor", textBox3.Text);
                     cmdProveedor.Parameters.AddWithValue("@Activo", 1);
                     cmdProveedor.ExecuteNonQuery();
 
                     // Insertar el teléfono
-                    string sqlQueryTelefono = "INSERT INTO telefono(Telefono, proveedores_ID, Clientes_ID) VALUES (@Telefono, @ProveedorId, NULL)";
+                    string sqlQueryTelefono = "INSERT INTO telefono(Telefono, proveedores_ID) VALUES (@Telefono, @ProveedorId)";
                     MySqlCommand cmdTelefono = new MySqlCommand(sqlQueryTelefono, connection);
                     cmdTelefono.Parameters.AddWithValue("@Telefono", textBox5.Text);
-                    cmdTelefono.Parameters.AddWithValue("@ProveedorId", nextId);
+                    cmdTelefono.Parameters.AddWithValue("@ProveedorId", newId);
                     cmdTelefono.ExecuteNonQuery();
                 }
-                CargarDatos(); // Recargar los datos en el DataGridView después de la inserción
-                LimpiarCampos(); // Limpiar los campos de texto después de la inserción
+                CargarDatos();
+                LimpiarCampos();
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Message.Contains("El proveedor con ese nombre o asesor ya existe"))
+                {
+                    DialogResult dialogResult = MessageBox.Show("El proveedor ya existe. ¿Desea actualizar la información del proveedor existente?", "Proveedor existente", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        // Buscar el ID del proveedor existente
+                        int idProveedorExistente = ObtenerIdProveedorExistente(textBox2.Text, textBox3.Text);
+                        if (idProveedorExistente > 0)
+                        {
+                            ActualizarProveedor(idProveedorExistente);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo encontrar el proveedor existente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error al insertar el proveedor: " + ex.Message);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar el proveedor: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
-        // Método para limpiar los campos de texto
+        private int ObtenerIdProveedorExistente(string nombre, string asesor)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT ID FROM proveedores WHERE Nombre = @Nombre OR Asesor = @Asesor";
+                    MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                    cmd.Parameters.AddWithValue("@Nombre", nombre);
+                    cmd.Parameters.AddWithValue("@Asesor", asesor);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID del proveedor existente: " + ex.Message);
+            }
+            return -1;
+        }
+
+        private void ActualizarProveedor(int id)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+
+                    // Actualizar el proveedor
+                    string sqlQueryProveedor = "UPDATE proveedores SET Nombre = @Nombre, Asesor = @Asesor WHERE ID = @ID";
+                    MySqlCommand cmdProveedor = new MySqlCommand(sqlQueryProveedor, connection);
+                    cmdProveedor.Parameters.AddWithValue("@ID", id);
+                    cmdProveedor.Parameters.AddWithValue("@Nombre", textBox2.Text);
+                    cmdProveedor.Parameters.AddWithValue("@Asesor", textBox3.Text);
+                    cmdProveedor.ExecuteNonQuery();
+
+                    // Actualizar el teléfono
+                    string sqlQueryTelefono = "UPDATE telefono SET Telefono = @Telefono WHERE proveedores_ID = @ProveedorId";
+                    MySqlCommand cmdTelefono = new MySqlCommand(sqlQueryTelefono, connection);
+                    cmdTelefono.Parameters.AddWithValue("@Telefono", textBox5.Text);
+                    cmdTelefono.Parameters.AddWithValue("@ProveedorId", id);
+                    cmdTelefono.ExecuteNonQuery();
+                }
+                CargarDatos();
+                LimpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el proveedor: " + ex.Message);
+            }
+        }
         private void LimpiarCampos()
         {
             textBox4.Clear();
@@ -355,7 +460,12 @@ namespace WindowsFormsApp1
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-
+            if (textBox5.Text.Length > 8)
+            {
+                textBox5.Text = textBox5.Text.Substring(0, 8);
+                textBox5.SelectionStart = textBox5.Text.Length; // Mover el cursor al final
+                MessageBox.Show("¡Solo se permiten 8 dígitos!", "Advertencia", MessageBoxButtons.OK);
+            }
         }
 
 
@@ -363,7 +473,16 @@ namespace WindowsFormsApp1
         {
             if (char.IsNumber(e.KeyChar))
             {
-                e.Handled = false;
+                // Permitir solo 8 dígitos
+                if (textBox5.Text.Length < 8)
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    e.Handled = true;
+                    MessageBox.Show("¡Solo se permiten 8 dígitos!", "Advertencia", MessageBoxButtons.OK);
+                }
             }
             else if (char.IsControl(e.KeyChar))
             {
@@ -372,7 +491,7 @@ namespace WindowsFormsApp1
             else
             {
                 e.Handled = true;
-                MessageBox.Show("¡Ingrese solo numeros!", "Advertencia", MessageBoxButtons.OK);
+                MessageBox.Show("¡Ingrese solo números!", "Advertencia", MessageBoxButtons.OK);
             }
         }
 
@@ -395,7 +514,7 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            InsertarProveedor();
+            GuardarProveedor();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -420,6 +539,11 @@ namespace WindowsFormsApp1
             Form4 abrir1 = new Form4();
             abrir1.Show();
             this.Hide();
+        }
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

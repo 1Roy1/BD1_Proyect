@@ -67,6 +67,8 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(280, 38);
             this.textBox5.TabIndex = 36;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // label7
             // 
@@ -266,6 +268,8 @@
             // 
             // button5
             // 
+            this.button5.BackColor = System.Drawing.Color.LavenderBlush;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
             this.button5.Location = new System.Drawing.Point(71, 631);
             this.button5.Margin = new System.Windows.Forms.Padding(4);
@@ -273,7 +277,7 @@
             this.button5.Size = new System.Drawing.Size(107, 86);
             this.button5.TabIndex = 39;
             this.button5.Tag = "Guardar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4

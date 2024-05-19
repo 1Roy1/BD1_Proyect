@@ -297,5 +297,40 @@ namespace WindowsFormsApp1
             abrir.Show();
             this.Hide();
         }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox5.Text.Length > 8)
+            {
+                textBox5.Text = textBox5.Text.Substring(0, 8);
+                textBox5.SelectionStart = textBox5.Text.Length; // Mover el cursor al final
+                MessageBox.Show("¡Solo se permiten 8 dígitos!", "Advertencia", MessageBoxButtons.OK);
+            }
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                if (textBox5.Text.Length < 8)
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    e.Handled = true;
+                    MessageBox.Show("¡Solo se permiten 8 dígitos!", "Advertencia", MessageBoxButtons.OK);
+                }
+            }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MessageBox.Show("¡Ingrese solo números!", "Advertencia", MessageBoxButtons.OK);
+            }
+        }
     }
 }

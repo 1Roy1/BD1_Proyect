@@ -76,14 +76,14 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "Rod2102777";
+            string password = "root123";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT * FROM inventario";
+                string sqlQuery = "SELECT * FROM producto";
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
@@ -159,7 +159,7 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "Rod2102777";
+            string password = "root123";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             connection = new MySqlConnection(cadenaConexion);

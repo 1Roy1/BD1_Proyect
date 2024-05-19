@@ -131,6 +131,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActuzalizarProductoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Conexion.cs" />
     <Compile Include="EncryptMD5.cs" />
     <Compile Include="Form1.cs">
@@ -335,6 +338,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\limpiar6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\edit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\edit2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\limpiar10.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

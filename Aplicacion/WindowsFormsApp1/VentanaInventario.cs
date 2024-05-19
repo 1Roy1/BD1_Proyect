@@ -181,5 +181,53 @@ namespace WindowsFormsApp1
             abrir.Show();
             this.Hide();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                string id = selectedRow.Cells["Codigo"].Value.ToString();
+                string currentNombre = selectedRow.Cells["Nombre"].Value.ToString();
+                string currentDescripcion = selectedRow.Cells["Descripcion"].Value.ToString();
+
+                ActualizarProductoForm actualizarProductoForm = new ActualizarProductoForm(currentNombre, currentDescripcion);
+
+                if (actualizarProductoForm.ShowDialog() == DialogResult.OK)
+                {
+                    string nuevoNombre = actualizarProductoForm.Nombre;
+                    string nuevaDescripcion = actualizarProductoForm.Descripcion;
+
+                    string connectionString = "server=localhost;port=3306;user id=root;password=root123;database=proyecto;";
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        string query = "UPDATE producto SET Nombre = @Nombre, descripcion = @Descripcion WHERE ID = @ID";
+
+                        MySqlCommand command = new MySqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@Nombre", nuevoNombre);
+                        command.Parameters.AddWithValue("@Descripcion", nuevaDescripcion);
+                        command.Parameters.AddWithValue("@ID", id);
+
+                        try
+                        {
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Producto actualizado exitosamente.");
+
+                            // Recargar los datos en el DataGridView
+                            CargarDatos();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al actualizar el producto: " + ex.Message);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un producto para actualizar.");
+            }
+        }
     }
 }

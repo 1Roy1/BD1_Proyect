@@ -41,12 +41,12 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -181,17 +181,51 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Filtrar por: ";
             // 
-            // pictureBox1
+            // label4
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(9, 49);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(64, 58);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(1065, 194);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(165, 25);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Agregar Producto";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1082, 411);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(148, 25);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Editar Producto";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LavenderBlush;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::WindowsFormsApp1.Properties.Resources.edit2;
+            this.button1.Location = new System.Drawing.Point(1081, 457);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(149, 136);
+            this.button1.TabIndex = 25;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.LavenderBlush;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Image = global::WindowsFormsApp1.Properties.Resources.save_i;
+            this.button5.Location = new System.Drawing.Point(1098, 247);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(115, 113);
+            this.button5.TabIndex = 22;
+            this.button5.Tag = "Guardar";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button2
             // 
@@ -208,46 +242,17 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
-            // button5
+            // pictureBox1
             // 
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(1098, 247);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 90);
-            this.button5.TabIndex = 22;
-            this.button5.Tag = "Guardar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1065, 197);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(165, 25);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Agregar Producto";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1065, 390);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(148, 25);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Editar Producto";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1098, 472);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 90);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Editar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(9, 49);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(64, 58);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // VentanaInventario
             // 
