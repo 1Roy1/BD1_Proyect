@@ -348,5 +348,20 @@
   <ItemGroup>
     <None Include="Images\limpiar10.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\ventas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\agregar-producto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\cancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\manual-book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\manual-book %281%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
