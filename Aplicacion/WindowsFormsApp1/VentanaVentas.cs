@@ -57,7 +57,7 @@ namespace WindowsFormsApp1
                 textBox1.Text = selectedRow.Cells["ID"].Value.ToString();
                 textBox2.Text = selectedRow.Cells["Nombre"].Value.ToString();
                 textBox3.Text = selectedRow.Cells["Descripcion"].Value.ToString();
-                textBox4.Text = selectedRow.Cells["Existencias"].Value.ToString();
+                textBox4.Text = selectedRow.Cells["Existencia"].Value.ToString();
                 textBox6.Text = selectedRow.Cells["Precio"].Value.ToString();
                 textBox7.Text = selectedRow.Cells["Marca"].Value.ToString();
             }
@@ -76,7 +76,7 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "root123";
+            string password = "Rod2102777";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
@@ -159,7 +159,7 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "root123";
+            string password = "Rod2102777";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             connection = new MySqlConnection(cadenaConexion);
@@ -175,14 +175,14 @@ namespace WindowsFormsApp1
                     float total = Convert.ToSingle(row.Cells["total"].Value);
                     TotalFinal = TotalFinal + total;
 
-                    string sqlQuery2 = "SELECT existencias FROM inventario WHERE ID = @ID";
+                    string sqlQuery2 = "SELECT existencia FROM producto WHERE ID = @ID";
                     MySqlCommand cmd2 = new MySqlCommand(sqlQuery2, connection);
                     cmd2.Parameters.AddWithValue("@ID", idVenta);
                     int viejoValor = Convert.ToInt32(cmd2.ExecuteScalar());
 
                     int valorFinal = viejoValor - existencias;
 
-                    string sqlQuery3 = "UPDATE inventario SET Existencias = @NuevoValor WHERE ID = @ID";
+                    string sqlQuery3 = "UPDATE producto SET Existencia = @NuevoValor WHERE ID = @ID";
                     MySqlCommand cmd3 = new MySqlCommand(sqlQuery3, connection);
                     cmd3.Parameters.AddWithValue("@NuevoValor", valorFinal);
                     cmd3.Parameters.AddWithValue("@ID", idVenta);

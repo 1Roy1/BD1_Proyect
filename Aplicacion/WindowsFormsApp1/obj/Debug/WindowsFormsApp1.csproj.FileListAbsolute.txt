@@ -365,3 +365,5 @@ C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\PROYECTO\BD
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\PROYECTO\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\PROYECTO\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form4.resources
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form4.resources
+C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form4.resources
+C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ResetPassword.resources

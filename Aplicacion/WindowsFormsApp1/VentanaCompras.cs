@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
 {
     public partial class NuevoProducto : Form
     {
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
         public NuevoProducto()
         {
             InitializeComponent();
