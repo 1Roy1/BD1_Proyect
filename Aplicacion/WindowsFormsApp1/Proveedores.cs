@@ -68,6 +68,8 @@ namespace WindowsFormsApp1
             }
         }
 
+        
+
         private void GuardarProveedor()
         {
             DialogResult dialogResult = MessageBox.Show("¿Es un nuevo proveedor?", "Confirmar acción", MessageBoxButtons.YesNo);

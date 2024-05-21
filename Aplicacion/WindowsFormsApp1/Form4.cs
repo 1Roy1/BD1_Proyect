@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace WindowsFormsApp1
 {
     public partial class Form4 : Form
     {
-        String cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
+        String cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
         public Form4()
         {
             InitializeComponent();
@@ -51,6 +52,35 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void CargarDatosDelete()
+        {
+            // Utiliza 'using' para asegurar que los recursos se liberen correctamente
+            string sqlQuery = @"SELECT Clientes.ID, Nombre AS Cliente, Apellido, Telefono, Direccion 
+                        FROM proyecto.telefono 
+                        INNER JOIN clientes ON telefono.Clientes_ID = Clientes.ID 
+                        INNER JOIN direccion ON direccion.Clientes_ID = Clientes.ID 
+                        WHERE Activo = 0";
+
+            // Inicializa el DataTable fuera del bloque 'using' para poder acceder a él después
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
+                    adapter.Fill(dataTable);
+                }
+
+                // Establece el DataSource del DataGridView fuera del bloque 'using'
+                dataGridView1.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos: " + ex.Message);
+            }
+        }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -330,6 +360,25 @@ namespace WindowsFormsApp1
             {
                 e.Handled = true;
                 MessageBox.Show("¡Ingrese solo números!", "Advertencia", MessageBoxButtons.OK);
+            }
+        }
+
+
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                CargarDatosDelete();
+            }
+            else
+            {
+                CargarDatos();
             }
         }
     }
