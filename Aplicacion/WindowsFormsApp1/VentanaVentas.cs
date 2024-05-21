@@ -41,6 +41,8 @@ namespace WindowsFormsApp1
             textBox5.Clear();
             textBox6.Clear();
             textBox7.Clear();
+            textBox8.Clear();
+            textBox9.Clear();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -94,6 +96,12 @@ namespace WindowsFormsApp1
                 MySqlDataAdapter adapter2 = new MySqlDataAdapter(sqlQuery2, connection);
                 adapter2.Fill(dataTable2);
                 dataGridView2.DataSource = dataTable2;
+
+                string sqlQuery3 = "SELECT id, nombre, apellido FROM clientes";
+                DataTable dataTable3 = new DataTable();
+                MySqlDataAdapter adapter3 = new MySqlDataAdapter(sqlQuery3, connection);
+                adapter3.Fill(dataTable3);
+                dataGridView3.DataSource = dataTable3;
             }
             catch (Exception ex)
             {
@@ -166,6 +174,7 @@ namespace WindowsFormsApp1
 
             try
             {
+                int idcliente = Convert.ToInt32(textBox8.Text);
                 connection.Open();
                 float TotalFinal = 0;
                 foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -197,7 +206,7 @@ namespace WindowsFormsApp1
                 string sqlQuery5 = "INSERT INTO ventas(total, clientes_id) VALUES(@total, @cliente_id)";
                 MySqlCommand cmd5 = new MySqlCommand(sqlQuery5, connection);
                 cmd5.Parameters.AddWithValue("@total", TotalFinal);
-                cmd5.Parameters.AddWithValue("@cliente_id", 1);
+                cmd5.Parameters.AddWithValue("@cliente_id", idcliente);
                 int rowsAffected3 = cmd5.ExecuteNonQuery();
                 if (rowsAffected3 > 0)
                 {
@@ -319,6 +328,22 @@ namespace WindowsFormsApp1
             Form4 a = new Form4();
             a.Show();
             this.Hide();
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView3.SelectedRows[0];
+
+                textBox8.Text = selectedRow.Cells["ID"].Value.ToString();
+                textBox9.Text = selectedRow.Cells["Nombre"].Value.ToString();
+            }
         }
     }
 }

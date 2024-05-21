@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form4 : Form
     {
-        String cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
+        String cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
         public Form4()
         {
             InitializeComponent();
