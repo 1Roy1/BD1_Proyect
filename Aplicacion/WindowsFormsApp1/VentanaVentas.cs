@@ -85,7 +85,7 @@ namespace WindowsFormsApp1
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT * FROM producto";
+                string sqlQuery = "SELECT producto.id, producto.nombre, descripcion, existencia, precio, proveedores.nombre as marca FROM producto left join proveedores on proveedores.id = producto.id_proveedor ";
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
