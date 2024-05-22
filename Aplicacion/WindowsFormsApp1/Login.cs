@@ -202,5 +202,13 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string rutaArchivoPDF = @"C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\ProyectoBase\BD1_Proyect\Aplicacion\WindowsFormsApp1\Manual de usuario.pdf";
+
+            // Abrir el archivo PDF con la aplicación predeterminada
+            Process.Start(rutaArchivoPDF);
+        }
     }
 }

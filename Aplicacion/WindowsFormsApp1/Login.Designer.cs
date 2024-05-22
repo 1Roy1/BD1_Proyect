@@ -39,6 +39,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ocultar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -48,10 +49,9 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(557, 169);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(418, 137);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(259, 35);
+            this.textBox1.Size = new System.Drawing.Size(195, 30);
             this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
@@ -60,11 +60,10 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(557, 241);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Location = new System.Drawing.Point(418, 196);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '#';
-            this.textBox2.Size = new System.Drawing.Size(259, 35);
+            this.textBox2.Size = new System.Drawing.Size(195, 30);
             this.textBox2.TabIndex = 2;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
@@ -76,10 +75,9 @@
             this.button1.BackColor = System.Drawing.Color.HotPink;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(597, 309);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(448, 251);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 44);
+            this.button1.Size = new System.Drawing.Size(121, 36);
             this.button1.TabIndex = 3;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = false;
@@ -88,9 +86,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(484, 126);
+            this.label1.Location = new System.Drawing.Point(363, 102);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(423, 16);
+            this.label1.Size = new System.Drawing.Size(319, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "---------------------------------------------------------------------------------" +
     "-----------------------";
@@ -98,9 +97,10 @@
             // ver
             // 
             this.ver.Image = global::WindowsFormsApp1.Properties.Resources.abrir;
-            this.ver.Location = new System.Drawing.Point(823, 241);
+            this.ver.Location = new System.Drawing.Point(617, 196);
+            this.ver.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ver.Name = "ver";
-            this.ver.Size = new System.Drawing.Size(70, 50);
+            this.ver.Size = new System.Drawing.Size(52, 41);
             this.ver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ver.TabIndex = 10;
             this.ver.TabStop = false;
@@ -109,9 +109,10 @@
             // ocultar
             // 
             this.ocultar.Image = global::WindowsFormsApp1.Properties.Resources.ocultar;
-            this.ocultar.Location = new System.Drawing.Point(823, 241);
+            this.ocultar.Location = new System.Drawing.Point(617, 196);
+            this.ocultar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ocultar.Name = "ocultar";
-            this.ocultar.Size = new System.Drawing.Size(70, 50);
+            this.ocultar.Size = new System.Drawing.Size(52, 41);
             this.ocultar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ocultar.TabIndex = 9;
             this.ocultar.TabStop = false;
@@ -121,9 +122,10 @@
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::WindowsFormsApp1.Properties.Resources.cerrar2;
-            this.button2.Location = new System.Drawing.Point(884, -2);
+            this.button2.Location = new System.Drawing.Point(663, -2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(47, 44);
+            this.button2.Size = new System.Drawing.Size(35, 36);
             this.button2.TabIndex = 8;
             this.button2.TabStop = false;
             this.button2.UseVisualStyleBackColor = true;
@@ -132,9 +134,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::WindowsFormsApp1.Properties.Resources.unnamed;
-            this.pictureBox2.Location = new System.Drawing.Point(618, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(464, 10);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(119, 94);
+            this.pictureBox2.Size = new System.Drawing.Size(89, 76);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
@@ -143,8 +146,9 @@
             // 
             this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(0, -2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(443, 429);
+            this.pictureBox1.Size = new System.Drawing.Size(332, 349);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
@@ -153,20 +157,35 @@
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(564, 377);
+            this.linkLabel1.Location = new System.Drawing.Point(423, 306);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(243, 24);
+            this.linkLabel1.Size = new System.Drawing.Size(206, 20);
             this.linkLabel1.TabIndex = 11;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "¿Ha olvidado su contraseña?";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.LavenderBlush;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Image = global::WindowsFormsApp1.Properties.Resources.manual_book__1_;
+            this.button6.Location = new System.Drawing.Point(11, 270);
+            this.button6.Margin = new System.Windows.Forms.Padding(2);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(69, 65);
+            this.button6.TabIndex = 16;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Plum;
-            this.ClientSize = new System.Drawing.Size(931, 426);
+            this.ClientSize = new System.Drawing.Size(698, 346);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.ver);
             this.Controls.Add(this.ocultar);
@@ -179,7 +198,6 @@
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -204,5 +222,6 @@
         private System.Windows.Forms.PictureBox ocultar;
         private System.Windows.Forms.PictureBox ver;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button button6;
     }
 }
