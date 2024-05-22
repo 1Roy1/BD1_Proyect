@@ -78,14 +78,14 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "Rod2102777";
+            string password = "root123";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT producto.id, producto.nombre, descripcion, existencia, precio, proveedores.nombre as marca FROM producto left join proveedores on proveedores.id = producto.id_proveedor ";
+                string sqlQuery = "Select pro.ID, pro.Nombre, pro.descripcion,  pro.Existencia,  pro.Precio, p.Nombre as marca from producto pro \r\ninner join detalle_compras dc on pro.ID = dc.Producto_ID inner join compras c on dc.compras_ID = c.ID \r\ninner join proveedores p on c.proveedores_ID = p.ID group by pro.Nombre;";
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
@@ -167,7 +167,7 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "Rod2102777";
+            string password = "root123";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             connection = new MySqlConnection(cadenaConexion);
@@ -248,7 +248,7 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "Rod2102777";
+            string password = "root123";
             string puerto = "3306";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             connection = new MySqlConnection(cadenaConexion);

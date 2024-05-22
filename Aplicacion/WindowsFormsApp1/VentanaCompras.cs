@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
 {
     public partial class NuevoProducto : Form
     {
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
         public NuevoProducto()
         {
             InitializeComponent();
@@ -186,7 +186,7 @@ namespace WindowsFormsApp1
                 cmd.Parameters.AddWithValue("@p_costoProducto", Convert.ToDecimal(textBox6.Text));
 
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Datos actualizados correctamente.");
+                MessageBox.Show("Compra Realizada correctamente!");
                 LimpiarCampos();
             }
             catch (Exception ex)
@@ -200,16 +200,25 @@ namespace WindowsFormsApp1
         }
         private void LimpiarCampos()
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
-            textBox6.Clear();
-            textBox7.Clear();
-            textBox9.Clear();
-            comboBox1.SelectedIndex = -1;
-            comboBox2.SelectedIndex = -1;
+            DialogResult result = MessageBox.Show("¿Estás seguro de limpiar los campos?", "Confirmación",
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                // Limpia los campos de texto
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                textBox4.Clear();
+                textBox5.Clear();
+                textBox6.Clear();
+                textBox7.Clear();
+                textBox9.Clear();
+                 // comboBox1.SelectedIndex = -1;
+                 // comboBox2.SelectedIndex = -1;
+                
+            }
+
         }
         private int InsertarProducto(MySqlConnection connection, string nombreProducto, string descripcion, string precio, int cantidad, decimal costo)
         {
@@ -414,16 +423,24 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
-            textBox6.Clear();
-            textBox7.Clear();
-            textBox9.Clear();
-            comboBox1.SelectedIndex = -1;
-            comboBox2.SelectedIndex = -1;
+            DialogResult result = MessageBox.Show("¿Estás seguro de limpiar los campos?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                textBox4.Clear();
+                textBox5.Clear();
+                textBox6.Clear();
+                textBox7.Clear();
+                textBox9.Clear();
+
+                if (comboBox1.SelectedIndex != -1)
+                {
+                    comboBox1.SelectedIndex = -1;
+                }
+            }
 
         }
 
@@ -568,6 +585,16 @@ namespace WindowsFormsApp1
                 e.Handled = true;
                 MessageBox.Show("Ingrese solo un punto decimal.", "Advertencia", MessageBoxButtons.OK);
             }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }
