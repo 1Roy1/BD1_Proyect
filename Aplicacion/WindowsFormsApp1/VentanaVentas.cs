@@ -91,7 +91,7 @@ namespace WindowsFormsApp1
                                   "FROM producto pro " +
                                   "INNER JOIN detalle_compras dc ON pro.ID = dc.Producto_ID " +
                                   "INNER JOIN compras c ON dc.compras_ID = c.ID " +
-                                  "INNER JOIN proveedores p ON c.proveedores_ID = p.ID";
+                                  "INNER JOIN proveedores p ON c.proveedores_ID = p.ID GROUP BY pro.ID";
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
