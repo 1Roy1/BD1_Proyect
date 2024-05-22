@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form4 : Form
     {
-        String cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
+        String cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
         public Form4()
         {
             InitializeComponent();
@@ -149,6 +149,27 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void restablecerCliente(int id)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+                    string sqlQuery = "UPDATE clientes SET Activo = 1 WHERE ID = @ID";
+                    MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    cmd.ExecuteNonQuery();
+                }
+                CargarDatos(); // Recargar los datos en el DataGridView después de la actualización
+                LimpiarCampos(); // Limpiar los campos de texto después de la actualización
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el estado del cliente: " + ex.Message);
+            }
+        }
+
         private void InsertarCliente()
         {
             try
@@ -227,6 +248,21 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al buscar el cliente.");
             }
         }
+
+        private void verificarInActivos()
+        {
+            // Utiliza 'using' para asegurar que los recursos se liberen correctamente
+            string consulta = @"SELECT count(*) FROM proyecto.clientes where Activo = 0;";
+
+            // Encapsula la lógica de conexión y ejecución en un método separado
+            DataTable resultado = EjecutarConsulta(consulta, textBox1.Text);
+            if (resultado != null)
+            {
+                checkBox1.Checked = false;
+            }
+
+        }
+
         private DataTable EjecutarConsulta(string consulta, string parametroBusqueda)
         {
             DataTable dataTable = new DataTable();
@@ -372,14 +408,47 @@ namespace WindowsFormsApp1
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+
             if (checkBox1.Checked)
             {
+
                 CargarDatosDelete();
+                pictureBox1.BringToFront();
             }
             else
             {
                 CargarDatos();
+                pictureBox2.BringToFront();
             }
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox4.Text))
+            {
+                int id = Convert.ToInt32(textBox6.Text);
+                EliminarCliente(id);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un ID para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            verificarInActivos();
+            if (!string.IsNullOrEmpty(textBox4.Text))
+            {
+                int id = Convert.ToInt32(textBox6.Text);
+                restablecerCliente(id);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un ID para restaurar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
     }
 }
+
