@@ -242,6 +242,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al actualizar el proveedor: " + ex.Message);
             }
         }
+
         private void verificarInActivos()
         {
             string consulta = @"SELECT count(*) FROM proveedores where Activo = 0;";
@@ -574,7 +575,14 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            GuardarProveedor();
+            if (textBox5.TextLength < 8)
+            {
+                MessageBox.Show("¡Ingrese un numero válido!", "Advertencia", MessageBoxButtons.OK);
+            }
+            else
+            {
+                GuardarProveedor();
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)

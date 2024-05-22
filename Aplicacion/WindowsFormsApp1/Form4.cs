@@ -1,10 +1,14 @@
-﻿using MySql.Data.MySqlClient;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -227,6 +231,83 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void GuardarCliente()
+        {
+            DialogResult dialogResult = MessageBox.Show("¿Es un nuevo cliente?", "Confirmar acción", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                InsertarCliente();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                if (!string.IsNullOrEmpty(textBox6.Text))
+                {
+                    int id = Convert.ToInt32(textBox6.Text);
+                    ActualizarCliente(id);
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un ID para actualizar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+
+        private void ActualizarCliente(int id)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+                    var transaction = connection.BeginTransaction();
+
+                    MySqlCommand cmd = connection.CreateCommand();
+                    cmd.Transaction = transaction;
+
+                    try
+                    {
+                        // Actualizar el cliente
+                        cmd.CommandText = "UPDATE clientes SET Nombre = @Nombre, Apellido = @Apellido WHERE ID = @ID";
+                        cmd.Parameters.AddWithValue("@ID", id);
+                        cmd.Parameters.AddWithValue("@Nombre", textBox4.Text);
+                        cmd.Parameters.AddWithValue("@Apellido", textBox2.Text);
+                        cmd.ExecuteNonQuery();
+
+                        // Actualizar el teléfono
+                        cmd.CommandText = "UPDATE telefono SET Telefono = @Telefono WHERE Clientes_ID = @ClienteId";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@Telefono", textBox5.Text);
+                        cmd.Parameters.AddWithValue("@ClienteId", id);
+                        cmd.ExecuteNonQuery();
+
+                        // Actualizar la dirección
+                        cmd.CommandText = "UPDATE direccion SET Direccion = @Direccion WHERE Clientes_ID = @ClienteId";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@Direccion", textBox3.Text);
+                        cmd.Parameters.AddWithValue("@ClienteId", id);
+                        cmd.ExecuteNonQuery();
+
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+                CargarDatos();
+                LimpiarCampos();
+            }
+            catch (MySqlException exSql)
+            {
+                MessageBox.Show("Error en la base de datos: " + exSql.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el cliente: " + ex.Message);
+            }
+        }
 
         private void BuscarPorNombre()
         {
@@ -314,7 +395,14 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            InsertarCliente();
+            if (textBox5.TextLength < 8)
+            {
+                MessageBox.Show("¡Ingrese un numero válido!", "Advertencia", MessageBoxButtons.OK);
+            }
+            else
+            {
+                GuardarCliente();
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -449,6 +537,84 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            // obtener mes y año
+            string nombreMesActual = DateTime.Now.ToString("MMMM", CultureInfo.CurrentCulture);
+            int añoActual = DateTime.Now.Year;
+            string fecha = DateTime.Now.ToString();
+
+            try
+            {
+                connection.Open();
+
+
+                string sqlQuery = @"SELECT Clientes.ID, Nombre AS Cliente, Apellido, Telefono, Direccion 
+                        FROM proyecto.telefono 
+                        INNER JOIN clientes ON telefono.Clientes_ID = Clientes.ID 
+                        INNER JOIN direccion ON direccion.Clientes_ID = Clientes.ID 
+                        WHERE Activo = 1";
+
+                MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                Document doc = new Document();
+                PdfWriter writer;
+                using (saveFileDialog)
+                {
+                    saveFileDialog.Filter = "PDF Files|*.pdf";
+                    saveFileDialog.DefaultExt = "pdf";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        writer = PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName, FileMode.Create));
+                    }
+                    else
+                    {
+                        throw new Exception("Operación cancelada por el usuario.");
+                    }
+                }
+
+                doc.Open();
+                Paragraph title = new Paragraph("Clientes Activos\n" + nombreMesActual + " " + añoActual + "\n\n");
+                title.Alignment = Element.ALIGN_CENTER;
+                doc.Add(title);
+                PdfPTable table = new PdfPTable(dataTable.Columns.Count);
+                table.WidthPercentage = 100;
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    PdfPCell cell = new PdfPCell(new Phrase(column.ColumnName));
+                    table.AddCell(cell);
+                }
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    foreach (object item in row.ItemArray)
+                    {
+                        PdfPCell cell = new PdfPCell(new Phrase(item.ToString()));
+                        table.AddCell(cell);
+                    }
+                }
+
+                doc.Add(table);
+                Paragraph Date = new Paragraph("\nGenerado: " + fecha);
+                Date.Alignment = Element.ALIGN_LEFT;
+                doc.Add(Date);
+                doc.Close();
+                MessageBox.Show("El archivo se guardo en '" + saveFileDialog.FileName + "'");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el archivo: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        
+    }
     }
 }
 
