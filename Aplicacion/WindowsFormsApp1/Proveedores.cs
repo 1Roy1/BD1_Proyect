@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
 {
     public partial class Proveedores : Form
     {
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
         public Proveedores()
         {
             InitializeComponent();
@@ -37,8 +37,8 @@ namespace WindowsFormsApp1
                     cmd.Parameters.AddWithValue("@ID", id);
                     cmd.ExecuteNonQuery();
                 }
-                CargarDatos(); // Recargar los datos en el DataGridView después de la actualización
-                LimpiarCampos(); // Limpiar los campos de texto después de la actualización
+                CargarDatos(); 
+                LimpiarCampos(); 
             }
             catch (Exception ex)
             {
@@ -67,8 +67,29 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al cargar los datos: " + ex.Message);
             }
         }
+        private void CargarDatosDelete()
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+                    string sqlQuery = "SELECT p.ID, p.Nombre as Proveedor, p.Asesor, t.Telefono " +
+                        "FROM proveedores p INNER JOIN telefono t ON p.ID = t.proveedores_ID " +
+                        "WHERE p.Activo = 0";
+                    DataTable dataTable = new DataTable();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos: " + ex.Message);
+            }
+        }
 
-        
+
 
         private void GuardarProveedor()
         {
@@ -221,6 +242,63 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al actualizar el proveedor: " + ex.Message);
             }
         }
+        private void verificarInActivos()
+        {
+            string consulta = @"SELECT count(*) FROM proveedores where Activo = 0;";
+            DataTable resultado = EjecutarConsulta(consulta, textBox1.Text);
+            if (resultado != null)
+            {
+                checkBox1.Checked = false;
+            }
+
+        }
+        private DataTable EjecutarConsulta(string consulta, string parametroBusqueda)
+        {
+            DataTable dataTable = new DataTable();
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(consulta, connection))
+                    {
+                        string parametroLike = "%" + parametroBusqueda + "%";
+                        cmd.Parameters.AddWithValue("@busqueda", parametroLike);
+
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar el proveedor: " + ex.Message);
+                return null;
+            }
+            return dataTable;
+        }
+        private void restablecerProveedor(int id)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
+                {
+                    connection.Open();
+                    string sqlQuery = "UPDATE proveedores SET Activo = 1 WHERE ID = @ID";
+                    MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    cmd.ExecuteNonQuery();
+                }
+                CargarDatos();
+                LimpiarCampos(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el estado del proveedor: " + ex.Message);
+            }
+        }
         private void LimpiarCampos()
         {
             textBox4.Clear();
@@ -321,7 +399,7 @@ namespace WindowsFormsApp1
             {
                 connection.Open();
 
-                // obtener la información requerida
+
                 string sqlQuery = @"SELECT p.ID, p.Nombre as Proveedor, p.Asesor, t.Telefono " +
                         "FROM proveedores p INNER JOIN telefono t ON p.ID = t.proveedores_ID " +
                         "WHERE p.Activo = 1";
@@ -331,11 +409,8 @@ namespace WindowsFormsApp1
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
 
-                // Crear el documento PDF
                 Document doc = new Document();
                 PdfWriter writer;
-
-                // seleccionar dónde guardar el PDF
                 using (saveFileDialog)
                 {
                     saveFileDialog.Filter = "PDF Files|*.pdf";
@@ -351,24 +426,16 @@ namespace WindowsFormsApp1
                 }
 
                 doc.Open();
-
-                // Agregar título al documento pdf
                 Paragraph title = new Paragraph("Proveedores Activos\n" + nombreMesActual + " " + añoActual + "\n\n");
                 title.Alignment = Element.ALIGN_CENTER;
                 doc.Add(title);
-
-                // Crear tabla para mostrar los datos
                 PdfPTable table = new PdfPTable(dataTable.Columns.Count);
                 table.WidthPercentage = 100;
-
-                // Agregar encabezados de columnas
                 foreach (DataColumn column in dataTable.Columns)
                 {
                     PdfPCell cell = new PdfPCell(new Phrase(column.ColumnName));
                     table.AddCell(cell);
                 }
-
-                // Agregar filas con datos
                 foreach (DataRow row in dataTable.Rows)
                 {
                     foreach (object item in row.ItemArray)
@@ -379,15 +446,10 @@ namespace WindowsFormsApp1
                 }
 
                 doc.Add(table);
-
-                // AGregar fecha de generacion
                 Paragraph Date = new Paragraph("\nGenerado: " + fecha);
                 Date.Alignment = Element.ALIGN_LEFT;
                 doc.Add(Date);
-
-
                 doc.Close();
-
                 MessageBox.Show("El archivo se guardo en '" + saveFileDialog.FileName + "'");
             }
             catch (Exception ex)
@@ -415,8 +477,6 @@ namespace WindowsFormsApp1
             if (dataGridView1.SelectedRows.Count > 0 && dataGridView1.SelectedRows[0].Index != -1)
             {
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-
-                // Verificar si la columna "Proveedor" existe antes de acceder a ella
                 if (dataGridView1.Columns.Contains("Proveedor"))
                 {
                     int indexColumna = dataGridView1.Columns["Proveedor"].Index;
@@ -425,8 +485,6 @@ namespace WindowsFormsApp1
                     string proveedor = selectedRow.Cells[indexColumna].Value?.ToString();
                     string asesor = selectedRow.Cells["Asesor"].Value?.ToString();
                     string telefono = selectedRow.Cells["Telefono"].Value?.ToString();
-
-                    // Verificar si los valores son null antes de asignarlos a los TextBoxes
                     textBox4.Text = id ?? "";
                     textBox2.Text = proveedor ?? "";
                     textBox3.Text = asesor ?? "";
@@ -546,6 +604,48 @@ namespace WindowsFormsApp1
         private void btnHabilitar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+
+                CargarDatosDelete();
+                button1.BringToFront();
+            }
+            else
+            {
+                CargarDatos();
+                button6.BringToFront();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox4.Text))
+            {
+                int id = Convert.ToInt32(textBox4.Text);
+                EliminarProveedor(id);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un ID para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            verificarInActivos();
+            if (!string.IsNullOrEmpty(textBox2.Text))
+            {
+                int id = Convert.ToInt32(textBox4.Text);
+                restablecerProveedor(id);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un ID para restaurar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 
