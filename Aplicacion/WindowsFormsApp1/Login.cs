@@ -173,7 +173,7 @@ namespace WindowsFormsApp1
         {
             ResetPassword abrir = new ResetPassword();
             abrir.ShowDialog();
-            this.Hide();
+            
         }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
