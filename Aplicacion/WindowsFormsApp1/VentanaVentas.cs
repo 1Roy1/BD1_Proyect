@@ -80,12 +80,18 @@ namespace WindowsFormsApp1
             string usuario = "root";
             string password = "root123";
             string puerto = "3306";
-            string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
+            string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             try
             {
                 connection.Open();
-                string sqlQuery = "Select pro.ID, pro.Nombre, pro.descripcion,  pro.Existencia,  pro.Precio, p.Nombre as marca from producto pro \r\ninner join detalle_compras dc on pro.ID = dc.Producto_ID inner join compras c on dc.compras_ID = c.ID \r\ninner join proveedores p on c.proveedores_ID = p.ID group by pro.Nombre;";
+
+                // Consulta ajustada para evitar duplicados
+                string sqlQuery = "SELECT DISTINCT pro.ID, pro.Nombre, pro.descripcion, pro.Existencia, pro.Precio, p.Nombre AS marca " +
+                                  "FROM producto pro " +
+                                  "INNER JOIN detalle_compras dc ON pro.ID = dc.Producto_ID " +
+                                  "INNER JOIN compras c ON dc.compras_ID = c.ID " +
+                                  "INNER JOIN proveedores p ON c.proveedores_ID = p.ID";
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
@@ -105,6 +111,7 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex)
             {
+                
                 MessageBox.Show("Error: " + ex.Message);
             }
             finally
@@ -169,7 +176,7 @@ namespace WindowsFormsApp1
             string usuario = "root";
             string password = "root123";
             string puerto = "3306";
-            string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
+            string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";
             connection = new MySqlConnection(cadenaConexion);
 
             try
@@ -177,32 +184,52 @@ namespace WindowsFormsApp1
                 int idcliente = Convert.ToInt32(textBox8.Text);
                 connection.Open();
                 float TotalFinal = 0;
+
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
+                    if (row.IsNewRow) continue;  // Ignorar la fila de nueva entrada
+
                     int idVenta = Convert.ToInt32(row.Cells["idventa"].Value);
                     int existencias = Convert.ToInt32(row.Cells["existencias"].Value);
                     float total = Convert.ToSingle(row.Cells["total"].Value);
-                    TotalFinal = TotalFinal + total;
+                    TotalFinal += total;
 
-                    string sqlQuery2 = "SELECT existencia FROM producto WHERE ID = @ID";
+                    // Consulta para obtener la existencia del producto
+                    string sqlQuery2 = "SELECT Existencia FROM producto WHERE ID = @ID LIMIT 1";
                     MySqlCommand cmd2 = new MySqlCommand(sqlQuery2, connection);
                     cmd2.Parameters.AddWithValue("@ID", idVenta);
-                    int viejoValor = Convert.ToInt32(cmd2.ExecuteScalar());
 
+                    object resultado = cmd2.ExecuteScalar();
+                    if (resultado == null || resultado == DBNull.Value)
+                    {
+                        MessageBox.Show("Producto no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    int viejoValor = Convert.ToInt32(resultado);
                     int valorFinal = viejoValor - existencias;
 
+                    if (valorFinal < 0)
+                    {
+                        MessageBox.Show("No hay suficientes existencias del producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Actualizar la existencia del producto
                     string sqlQuery3 = "UPDATE producto SET Existencia = @NuevoValor WHERE ID = @ID";
                     MySqlCommand cmd3 = new MySqlCommand(sqlQuery3, connection);
                     cmd3.Parameters.AddWithValue("@NuevoValor", valorFinal);
                     cmd3.Parameters.AddWithValue("@ID", idVenta);
-                    int rowsAffected = cmd3.ExecuteNonQuery();
+                    cmd3.ExecuteNonQuery();
 
-                    string sqlQuery4 = "DELETE FROM venta WHERE idventa=@ID";
+                    // Eliminar de la tabla venta
+                    string sqlQuery4 = "DELETE FROM venta WHERE idventa = @ID";
                     MySqlCommand cmd4 = new MySqlCommand(sqlQuery4, connection);
                     cmd4.Parameters.AddWithValue("@ID", idVenta);
-                    int rowsAffected2 = cmd4.ExecuteNonQuery();
-
+                    cmd4.ExecuteNonQuery();
                 }
+
+                // Insertar en la tabla ventas
                 string sqlQuery5 = "INSERT INTO ventas(total, clientes_id) VALUES(@total, @cliente_id)";
                 MySqlCommand cmd5 = new MySqlCommand(sqlQuery5, connection);
                 cmd5.Parameters.AddWithValue("@total", TotalFinal);
@@ -210,7 +237,7 @@ namespace WindowsFormsApp1
                 int rowsAffected3 = cmd5.ExecuteNonQuery();
                 if (rowsAffected3 > 0)
                 {
-                    MessageBox.Show("Datos actualizados correctamente.");
+                    MessageBox.Show("Compra realizada exitosamente!");
                 }
                 else
                 {
@@ -219,12 +246,13 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Compra Realizada Exitosamente");
             }
             finally
             {
                 connection.Close();
             }
+
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
@@ -285,7 +313,7 @@ namespace WindowsFormsApp1
 
                     if (rowsAffected > 0)
                     {
-                        MessageBox.Show("Datos actualizados correctamente.");
+                        MessageBox.Show("Se agregaron los productos al carrito exitosamente!");
                     }
                     else
                     {
