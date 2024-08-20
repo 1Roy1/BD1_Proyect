@@ -43,17 +43,11 @@ namespace WindowsFormsApp1
             textBox2.PasswordChar = '\0';
             textBox2.Text = "Contraseña";
             textBox2.ForeColor = Color.Gray;
-
-            
-
-
         }
-
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           
-           
+             
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

@@ -18,14 +18,13 @@ namespace WindowsFormsApp1
 {
     public partial class NuevoProducto : Form
     {
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root123;database=proyecto";
+        int lista_id = 0;
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
         public NuevoProducto()
         {
             InitializeComponent();
             CargarNombresProveedores();
             CargarNombresProductos();
-
-
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -46,11 +45,6 @@ namespace WindowsFormsApp1
         private void label8_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -79,11 +73,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
         private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
@@ -100,17 +89,37 @@ namespace WindowsFormsApp1
 
         }
 
+        private void CargarDatos()
+        {
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            try
+            {
+                connection.Open();
+
+                // Consulta ajustada para evitar duplicados
+                string sqlQuery = "SELECT * from lista_compras";
+                DataTable dataTable = new DataTable();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
+                adapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         private void NuevoProducto_Load(object sender, EventArgs e)
         {
-            
+            CargarDatos();
         }
 
         private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -130,96 +139,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MySqlConnection connection = new MySqlConnection(cadenaConexion);
-
-            try
-            {
-                connection.Open();
-
-                MySqlCommand cmd = new MySqlCommand("InsertarCompraCompleta", connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                // Verificar si se ha seleccionado un proveedor
-                if (comboBox1.SelectedItem == null)
-                {
-                    // Manejar el caso cuando no se ha seleccionado ningún proveedor
-                    MessageBox.Show("No se ha seleccionado ningún proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; // Salir del método sin continuar con la ejecución
-                }
-
-                string nombreProducto;
-                string descripcionProducto;
-
-                // Verificar si se ha seleccionado un producto existente
-                if (comboBox2.SelectedItem != null && !string.IsNullOrWhiteSpace(comboBox2.SelectedItem.ToString()))
-                {
-                    // Se seleccionó un producto existente en comboBox2
-                    nombreProducto = comboBox2.SelectedItem.ToString();
-                    descripcionProducto = textBox3.Text;
-                }
-                else
-                {
-                    // Es un nuevo producto, por lo tanto, insertar el nombre y la descripción en la tabla producto
-                    nombreProducto = textBox2.Text;
-                    descripcionProducto = textBox3.Text;
-
-                    // Insertar el nuevo producto
-                    int nuevoProductoID = InsertarProducto(connection, nombreProducto, descripcionProducto, textBox5.Text, Convert.ToInt32(textBox4.Text), Convert.ToDecimal(textBox6.Text));
-                    if (nuevoProductoID == -1)
-                    {
-                        // Ocurrió un error al insertar el nuevo producto
-                        MessageBox.Show("Error al insertar el nuevo producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-
-                // Pasar los parámetros del procedimiento almacenado
-                cmd.Parameters.AddWithValue("@p_nombreProveedor", comboBox1.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@p_nombreProducto", nombreProducto);
-                cmd.Parameters.AddWithValue("@p_descripcionProducto", descripcionProducto);
-                cmd.Parameters.AddWithValue("@p_fecha", textBox9.Text);
-                cmd.Parameters.AddWithValue("@p_total", Convert.ToDecimal(textBox7.Text));
-                cmd.Parameters.AddWithValue("@p_precioProducto", Convert.ToDecimal(textBox5.Text));
-                cmd.Parameters.AddWithValue("@p_cantidadProducto", Convert.ToInt32(textBox4.Text));
-                cmd.Parameters.AddWithValue("@p_costoProducto", Convert.ToDecimal(textBox6.Text));
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Compra Realizada correctamente!");
-                LimpiarCampos();
-            }
-            catch (Exception ex)
-            {
-                // MessageBox.Show("Error: " + ex.Message); // Comentado para evitar mostrar el mensaje de error
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-        private void LimpiarCampos()
-        {
-            DialogResult result = MessageBox.Show("¿Estás seguro de limpiar los campos?", "Confirmación",
-                                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
-            {
-                // Limpia los campos de texto
-                textBox1.Clear();
-                textBox2.Clear();
-                textBox3.Clear();
-                textBox4.Clear();
-                textBox5.Clear();
-                textBox6.Clear();
-                textBox7.Clear();
-                textBox9.Clear();
-                 // comboBox1.SelectedIndex = -1;
-                 // comboBox2.SelectedIndex = -1;
-                
-            }
-
-        }
         private int InsertarProducto(MySqlConnection connection, string nombreProducto, string descripcion, string precio, int cantidad, decimal costo)
         {
             MySqlCommand cmdInsertProducto = new MySqlCommand("INSERT INTO producto (Nombre, Descripcion, Existencia, Precio) VALUES (@nombre, @descripcion, @cantidad, @precio)", connection);
@@ -252,6 +171,7 @@ namespace WindowsFormsApp1
             cmdDetalleCompras.Parameters.AddWithValue("@cantidad", cantidad);
             cmdDetalleCompras.ExecuteNonQuery();
         }
+
         private void CalcularTotal()
         {
             if (!string.IsNullOrEmpty(textBox6.Text) && !string.IsNullOrEmpty(textBox4.Text))
@@ -340,7 +260,6 @@ namespace WindowsFormsApp1
                 connection.Close();
             }
         }
-
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
@@ -441,7 +360,6 @@ namespace WindowsFormsApp1
                     comboBox1.SelectedIndex = -1;
                 }
             }
-
         }
 
         private void inventarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -595,6 +513,134 @@ namespace WindowsFormsApp1
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
 
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+
+            try
+            {
+                connection.Open();
+
+                MySqlCommand cmd = new MySqlCommand("InsertarCompraCompleta", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Verificar si se ha seleccionado un proveedor
+                if (comboBox1.SelectedItem == null)
+                {
+                    // Manejar el caso cuando no se ha seleccionado ningún proveedor
+                    MessageBox.Show("No se ha seleccionado ningún proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; // Salir del método sin continuar con la ejecución
+                }
+
+                string nombreProducto;
+                string descripcionProducto;
+
+                // Verificar si se ha seleccionado un producto existente
+                if (comboBox2.SelectedItem != null && !string.IsNullOrWhiteSpace(comboBox2.SelectedItem.ToString()))
+                {
+                    // Se seleccionó un producto existente en comboBox2
+                    nombreProducto = comboBox2.SelectedItem.ToString();
+                    descripcionProducto = textBox3.Text;
+                }
+                else
+                {
+                    // Es un nuevo producto, por lo tanto, insertar el nombre y la descripción en la tabla producto
+                    nombreProducto = textBox2.Text;
+                    descripcionProducto = textBox3.Text;
+
+                    // Insertar el nuevo producto
+                    int nuevoProductoID = InsertarProducto(connection, nombreProducto, descripcionProducto, textBox5.Text, Convert.ToInt32(textBox4.Text), Convert.ToDecimal(textBox6.Text));
+                    if (nuevoProductoID == -1)
+                    {
+                        // Ocurrió un error al insertar el nuevo producto
+                        MessageBox.Show("Error al insertar el nuevo producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                // Pasar los parámetros del procedimiento almacenado
+                cmd.Parameters.AddWithValue("@p_nombreProveedor", comboBox1.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@p_nombreProducto", nombreProducto);
+                cmd.Parameters.AddWithValue("@p_descripcionProducto", descripcionProducto);
+                cmd.Parameters.AddWithValue("@p_fecha", textBox9.Text);
+                cmd.Parameters.AddWithValue("@p_total", Convert.ToDecimal(textBox7.Text));
+                cmd.Parameters.AddWithValue("@p_precioProducto", Convert.ToDecimal(textBox5.Text));
+                cmd.Parameters.AddWithValue("@p_cantidadProducto", Convert.ToInt32(textBox4.Text));
+                cmd.Parameters.AddWithValue("@p_costoProducto", Convert.ToDecimal(textBox6.Text));
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Compra Realizada correctamente!");
+                LimpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                // MessageBox.Show("Error: " + ex.Message); // Comentado para evitar mostrar el mensaje de error
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void LimpiarCampos()
+        {
+            DialogResult result = MessageBox.Show("¿Estás seguro de limpiar los campos?", "Confirmación",
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                // Limpia los campos de texto
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                textBox4.Clear();
+                textBox5.Clear();
+                textBox6.Clear();
+                textBox7.Clear();
+                textBox9.Clear();
+                // comboBox1.SelectedIndex = -1;
+                // comboBox2.SelectedIndex = -1;
+
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            connection.Open();
+            MySqlCommand cmdInsertProducto = new MySqlCommand("INSERT INTO lista_compras (id, Nombre, Descripcion, Precio, costo, total, cantidad) VALUES (@id, @nombre, @descripcion, @precio, @costo, @total, @cantidad)", connection);
+            if (textBox1.Text is null)
+            {
+                //temporal se cambiara luego
+                lista_id += 1;
+                cmdInsertProducto.Parameters.AddWithValue("@id", lista_id);
+            }
+            else
+            {
+                cmdInsertProducto.Parameters.AddWithValue("@id", Convert.ToInt32(textBox1.Text));
+            }
+            cmdInsertProducto.Parameters.AddWithValue("@nombre", textBox2.Text);
+            cmdInsertProducto.Parameters.AddWithValue("@descripcion", textBox3.Text);
+            cmdInsertProducto.Parameters.AddWithValue("@cantidad", Convert.ToInt32(textBox4.Text));
+            cmdInsertProducto.Parameters.AddWithValue("@precio", Convert.ToDecimal(textBox5.Text));
+            cmdInsertProducto.Parameters.AddWithValue("@costo", Convert.ToDecimal(textBox6.Text));
+            cmdInsertProducto.Parameters.AddWithValue("@total", Convert.ToDecimal(textBox7.Text));
+            cmdInsertProducto.ExecuteNonQuery();
+            connection.Close();
+            CargarDatos();
         }
     }
 }
