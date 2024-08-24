@@ -427,5 +427,31 @@ namespace WindowsFormsApp1
                 textBox9.Text = selectedRow.Cells["Nombre"].Value.ToString();
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var cmd = new MySqlCommand("ROLLBACK", _connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                RegistrarTransaccion("Transacción revertida");
+                IniciarConexionYTransaccion();
+            }
+            catch (Exception ex)
+            {
+                using (var cmd = new MySqlCommand("ROLLBACK", _connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                RegistrarTransaccion("Transacción revertida por error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
+                IniciarConexionYTransaccion();
+            }
+
+            CargarDatos();
+
+        }
     }
 }

@@ -128,9 +128,7 @@ D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Exte
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\MySql.Data.dll
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Configuration.ConfigurationManager.dll
-C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Diagnostics.DiagnosticSource.dll
 C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Proveedores.resources
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\Nueva carpeta\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
 C:\Users\luist\OneDrive\Escritorio\1er semestre 2024\Base de datos I\Nueva carpeta\BD1_Proyect\Aplicacion\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
