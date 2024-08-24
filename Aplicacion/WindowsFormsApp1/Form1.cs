@@ -80,5 +80,31 @@ namespace WindowsFormsApp1
             // Abrir el archivo PDF con la aplicación predeterminada
             Process.Start(rutaArchivoPDF);
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Ruta del archivo .txt
+                string rutaArchivo = @"D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\transaction_log.txt";
+
+                // Verificar si el archivo existe
+                if (System.IO.File.Exists(rutaArchivo))
+                {
+                    // Leer todo el contenido del archivo
+                    string contenido = System.IO.File.ReadAllText(rutaArchivo);
+
+                   MessageBox.Show(contenido, "Contenido del archivo");
+                }
+                else
+                {
+                    MessageBox.Show("El archivo no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al leer el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

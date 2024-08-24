@@ -1,0 +1,4 @@
+24/08/2024 00:31:26: Transacción iniciada.
+24/08/2024 00:31:39: Transacción comiteada.
+24/08/2024 00:31:39: Transacción iniciada.
+24/08/2024 00:31:46: Transacción revertida 
