@@ -93,7 +93,6 @@ namespace WindowsFormsApp1
 
         private void VentanaVentas_Load(object sender, EventArgs e)
         {
-            IniciarConexionYTransaccion();
             CargarDatos();
             originalDataTable = ((DataTable)dataGridView1.DataSource).Copy();
         }
@@ -323,6 +322,7 @@ namespace WindowsFormsApp1
         {
             try
             {
+                IniciarConexionYTransaccion();
                 int id = Convert.ToInt32(textBox1.Text);
                 float precio = float.Parse(textBox6.Text);
                 int nuevoValor = int.Parse(textBox5.Text);
@@ -341,6 +341,8 @@ namespace WindowsFormsApp1
                 else if (viejoValor < nuevoValor)
                 {
                     MessageBox.Show("No se tienen las suficientes existencias de este producto.");
+                    RegistrarTransaccion("Transacción revertida");
+                    IniciarConexionYTransaccion();
                 }
                 else
                 {
@@ -364,6 +366,7 @@ namespace WindowsFormsApp1
                     else
                     {
                         throw new Exception("No se encontró el registro con el ID proporcionado.");
+
                     }
                 }
             }
