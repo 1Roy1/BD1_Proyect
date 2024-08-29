@@ -9,3 +9,14 @@
 26/08/2024 12:16:15: Transacción comiteada.
 26/08/2024 12:16:15: Transacción iniciada.
 26/08/2024 13:03:09: Transacción iniciada.
+29/08/2024 16:59:03: Transacción iniciada.
+29/08/2024 16:59:51: Transacción revertida 
+29/08/2024 17:15:24: Conexión abierta.
+29/08/2024 17:16:21: Conexión abierta.
+29/08/2024 17:16:24: Transacción revertida 
+29/08/2024 17:18:31: Transacción revertida 
+29/08/2024 17:18:55: Transacción iniciada.
+29/08/2024 17:19:20: Transacción revertida por error: Duplicate entry '0' for key 'PRIMARY'
+29/08/2024 17:27:37: Transacción iniciada.
+29/08/2024 17:28:03: Transacción comiteada.
+29/08/2024 17:28:10: Transacción revertida 
