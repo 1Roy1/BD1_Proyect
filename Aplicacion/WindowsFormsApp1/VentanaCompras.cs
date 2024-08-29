@@ -13,13 +13,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Data.Common;
 
 namespace WindowsFormsApp1
 {
     public partial class NuevoProducto : Form
     {
         int lista_id = 0;
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=Rod2102777;database=proyecto";
+        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root1234;database=proyecto";
         public NuevoProducto()
         {
             InitializeComponent();
@@ -533,60 +534,57 @@ namespace WindowsFormsApp1
             {
                 connection.Open();
 
-                MySqlCommand cmd = new MySqlCommand("InsertarCompraCompleta", connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                // Verificar si se ha seleccionado un proveedor
-                if (comboBox1.SelectedItem == null)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    // Manejar el caso cuando no se ha seleccionado ningún proveedor
-                    MessageBox.Show("No se ha seleccionado ningún proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; // Salir del método sin continuar con la ejecución
-                }
-
-                string nombreProducto;
-                string descripcionProducto;
-
-                // Verificar si se ha seleccionado un producto existente
-                if (comboBox2.SelectedItem != null && !string.IsNullOrWhiteSpace(comboBox2.SelectedItem.ToString()))
-                {
-                    // Se seleccionó un producto existente en comboBox2
-                    nombreProducto = comboBox2.SelectedItem.ToString();
-                    descripcionProducto = textBox3.Text;
-                }
-                else
-                {
-                    // Es un nuevo producto, por lo tanto, insertar el nombre y la descripción en la tabla producto
-                    nombreProducto = textBox2.Text;
-                    descripcionProducto = textBox3.Text;
-
-                    // Insertar el nuevo producto
-                    int nuevoProductoID = InsertarProducto(connection, nombreProducto, descripcionProducto, textBox5.Text, Convert.ToInt32(textBox4.Text), Convert.ToDecimal(textBox6.Text));
-                    if (nuevoProductoID == -1)
+                    if (!row.IsNewRow) // Asegúrate de no procesar la fila de nueva entrada
                     {
-                        // Ocurrió un error al insertar el nuevo producto
-                        MessageBox.Show("Error al insertar el nuevo producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        int id = Convert.ToInt32(row.Cells["id"].Value); // Asegúrate de que la columna "id" exista
+                        string nombre = row.Cells["Nombre"].Value.ToString();
+                        string descripcion = row.Cells["Descripcion"].Value.ToString();
+                        decimal precio = Convert.ToDecimal(row.Cells["Precio"].Value);
+                        int cantidad = Convert.ToInt32(row.Cells["cantidad"].Value);
+
+                        // Verificar si el producto ya existe en la base de datos
+                        string sqlQueryCheck = "SELECT COUNT(*) FROM producto WHERE ID = @id";
+                        MySqlCommand cmdCheck = new MySqlCommand(sqlQueryCheck, connection);
+                        cmdCheck.Parameters.AddWithValue("@id", id);
+
+                        int count = Convert.ToInt32(cmdCheck.ExecuteScalar());
+
+                        if (count > 0)
+                        {
+                            // Producto existe, actualizar existencias
+                            string sqlUpdate = "UPDATE producto SET Existencia = Existencia + @cantidad WHERE ID = @id";
+                            MySqlCommand cmdUpdate = new MySqlCommand(sqlUpdate, connection);
+                            cmdUpdate.Parameters.AddWithValue("@cantidad", cantidad);
+                            cmdUpdate.Parameters.AddWithValue("@id", id);
+                            cmdUpdate.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            // Producto no existe, insertar nuevo producto
+                            string sqlInsert = "INSERT INTO producto (ID, Nombre, Descripcion, Precio, Existencia) VALUES (@id, @nombre, @descripcion, @precio, @cantidad)";
+                            MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, connection);
+                            cmdInsert.Parameters.AddWithValue("@id", id);
+                            cmdInsert.Parameters.AddWithValue("@nombre", nombre);
+                            cmdInsert.Parameters.AddWithValue("@descripcion", descripcion);
+                            cmdInsert.Parameters.AddWithValue("@precio", precio);
+                            cmdInsert.Parameters.AddWithValue("@cantidad", cantidad);
+                            cmdInsert.ExecuteNonQuery();
+                        }
+                        string sqlQueryDel = "DELETE FROM lista_compras WHERE id = @id";
+                        MySqlCommand cmdDel = new MySqlCommand(sqlQueryDel, connection);
+                        cmdDel.Parameters.AddWithValue("@id", id);
+                        cmdDel.ExecuteNonQuery();
                     }
                 }
 
-                // Pasar los parámetros del procedimiento almacenado
-                cmd.Parameters.AddWithValue("@p_nombreProveedor", comboBox1.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@p_nombreProducto", nombreProducto);
-                cmd.Parameters.AddWithValue("@p_descripcionProducto", descripcionProducto);
-                cmd.Parameters.AddWithValue("@p_fecha", textBox9.Text);
-                cmd.Parameters.AddWithValue("@p_total", Convert.ToDecimal(textBox7.Text));
-                cmd.Parameters.AddWithValue("@p_precioProducto", Convert.ToDecimal(textBox5.Text));
-                cmd.Parameters.AddWithValue("@p_cantidadProducto", Convert.ToInt32(textBox4.Text));
-                cmd.Parameters.AddWithValue("@p_costoProducto", Convert.ToDecimal(textBox6.Text));
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Compra Realizada correctamente!");
-                LimpiarCampos();
+                MessageBox.Show("Inventario actualizado correctamente.");
+                CargarDatos();
             }
             catch (Exception ex)
             {
-                // MessageBox.Show("Error: " + ex.Message); // Comentado para evitar mostrar el mensaje de error
+                MessageBox.Show("Error al actualizar el inventario: " + ex.Message);
             }
             finally
             {
