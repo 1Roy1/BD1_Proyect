@@ -107,10 +107,10 @@ namespace WindowsFormsApp1
         }
         private void IniciarConexion()
         {
-            string servidor = "localhost";
+            string servidor = "192.168.106.201";
             string bd = "proyecto";
-            string usuario = "root";
-            string password = "root123";
+            string usuario = "roy2";
+            string password = "root1234";
             string puerto = "3306";
             string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";
             _connection = new MySqlConnection(cadenaConexion);

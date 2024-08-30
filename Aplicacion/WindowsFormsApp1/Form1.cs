@@ -18,16 +18,16 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            respaldo.Asignar(); 
+   
 
         }
      
         private void button1_Click(object sender, EventArgs e)
         {
-            // Crear una instancia de tu ventana de inventario
+     
             VentanaInventario ventanaInventario = new VentanaInventario();
 
-            // Mostrar la ventana de inventario
+
             ventanaInventario.Show();
             this.Hide();
         }
