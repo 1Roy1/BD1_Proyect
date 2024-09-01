@@ -353,7 +353,17 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
+
+                    using (var cmd = new MySqlCommand("ROLLBACK", _connection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    RegistrarTransaccion("Transacción revertida por error: ");
+                    limpiarcampos();
+                    CargarDatos();
                     throw new Exception("Error al insertar en la tabla ventas");
+                    
+
                 }
             }
             catch (Exception ex)
@@ -365,6 +375,8 @@ namespace WindowsFormsApp1
                         cmd.ExecuteNonQuery();
                     }
                     RegistrarTransaccion("Transacción revertida por error: " + ex.Message);
+                    limpiarcampos();
+                    CargarDatos();  
                 }
                 MessageBox.Show("Error: " + ex.Message);
             }
@@ -402,8 +414,8 @@ namespace WindowsFormsApp1
                 transaccionactiva = true;
                 int id = Convert.ToInt32(textBox1.Text);
                 float precio = float.Parse(textBox6.Text);
-                int nuevoValor = int.Parse(textBox5.Text);
-                int viejoValor = int.Parse(textBox4.Text);
+                int cantidadVenta = int.Parse(textBox5.Text);
+                int existenciasActuales = int.Parse(textBox4.Text);
 
                 int idClienteActual = Convert.ToInt32(textBox8.Text);
 
@@ -416,21 +428,15 @@ namespace WindowsFormsApp1
                     MessageBox.Show("Debe continuar con el mismo cliente antes de agregar productos de otro cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (viejoValor <= 0)
-                {
-                    MessageBox.Show("Se han agotado todas las existencias de este producto.xd");
-                    using (var cmd = new MySqlCommand("ROLLBACK", _connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    RegistrarTransaccion("Transacción revertida");
 
+                if (existenciasActuales <= 0)
+                {
+                    MessageBox.Show("Se han agotado todas las existencias de este producto.");
                 }
-                else if (viejoValor < nuevoValor)
+                else if (existenciasActuales < cantidadVenta)
                 {
                     MessageBox.Show("No se tienen las suficientes existencias de este producto.");
                     RegistrarTransaccion("Transacción revertida");
-
                 }
                 else
                 {
@@ -440,23 +446,30 @@ namespace WindowsFormsApp1
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, _connection, _transaction);
                     cmd.Parameters.AddWithValue("@idventa", id);
                     cmd.Parameters.AddWithValue("@nombre", textBox2.Text);
-                    cmd.Parameters.AddWithValue("@existencias", nuevoValor);
+                    cmd.Parameters.AddWithValue("@existencias", cantidadVenta);
                     cmd.Parameters.AddWithValue("@precio", precio);
                     cmd.Parameters.AddWithValue("@marca", textBox7.Text);
-                    cmd.Parameters.AddWithValue("@total", (precio * nuevoValor));
+                    cmd.Parameters.AddWithValue("@total", (precio * cantidadVenta));
 
                     int rowsAffected = cmd.ExecuteNonQuery();
 
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Se agregaron los productos al carrito exitosamente!");
-                      
-
+                        CargarDatosCarrito();
+                        foreach (DataGridViewRow row in dataGridView1.Rows)
+                        {
+                            if (Convert.ToInt32(row.Cells["ID"].Value) == id)
+                            {
+                                int nuevaExistencia = existenciasActuales - cantidadVenta;
+                                row.Cells["Existencia"].Value = nuevaExistencia;
+                                break;
+                            }
+                        }
                     }
                     else
                     {
                         throw new Exception("No se encontró el registro con el ID proporcionado.");
-
                     }
                 }
             }
@@ -468,13 +481,29 @@ namespace WindowsFormsApp1
                 }
                 RegistrarTransaccion("Transacción revertida por error: " + ex.Message);
                 MessageBox.Show("Error: " + ex.Message);
-
+                limpiarcampos();
+                CargarDatos();
             }
-
-            CargarDatos();
 
 
         }
+        private void CargarDatosCarrito()
+        {
+            // Cargar los datos actualizados del carrito en el DataGridView2
+            try
+            {
+                string sqlQuery2 = "SELECT * FROM venta";
+                DataTable dataTable2 = new DataTable();
+                MySqlDataAdapter adapter2 = new MySqlDataAdapter(sqlQuery2, _connection);
+                adapter2.Fill(dataTable2);
+                dataGridView2.DataSource = dataTable2;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar datos del carrito: " + ex.Message);
+            }
+        }
+
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
