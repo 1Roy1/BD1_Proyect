@@ -110,5 +110,10 @@ namespace WindowsFormsApp1
             ocultar1.BringToFront();
             textBox2.PasswordChar = '\0';
         }
+
+        private void ResetPassword_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

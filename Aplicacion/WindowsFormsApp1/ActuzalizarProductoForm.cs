@@ -86,7 +86,8 @@ namespace WindowsFormsApp1
             this.buttonAceptar.Font = new Font(this.buttonAceptar.Font.FontFamily, 10, FontStyle.Bold); // Texto negrita y tamaño más grande
             this.buttonAceptar.MouseEnter += new EventHandler(this.buttonAceptar_MouseEnter);
             this.buttonAceptar.MouseLeave += new EventHandler(this.buttonAceptar_MouseLeave);
-            this.buttonAceptar.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.buttonAceptar.Width, this.buttonAceptar.Height, 20, 20));
+            this.buttonAceptar.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, buttonAceptar.Width, buttonAceptar.Height, 20, 20));
+
             // 
             // ActualizarProductoForm
             // 
@@ -109,14 +110,14 @@ namespace WindowsFormsApp1
         private Button buttonAceptar;
 
         // Agrega las referencias necesarias para la función de redondeo
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        [DllImport("Gdi32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr CreateRoundRectRgn(
-            int nLeftRect,
-            int nTopRect,
-            int nRightRect,
-            int nBottomRect,
-            int nWidthEllipse,
-            int nHeightEllipse);
+     int nLeftRect,
+     int nTopRect,
+     int nRightRect,
+     int nBottomRect,
+     int nWidthEllipse,
+     int nHeightEllipse);
 
         private void buttonAceptar_MouseEnter(object sender, EventArgs e)
         {
