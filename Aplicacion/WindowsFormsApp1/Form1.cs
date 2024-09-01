@@ -13,7 +13,6 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        BackupScheduling respaldo = new BackupScheduling();
 
         public Form1()
         {
