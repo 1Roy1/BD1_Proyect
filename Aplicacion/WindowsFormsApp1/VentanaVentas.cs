@@ -20,6 +20,8 @@ namespace WindowsFormsApp1
         private const string logSubFolder = "Bitacora";
         private readonly string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logSubFolder, "transaction_log.txt");
         private bool transaccionactiva = false;
+        private int? idClienteCarrito = null;
+
         public VentanaVentas()
         {
             InitializeComponent();
@@ -174,11 +176,12 @@ namespace WindowsFormsApp1
                     IniciarConexion();
                 }
 
-                string sqlQuery = "SELECT DISTINCT pro.ID, pro.Nombre, pro.descripcion, pro.Existencia, pro.Precio, p.Nombre AS marca " +
-                                  "FROM producto pro " +
-                                  "INNER JOIN detalle_compras dc ON pro.ID = dc.Producto_ID " +
-                                  "INNER JOIN compras c ON dc.compras_ID = c.ID " +
-                                  "INNER JOIN proveedores p ON c.proveedores_ID = p.ID GROUP BY pro.ID";
+                string sqlQuery = "SELECT pro.ID, pro.Nombre, pro.Descripcion, pro.Existencia, pro.Precio, MAX(p.Nombre) AS Marca " +
+                  "FROM producto pro " +
+                  "LEFT JOIN detalle_compras dc ON pro.ID = dc.Producto_ID " +
+                  "LEFT JOIN compras c ON dc.Compras_ID = c.ID " +
+                  "LEFT JOIN proveedores p ON c.Proveedores_ID = p.ID " +
+                  "GROUP BY pro.ID, pro.Nombre, pro.Descripcion, pro.Existencia, pro.Precio";
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, _connection);
                 adapter.Fill(dataTable);
@@ -201,6 +204,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+      
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
@@ -277,6 +281,11 @@ namespace WindowsFormsApp1
                     return;
                 }
 
+                if (idClienteCarrito != idcliente)
+                {
+                    MessageBox.Show("El cliente seleccionado no coincide con el cliente del carrito. Debe continuar con el mismo cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 float TotalFinal = 0;
                 IniciarTransaccion();  // Iniciar la transacción aquí
 
@@ -340,6 +349,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show("Compra realizada exitosamente!");
                     RegistrarTransaccion("Transacción comiteada.");
                     limpiarcampos();
+                    idClienteCarrito = null;
                 }
                 else
                 {
@@ -395,6 +405,17 @@ namespace WindowsFormsApp1
                 int nuevoValor = int.Parse(textBox5.Text);
                 int viejoValor = int.Parse(textBox4.Text);
 
+                int idClienteActual = Convert.ToInt32(textBox8.Text);
+
+                if (idClienteCarrito == null)
+                {
+                    idClienteCarrito = idClienteActual;
+                }
+                else if (idClienteCarrito != idClienteActual)
+                {
+                    MessageBox.Show("Debe continuar con el mismo cliente antes de agregar productos de otro cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 if (viejoValor <= 0)
                 {
                     MessageBox.Show("Se han agotado todas las existencias de este producto.xd");
@@ -429,7 +450,8 @@ namespace WindowsFormsApp1
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Se agregaron los productos al carrito exitosamente!");
-                       
+                      
+
                     }
                     else
                     {
@@ -449,8 +471,8 @@ namespace WindowsFormsApp1
 
             }
 
-
             CargarDatos();
+
 
         }
 
@@ -525,20 +547,47 @@ namespace WindowsFormsApp1
         {
             try
             {
-
-                using (var cmd = new MySqlCommand("ROLLBACK", _connection))
+                // Revertir cualquier transacción activa
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", _connection))
                 {
-                    cmd.ExecuteNonQuery();
+                    cmdRollback.ExecuteNonQuery();
                 }
                 RegistrarTransaccion("Transacción revertida");
                 MessageBox.Show("Venta devuelta");
-                using (var cmd = new MySqlCommand("DELETE FROM venta", _connection))
+
+                // Iniciar una nueva transacción
+                using (var cmdStartTransaction = new MySqlCommand("START TRANSACTION", _connection))
                 {
-                    cmd.ExecuteNonQuery();
+                    cmdStartTransaction.ExecuteNonQuery();
+                }
+
+                try
+                {
+                    using (var cmdDelete = new MySqlCommand("DELETE FROM venta", _connection))
+                    {
+                        cmdDelete.ExecuteNonQuery();
+                    }
+                    using (var cmdCommit = new MySqlCommand("COMMIT", _connection))
+                    {
+                        cmdCommit.ExecuteNonQuery();
+                    }
+
+                    RegistrarTransaccion("Todos los registros de venta eliminados.");
+                }
+                catch (Exception ex)
+                {
+                    // Revertir si algo falla al eliminar registros
+                    using (var cmdRollbackDelete = new MySqlCommand("ROLLBACK", _connection))
+                    {
+                        cmdRollbackDelete.ExecuteNonQuery();
+                    }
+                    RegistrarTransaccion("Error al eliminar registros de venta: " + ex.Message);
+                    MessageBox.Show("Error al eliminar registros: " + ex.Message);
                 }
             }
             catch (Exception ex)
             {
+                // Manejo de errores en el ROLLBACK inicial
                 using (var cmd = new MySqlCommand("ROLLBACK", _connection))
                 {
                     cmd.ExecuteNonQuery();
@@ -546,10 +595,9 @@ namespace WindowsFormsApp1
                 RegistrarTransaccion("Transacción revertida por error: " + ex.Message);
                 MessageBox.Show("Error: " + ex.Message);
             }
-        
+
             limpiarcampos();
             CargarDatos();
-
         }
     }
 }
