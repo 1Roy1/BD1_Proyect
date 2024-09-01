@@ -12,10 +12,10 @@ namespace WindowsFormsApp1
     {
         EncryptMD5 encrypt = new EncryptMD5();
         MySqlConnection cnx = new MySqlConnection();
-        static string servidor = "192.168.106.167";
+        static string servidor = "localhost";
         static string bd= "proyecto";
-        static string usuario= "rootdos";
-        static string password= "root";
+        static string usuario= "root";
+        static string password= "root1234";
         static string puerto= "3306";
         string cadenaConexion = "server="+servidor+";"+"port="+puerto+";"+"user id="+usuario+";"+"password="+password+";"+"database="+bd+";";
         public MySqlConnection establecerconexion() {
