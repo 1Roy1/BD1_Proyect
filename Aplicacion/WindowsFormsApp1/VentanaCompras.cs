@@ -101,7 +101,7 @@ namespace WindowsFormsApp1
             string servidor = "localhost";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "root";
+            string password = "root1234";
             string puerto = "3306";
             string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";
             _connection = new MySqlConnection(cadenaConexion);
@@ -777,52 +777,37 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            MySqlConnection connection = new MySqlConnection(cadenaConexion);
+            connection.Open();
+
+            if (!transaccionactiva)
             {
-                using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
-                {
-                    connection.Open();
-
-                    if (!transaccionactiva)
-                    {
-                        IniciarTransaccion();
-                        transaccionactiva = true; // Marcar que la transacción ha sido iniciada
-                    }
-
-                    InsertarProducto(connection);
-
-                    // Si necesitas realizar otras acciones después de insertar el producto, agrégalas aquí
-                    CargarDatos();
-                }
+                IniciarTransaccion();
+                transaccionactiva = true; // Marcar que la transacción ha sido iniciada
             }
-            catch (Exception ex)
+
+            MySqlCommand cmdInsertProducto = new MySqlCommand("INSERT INTO lista_compras (id, Nombre, Descripcion, Precio, costo, total, cantidad) VALUES (@id, @nombre, @descripcion, @precio, @costo, @total, @cantidad)", connection);
+
+            if (string.IsNullOrEmpty(textBox1.Text))
             {
-                // Manejo de errores. Puedes mostrar un mensaje o registrar el error.
-                MessageBox.Show($"Error: {ex.Message}");
+                //temporal se cambiara luego
+                lista_id += 1;
+                cmdInsertProducto.Parameters.AddWithValue("@id", lista_id);
             }
+            else
+            {
+                cmdInsertProducto.Parameters.AddWithValue("@id", Convert.ToInt32(textBox1.Text));
+            }
+
+            cmdInsertProducto.Parameters.AddWithValue("@nombre", textBox2.Text);
+            cmdInsertProducto.Parameters.AddWithValue("@descripcion", textBox3.Text);
+            cmdInsertProducto.Parameters.AddWithValue("@cantidad", Convert.ToInt32(textBox4.Text));
+            cmdInsertProducto.Parameters.AddWithValue("@precio", Convert.ToDecimal(textBox5.Text));
+            cmdInsertProducto.Parameters.AddWithValue("@costo", Convert.ToDecimal(textBox6.Text));
+            cmdInsertProducto.Parameters.AddWithValue("@total", Convert.ToDecimal(textBox7.Text));
+            cmdInsertProducto.ExecuteNonQuery();
+            CargarDatos();
         }
-
-
-        private void InsertarProducto(MySqlConnection connection)
-        {
-            using (MySqlCommand cmdInsertProducto = new MySqlCommand(
-                "INSERT INTO lista_compras (id, Nombre, Descripcion, Precio, costo, total, cantidad) VALUES (@id, @nombre, @descripcion, @precio, @costo, @total, @cantidad)",
-                connection))
-            {
-                int id = string.IsNullOrEmpty(textBox1.Text) ? lista_id + 1 : Convert.ToInt32(textBox1.Text);
-
-                cmdInsertProducto.Parameters.AddWithValue("@id", id);
-                cmdInsertProducto.Parameters.AddWithValue("@nombre", textBox2.Text);
-                cmdInsertProducto.Parameters.AddWithValue("@descripcion", textBox3.Text);
-                cmdInsertProducto.Parameters.AddWithValue("@cantidad", Convert.ToInt32(textBox4.Text));
-                cmdInsertProducto.Parameters.AddWithValue("@precio", Convert.ToDecimal(textBox5.Text));
-                cmdInsertProducto.Parameters.AddWithValue("@costo", Convert.ToDecimal(textBox6.Text));
-                cmdInsertProducto.Parameters.AddWithValue("@total", Convert.ToDecimal(textBox7.Text));
-
-                cmdInsertProducto.ExecuteNonQuery();
-            }
-        }
-
 
         private void button4_Click(object sender, EventArgs e)
         {
