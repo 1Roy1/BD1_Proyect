@@ -65,7 +65,7 @@ namespace WindowsFormsApp1
         {
             textBox2.Text = "";
             textBox2.ForeColor = Color.Black;
-            textBox2.PasswordChar = '#';
+            textBox2.PasswordChar = '*';
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    textBox2.PasswordChar = '#';
+                    textBox2.PasswordChar = '*';
                     textBox2.Text = pass;
                     textBox2.ForeColor = Color.Black;
                 }
@@ -159,7 +159,7 @@ namespace WindowsFormsApp1
         private void ocultar_Click(object sender, EventArgs e)
         {
             ver.BringToFront();
-            textBox2.PasswordChar = '#';
+            textBox2.PasswordChar = '*';
 
         }
 

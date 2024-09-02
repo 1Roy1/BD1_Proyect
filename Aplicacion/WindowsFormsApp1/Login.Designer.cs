@@ -62,7 +62,7 @@
             this.textBox2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(418, 196);
             this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '#';
+            this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(195, 30);
             this.textBox2.TabIndex = 2;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -98,7 +98,7 @@
             // 
             this.ver.Image = global::WindowsFormsApp1.Properties.Resources.abrir;
             this.ver.Location = new System.Drawing.Point(617, 196);
-            this.ver.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ver.Margin = new System.Windows.Forms.Padding(2);
             this.ver.Name = "ver";
             this.ver.Size = new System.Drawing.Size(52, 41);
             this.ver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -110,7 +110,7 @@
             // 
             this.ocultar.Image = global::WindowsFormsApp1.Properties.Resources.ocultar;
             this.ocultar.Location = new System.Drawing.Point(617, 196);
-            this.ocultar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ocultar.Margin = new System.Windows.Forms.Padding(2);
             this.ocultar.Name = "ocultar";
             this.ocultar.Size = new System.Drawing.Size(52, 41);
             this.ocultar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -123,7 +123,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::WindowsFormsApp1.Properties.Resources.cerrar2;
             this.button2.Location = new System.Drawing.Point(663, -2);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(35, 36);
             this.button2.TabIndex = 8;
@@ -135,7 +135,7 @@
             // 
             this.pictureBox2.Image = global::WindowsFormsApp1.Properties.Resources.unnamed;
             this.pictureBox2.Location = new System.Drawing.Point(464, 10);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(89, 76);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -146,7 +146,7 @@
             // 
             this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(0, -2);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(332, 349);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
