@@ -278,12 +278,29 @@ namespace WindowsFormsApp1
                     cmd4.ExecuteNonQuery();
                 }
 
-                // Insertar la venta en la tabla 'ventas'
-                string sqlQuery5 = "INSERT INTO ventas(total, clientes_id) VALUES(@total, @cliente_id)";
+                string sqlQuery5 = "INSERT INTO ventas(fecha, total, clientes_id) VALUES(@fecha, @total, @cliente_id)";
                 MySqlCommand cmd5 = new MySqlCommand(sqlQuery5, _connection, _transaction);
+                cmd5.Parameters.AddWithValue("@fecha", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd5.Parameters.AddWithValue("@total", TotalFinal);
                 cmd5.Parameters.AddWithValue("@cliente_id", idcliente);
                 int rowsAffected3 = cmd5.ExecuteNonQuery();
+                
+                long ventasId = cmd5.LastInsertedId;
+
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    int idProducto = Convert.ToInt32(row.Cells["idventa"].Value);
+                    int cantidadVendida = Convert.ToInt32(row.Cells["existencias"].Value);
+
+                    string sqlQuery6 = "INSERT INTO detalle_ventas(Ventas_Id, Producto_ID, cantidad) VALUES(@Ventas_Id, @Producto_ID, @cantidad)";
+                    MySqlCommand cmd6 = new MySqlCommand(sqlQuery6, _connection, _transaction);
+                    cmd6.Parameters.AddWithValue("@Ventas_Id", ventasId);
+                    cmd6.Parameters.AddWithValue("@Producto_ID", idProducto);
+                    cmd6.Parameters.AddWithValue("@cantidad", cantidadVendida);
+                    cmd6.ExecuteNonQuery();
+                }
 
                 if (rowsAffected3 > 0)
                 {
@@ -300,7 +317,6 @@ namespace WindowsFormsApp1
             }
             catch (MySqlException ex)
             {
-               
                 using (var cmd = new MySqlCommand("ROLLBACK", _connection, _transaction))
                 {
                         cmd.ExecuteNonQuery();
@@ -337,49 +353,76 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            IniciarTransaccion();
-            transaccionactiva = true;
-            int id = Convert.ToInt32(textBox1.Text);
-            float precio = float.Parse(textBox6.Text);
-            int cantidadVenta = int.Parse(textBox5.Text);
-            int existenciasActuales = int.Parse(textBox4.Text);
-            int idClienteActual = Convert.ToInt32(textBox8.Text);
-
-            if (idClienteCarrito == null)
+            try
             {
-                idClienteCarrito = idClienteActual;
-            }
+                IniciarTransaccion();
+                transaccionactiva = true;
+                int id = Convert.ToInt32(textBox1.Text);
+                float precio = float.Parse(textBox6.Text);
+                int cantidadVenta = int.Parse(textBox5.Text);
+                int existenciasActuales = int.Parse(textBox4.Text);
+                int idClienteActual = Convert.ToInt32(textBox8.Text);
 
-            else
-            {
-                string sqlQuery = $"INSERT INTO venta(idventa, nombre, existencias, precio, marca, total) " +
-                                  $"VALUES (@idventa, @nombre, @existencias, @precio, @marca, @total)";
-
-                MySqlCommand cmd = new MySqlCommand(sqlQuery, _connection, _transaction);
-                cmd.Parameters.AddWithValue("@idventa", id);
-                cmd.Parameters.AddWithValue("@nombre", textBox2.Text);
-                cmd.Parameters.AddWithValue("@existencias", cantidadVenta);
-                cmd.Parameters.AddWithValue("@precio", precio);
-                cmd.Parameters.AddWithValue("@marca", textBox7.Text);
-                cmd.Parameters.AddWithValue("@total", (precio * cantidadVenta));
-
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
+                if (idClienteCarrito == null)
                 {
-                    MessageBox.Show("Se agregaron los productos al carrito exitosamente!");
-                    CargarDatosCarrito();
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-                        if (Convert.ToInt32(row.Cells["ID"].Value) == id)
-                        {
-                            int nuevaExistencia = existenciasActuales - cantidadVenta;
-                            row.Cells["Existencia"].Value = nuevaExistencia;
-                            break;
-                        }
-                    }
+                    idClienteCarrito = idClienteActual;
                 }
 
+                else
+                {
+                    string sqlQuery = $"INSERT INTO venta(idventa, nombre, existencias, precio, marca, total) " +
+                                      $"VALUES (@idventa, @nombre, @existencias, @precio, @marca, @total)";
+
+                    MySqlCommand cmd = new MySqlCommand(sqlQuery, _connection, _transaction);
+                    cmd.Parameters.AddWithValue("@idventa", id);
+                    cmd.Parameters.AddWithValue("@nombre", textBox2.Text);
+                    cmd.Parameters.AddWithValue("@existencias", cantidadVenta);
+                    cmd.Parameters.AddWithValue("@precio", precio);
+                    cmd.Parameters.AddWithValue("@marca", textBox7.Text);
+                    cmd.Parameters.AddWithValue("@total", (precio * cantidadVenta));
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Se agregaron los productos al carrito exitosamente!");
+                        CargarDatosCarrito();
+                        foreach (DataGridViewRow row in dataGridView1.Rows)
+                        {
+                            if (Convert.ToInt32(row.Cells["ID"].Value) == id)
+                            {
+                                int nuevaExistencia = existenciasActuales - cantidadVenta;
+                                row.Cells["Existencia"].Value = nuevaExistencia;
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                using (var cmd = new MySqlCommand("ROLLBACK", _connection, _transaction))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                using (var cmdStartTransaction = new MySqlCommand("START TRANSACTION", _connection))
+                {
+                    cmdStartTransaction.ExecuteNonQuery();
+                }
+                using (var cmdDelete = new MySqlCommand("DELETE FROM venta", _connection, _transaction))
+                {
+                    cmdDelete.ExecuteNonQuery();
+                }
+                using (var cmdCommit = new MySqlCommand("COMMIT", _connection))
+                {
+                    cmdCommit.ExecuteNonQuery();
+                }
+                RegistrarTransaccion("Transacción revertida por error ");
+                limpiarcampos();
+                CargarDatos();
+
+                MessageBox.Show("Error de base de datos: " + ex.Message);
             }
         }
         private void CargarDatosCarrito()
