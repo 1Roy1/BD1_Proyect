@@ -696,7 +696,13 @@ namespace WindowsFormsApp1
                         }
                         else
                         {
-                            // Producto no existe, insertar nuevo producto
+
+                            string sqlSelectLastId = "SELECT MAX(ID) FROM producto";
+                            MySqlCommand cmdSelectLastId = new MySqlCommand(sqlSelectLastId, connection);
+
+                            object result = cmdSelectLastId.ExecuteScalar();
+                            id = (result == DBNull.Value) ? 1 : Convert.ToInt32(result) + 1;
+                    
                             string sqlInsert = "INSERT INTO producto (ID, Nombre, Descripcion, Precio, Existencia) VALUES (@id, @nombre, @descripcion, @precio, @cantidad)";
                             MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, connection);
                             cmdInsert.Parameters.AddWithValue("@id", id);

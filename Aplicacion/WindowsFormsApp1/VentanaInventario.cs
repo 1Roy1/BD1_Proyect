@@ -64,7 +64,12 @@ namespace WindowsFormsApp1
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT p.ID as Codigo, p.Nombre, p.descripcion as Descripcion,p.Existencia, p.Precio, dc.Costo FROM producto p  inner join detalle_compras dc on p.ID = dc.Producto_ID group by p.ID";
+                string sqlQuery = "SELECT pro.ID, pro.Nombre, pro.Descripcion, pro.Existencia, pro.Precio, MAX(p.Nombre) AS Marca " +
+                   "FROM producto pro " +
+                   "LEFT JOIN detalle_compras dc ON pro.ID = dc.Producto_ID " +
+                   "LEFT JOIN compras c ON dc.Compras_ID = c.ID " +
+                   "LEFT JOIN proveedores p ON c.Proveedores_ID = p.ID " +
+                   "GROUP BY pro.ID, pro.Nombre, pro.Descripcion, pro.Existencia, pro.Precio";
 
                 if (comboBox1.SelectedItem != null)
                 {
