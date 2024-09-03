@@ -57,56 +57,23 @@ namespace WindowsFormsApp1
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false ;
-            }
-            else
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo numeros", "Advertencia", MessageBoxButtons.OK);
-            }
+            
         }
 
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo números enteros.", "Advertencia", MessageBoxButtons.OK);
-            }
+           
         }
 
         private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo números enteros o decimales.", "Advertencia", MessageBoxButtons.OK);
-            }
-            // Permitir solo un punto decimal
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo un punto decimal.", "Advertencia", MessageBoxButtons.OK);
-            }
+            
 
         }
 
         private void IniciarConexion()
         {
-            string servidor = "localhost";
-            string bd = "proyecto";
-            string usuario = "root";
-            string password = "root1234";
-            string puerto = "3306";
-            string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";
             connection = new MySqlConnection(cadenaConexion);
-
             try
             {
                 connection.Open();
@@ -139,26 +106,25 @@ namespace WindowsFormsApp1
 
         private void CargarDatos()
         {
-            MySqlConnection connection = new MySqlConnection(cadenaConexion);
-            try
+            if (connection == null || connection.State != ConnectionState.Open)
             {
-                if (connection == null || connection.State != ConnectionState.Open)
-                {
-                    IniciarConexion();
-                }
+                IniciarConexion();
+            }
 
-                // Consulta ajustada para evitar duplicados
-                string sqlQuery = "SELECT * from producto";
+            string sqlQuery = @"
+            SELECT p.ID, p.Nombre, p.Descripcion, p.Existencia, p.Precio, 
+                   ROUND(SUM(c.Total), 2) AS Total, dc.Costo AS Costo
+            FROM producto p
+            LEFT JOIN detalle_compras dc ON p.ID = dc.Producto_ID
+            LEFT JOIN compras c ON dc.compras_ID = c.ID
+            GROUP BY p.ID, p.Nombre, p.Descripcion, p.Existencia, p.Precio";
+
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
                 adapter.Fill(dataTable);
                 dataGridView1.DataSource = dataTable;
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            
+            
         }
 
         private void NuevoProducto_Load(object sender, EventArgs e)
@@ -173,17 +139,7 @@ namespace WindowsFormsApp1
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo números enteros o decimales.", "Advertencia", MessageBoxButtons.OK);
-            }
            
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo un punto decimal.", "Advertencia", MessageBoxButtons.OK);
-            }
         }
 
         private int InsertarProducto(MySqlConnection connection, string nombreProducto, string descripcion, string precio, int cantidad, decimal costo)
@@ -267,22 +223,21 @@ namespace WindowsFormsApp1
         private void CargarNombresProveedores()
         {
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
-            comboBox1.Items.Clear(); // Limpiar los elementos existentes en el ComboBox antes de cargar nuevos
 
             try
             {
                 connection.Open();
-                string sqlQuery = "SELECT Nombre FROM proveedores WHERE Activo = 1";
+                string sqlQuery = "SELECT ID, Nombre FROM proveedores WHERE Activo = 1";
                 MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-                MySqlDataReader reader = cmd.ExecuteReader();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
 
-                while (reader.Read())
-                {
-                    string nombreProveedor = reader["Nombre"].ToString();
-                    comboBox1.Items.Add(nombreProveedor); // Agregar el nombre del proveedor al ComboBox
-                }
+                comboBox1.DataSource = dataTable;
+                comboBox1.DisplayMember = "Nombre"; // Mostrar el nombre del proveedor
+                comboBox1.ValueMember = "ID";       // Usar el ID del proveedor como valor
 
-                reader.Close();
+                comboBox1.SelectedIndex = -1; // Opcional: para que no haya ninguna selección al inicio
             }
             catch (Exception ex)
             {
@@ -417,21 +372,6 @@ namespace WindowsFormsApp1
 
         private void inventarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (transaccionactiva == true)
-            {
-                try
-                {
-                    using (var cmd = new MySqlCommand("ROLLBACK", connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    RegistrarTransaccion("Transacción revertida antes de abrir Ventana.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al hacer rollback: " + ex.Message);
-                }
-            }
             VentanaInventario abrir1 = new VentanaInventario();
             abrir1.Show();
             this.Hide();
@@ -439,21 +379,7 @@ namespace WindowsFormsApp1
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (transaccionactiva == true)
-            {
-                try
-                {
-                    using (var cmd = new MySqlCommand("ROLLBACK", connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    RegistrarTransaccion("Transacción revertida antes de abrir Ventana.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al hacer rollback: " + ex.Message);
-                }
-            }
+           
             Proveedores abrir1 = new Proveedores();
             abrir1.Show();
             this.Hide();
@@ -461,21 +387,7 @@ namespace WindowsFormsApp1
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (transaccionactiva == true)
-            {
-                try
-                {
-                    using (var cmd = new MySqlCommand("ROLLBACK", connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    RegistrarTransaccion("Transacción revertida antes de abrir Ventana.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al hacer rollback: " + ex.Message);
-                }
-            }
+          
             Form4 abrir1 = new Form4();
             abrir1.Show();
             this.Hide();
@@ -483,21 +395,6 @@ namespace WindowsFormsApp1
 
         private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (transaccionactiva == true)
-            {
-                try
-                {
-                    using (var cmd = new MySqlCommand("ROLLBACK", connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    RegistrarTransaccion("Transacción revertida antes de abrir Ventana.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al hacer rollback: " + ex.Message);
-                }
-            }
             VentanaVentas abrir1 = new VentanaVentas();
             abrir1.Show();
             this.Hide();
@@ -505,21 +402,7 @@ namespace WindowsFormsApp1
 
         private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (transaccionactiva == true)
-            {
-                try
-                {
-                    using (var cmd = new MySqlCommand("ROLLBACK", connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    RegistrarTransaccion("Transacción revertida antes de abrir Ventana.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al hacer rollback: " + ex.Message);
-                }
-            }
+            
             Form1 abrir1 = new Form1();
             abrir1.Show();
             this.Hide();
@@ -617,17 +500,7 @@ namespace WindowsFormsApp1
 
         private void textBox7_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo números enteros o decimales.", "Advertencia", MessageBoxButtons.OK);
-            }
-          
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-                MessageBox.Show("Ingrese solo un punto decimal.", "Advertencia", MessageBoxButtons.OK);
-            }
+           
         }
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
@@ -652,58 +525,95 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (connection == null)
-            {
-                connection = new MySqlConnection(cadenaConexion);
-                connection.Open();
-            }
-
             try
             {
-                if (!transaccionactiva)
+           
+                if (comboBox1.SelectedIndex == -1)
                 {
-                    transaction = connection.BeginTransaction();
-                    transaccionactiva = true; // Marcar que la transacción ha sido iniciada
+                    MessageBox.Show("Por favor, seleccione un proveedor.");
+                    return; 
                 }
 
-                // Insertar o actualizar en la tabla producto
-                string sql = "SELECT COUNT(*) FROM producto WHERE ID = @id";
-                MySqlCommand cmdCheck = new MySqlCommand(sql, connection, transaction);
-                cmdCheck.Parameters.AddWithValue("@id", string.IsNullOrEmpty(textBox1.Text) ? lista_id + 1 : Convert.ToInt32(textBox1.Text));
-                int count = Convert.ToInt32(cmdCheck.ExecuteScalar());
+             
+                int proveedorId = Convert.ToInt32(comboBox1.SelectedValue);
 
-                if (count > 0)
+                IniciarTransaccion();
+                transaccionactiva = true;
+
+                int cantidad = Convert.ToInt32(textBox4.Text);
+                decimal precio = Convert.ToDecimal(textBox5.Text);
+                decimal costoTotal = cantidad * precio;
+
+                // Insertar o actualizar en la tabla producto
+                string sql = "SELECT ID FROM producto WHERE Nombre = @nombre";
+                MySqlCommand cmdCheck = new MySqlCommand(sql, connection, transaction);
+                cmdCheck.Parameters.AddWithValue("@nombre", textBox2.Text);
+                object result = cmdCheck.ExecuteScalar();
+
+                int productoId;
+
+                if (result != null)
                 {
+                    // El producto ya existe, obtenemos el ID
+                    productoId = Convert.ToInt32(result);
+
                     // Actualizar existencia si el producto ya existe
-                    sql = "UPDATE producto SET Nombre = @nombre, Descripcion = @descripcion, Precio = @precio, Existencia = Existencia + @cantidad WHERE ID = @id";
+                    sql = "UPDATE producto SET Descripcion = @descripcion, Precio = @precio, Existencia = Existencia + @cantidad WHERE ID = @id";
                     MySqlCommand cmdUpdate = new MySqlCommand(sql, connection, transaction);
-                    cmdUpdate.Parameters.AddWithValue("@id", Convert.ToInt32(textBox1.Text));
-                    cmdUpdate.Parameters.AddWithValue("@nombre", textBox2.Text);
+                    cmdUpdate.Parameters.AddWithValue("@id", productoId);
                     cmdUpdate.Parameters.AddWithValue("@descripcion", textBox3.Text);
-                    cmdUpdate.Parameters.AddWithValue("@precio", Convert.ToDecimal(textBox5.Text));
-                    cmdUpdate.Parameters.AddWithValue("@cantidad", Convert.ToInt32(textBox4.Text));
+                    cmdUpdate.Parameters.AddWithValue("@precio", precio);
+                    cmdUpdate.Parameters.AddWithValue("@cantidad", cantidad);
                     cmdUpdate.ExecuteNonQuery();
                 }
                 else
                 {
                     // Insertar nuevo producto si no existe
-                    sql = "INSERT INTO producto (ID, Nombre, Descripcion, Precio, Existencia) VALUES (@id, @nombre, @descripcion, @precio, @cantidad)";
+                    sql = "INSERT INTO producto (Nombre, Descripcion, Precio, Existencia) VALUES (@nombre, @descripcion, @precio, @cantidad)";
                     MySqlCommand cmdInsert = new MySqlCommand(sql, connection, transaction);
-                    cmdInsert.Parameters.AddWithValue("@id", string.IsNullOrEmpty(textBox1.Text) ? lista_id + 1 : Convert.ToInt32(textBox1.Text));
                     cmdInsert.Parameters.AddWithValue("@nombre", textBox2.Text);
                     cmdInsert.Parameters.AddWithValue("@descripcion", textBox3.Text);
-                    cmdInsert.Parameters.AddWithValue("@precio", Convert.ToDecimal(textBox5.Text));
-                    cmdInsert.Parameters.AddWithValue("@cantidad", Convert.ToInt32(textBox4.Text));
+                    cmdInsert.Parameters.AddWithValue("@precio", precio);
+                    cmdInsert.Parameters.AddWithValue("@cantidad", cantidad);
                     cmdInsert.ExecuteNonQuery();
+
+                    // Obtener el ID del producto recién insertado
+                    productoId = (int)cmdInsert.LastInsertedId;
                 }
 
-                CargarDatos(); // Actualiza la interfaz de usuario
+                // Insertar en la tabla compras, incluyendo el proveedores_ID
+                sql = "INSERT INTO compras (Fecha, Total, proveedores_ID) VALUES (@fecha, @total, @proveedor_id)";
+                MySqlCommand cmdCompras = new MySqlCommand(sql, connection, transaction);
+                cmdCompras.Parameters.AddWithValue("@fecha", DateTime.Now);
+                cmdCompras.Parameters.AddWithValue("@total", costoTotal);
+                cmdCompras.Parameters.AddWithValue("@proveedor_id", proveedorId); // Aquí se añade el ID del proveedor
+                cmdCompras.ExecuteNonQuery();
 
-                MessageBox.Show("Producto preparado para ser confirmado.");
+                long compraId = cmdCompras.LastInsertedId;
+
+                // Insertar en la tabla detalle_compras
+                sql = "INSERT INTO detalle_compras (Producto_ID, Compras_ID, Cantidad, Costo) VALUES (@producto_id, @compras_id, @cantidad, @costo)";
+                MySqlCommand cmdDetalleCompras = new MySqlCommand(sql, connection, transaction);
+                cmdDetalleCompras.Parameters.AddWithValue("@producto_id", productoId);
+                cmdDetalleCompras.Parameters.AddWithValue("@compras_id", compraId);
+                cmdDetalleCompras.Parameters.AddWithValue("@cantidad", cantidad);
+                cmdDetalleCompras.Parameters.AddWithValue("@costo", precio);
+                cmdDetalleCompras.ExecuteNonQuery();
+
+                CargarDatos(); // Actualiza la interfaz de usuario, incluyendo el total actualizado
+
+                MessageBox.Show("Producto añadido al carrito de compras.");
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                using (var cmd = new MySqlCommand("ROLLBACK", connection, transaction))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                RegistrarTransaccion("Transacción revertida por error ");
+                LimpiarCampos();
+                CargarDatos();
+                MessageBox.Show("Error de base de datos: " + ex.Message);
             }
         }
 
@@ -735,27 +645,24 @@ namespace WindowsFormsApp1
         {
             try
             {
-                if (transaccionactiva && transaction != null)
+                using (var cmd = new MySqlCommand("COMMIT", connection, transaction))
                 {
-                    transaction.Commit();
-                    transaccionactiva = false; // Marcar como confirmada
-                    RegistrarTransaccion("Transacción comiteada exitosamente.");
-                    MessageBox.Show("Transacción comiteada correctamente.");
+                    cmd.ExecuteNonQuery();
                 }
-                else
-                {
-                    MessageBox.Show("No hay transacción activa para confirmar.");
-                }
+                transaccionactiva = false;
+                RegistrarTransaccion("Transacción comiteada.");
+                MessageBox.Show("Compra Realizada correctamente!!!.");
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                if (transaction != null)
+                using (var cmd = new MySqlCommand("ROLLBACK", connection, transaction))
                 {
-                    transaction.Rollback();
-                    transaccionactiva = false;
+                    cmd.ExecuteNonQuery();
                 }
-                RegistrarTransaccion("Transacción revertida por error: " + ex.Message);
-                MessageBox.Show("Error: " + ex.Message);
+                RegistrarTransaccion("Transacción revertida por error ");
+                LimpiarCampos();
+                CargarDatos();
+                MessageBox.Show("Error de base de datos: " + ex.Message);
             }
             finally
             {
@@ -772,25 +679,18 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (!transaccionactiva)
-            {
-                MessageBox.Show("No hay transacción activa para revertir.");
-                return;
-            }
 
             try
             {
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                    transaccionactiva = false; // Transacción desactivada después del rollback
+                
+                    using (var cmd = new MySqlCommand("ROLLBACK", connection, transaction))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    transaccionactiva = false; 
                     RegistrarTransaccion("Transacción revertida.");
-                    MessageBox.Show("Transacción revertida exitosamente.");
-                }
-                else
-                {
-                    MessageBox.Show("No hay una transacción activa para revertir.");
-                }
+                    MessageBox.Show("Compras revertida exitosamente.");
+                
             }
             catch (Exception ex)
             {
