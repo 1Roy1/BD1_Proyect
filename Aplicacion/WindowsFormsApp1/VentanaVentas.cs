@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -32,13 +34,32 @@ namespace WindowsFormsApp1
                 Directory.CreateDirectory(logDirectory);
             }
         }
+
         private void RegistrarTransaccion(string mensaje)
         {
             try
             {
+                int numeroTransaccion = 1;
+
+
+                if (File.Exists(logFilePath))
+                {
+                    var lastLine = File.ReadLines(logFilePath).LastOrDefault();
+                    if (lastLine != null)
+                    {
+
+                        var lastNumberStr = lastLine.Split(':').FirstOrDefault();
+                        if (int.TryParse(lastNumberStr, out int lastNumber))
+                        {
+                            numeroTransaccion = lastNumber + 1;
+                        }
+                    }
+                }
+
+
                 using (StreamWriter sw = new StreamWriter(logFilePath, true))
                 {
-                    sw.WriteLine($"{DateTime.Now}: {mensaje}");
+                    sw.WriteLine($"{numeroTransaccion}: {DateTime.Now}: {mensaje}");
                 }
             }
             catch (Exception ex)
@@ -58,6 +79,31 @@ namespace WindowsFormsApp1
             textBox8.Clear();
             textBox9.Clear();
         }
+        private void eliminartemporal() 
+        {
+            using (var cmdStartTransaction = new MySqlCommand("START TRANSACTION", _connection))
+            {
+                cmdStartTransaction.ExecuteNonQuery();
+            }
+
+            try
+            {
+                using (var cmdDelete = new MySqlCommand("DELETE FROM venta", _connection))
+                {
+                    cmdDelete.ExecuteNonQuery();
+                }
+                using (var cmdCommit = new MySqlCommand("COMMIT", _connection))
+                {
+                    cmdCommit.ExecuteNonQuery();
+                }
+
+                RegistrarTransaccion("Todos los registros de venta eliminados.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar registros: " + ex.Message);
+            }
+        }
 
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,6 +113,16 @@ namespace WindowsFormsApp1
 
         private void moduloVentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", _connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+                eliminartemporal();
+                transaccionactiva = false;
+
+            }
             VentanaInventario abrir = new VentanaInventario();
             abrir.Show();
             this.Hide();
@@ -196,7 +252,16 @@ namespace WindowsFormsApp1
 
         private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", _connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+                eliminartemporal();
+                transaccionactiva = false;
+
+            }
             Form1 abririmenu = new Form1();
             abririmenu.Show();
             this.Hide();
@@ -345,7 +410,16 @@ namespace WindowsFormsApp1
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", _connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+                eliminartemporal();
+                transaccionactiva = false;
+
+            }
             Proveedores abrir = new Proveedores();
             abrir.Show();
             this.Hide();
@@ -355,8 +429,11 @@ namespace WindowsFormsApp1
         {
             try
             {
-                IniciarTransaccion();
-                transaccionactiva = true;
+                if (!transaccionactiva)
+                {
+                    IniciarTransaccion();
+                    transaccionactiva = true;
+                }
                 int id = Convert.ToInt32(textBox1.Text);
                 float precio = float.Parse(textBox6.Text);
                 int cantidadVenta = int.Parse(textBox5.Text);
@@ -442,6 +519,16 @@ namespace WindowsFormsApp1
 
         private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", _connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+                eliminartemporal();
+                transaccionactiva = false;
+               
+            }
             NuevoProducto abrir = new NuevoProducto();
             abrir.Show();
             this.Hide();
@@ -449,6 +536,16 @@ namespace WindowsFormsApp1
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", _connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+                eliminartemporal();
+                transaccionactiva = false;
+
+            }
             Form4 a = new Form4();
             a.Show();
             this.Hide();
@@ -503,23 +600,11 @@ namespace WindowsFormsApp1
                 }
                 catch (Exception ex)
                 {
-                    // Revertir si algo falla al eliminar registros
-                    using (var cmdRollbackDelete = new MySqlCommand("ROLLBACK", _connection))
-                    {
-                        cmdRollbackDelete.ExecuteNonQuery();
-                    }
-                    RegistrarTransaccion("Error al eliminar registros de venta: " + ex.Message);
                     MessageBox.Show("Error al eliminar registros: " + ex.Message);
                 }
             }
             catch (Exception ex)
             {
-                // Manejo de errores en el ROLLBACK inicial
-                using (var cmd = new MySqlCommand("ROLLBACK", _connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                RegistrarTransaccion("Transacción revertida por error: " + ex.Message);
                 MessageBox.Show("Error: " + ex.Message);
             }
 

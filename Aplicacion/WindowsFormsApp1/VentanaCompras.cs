@@ -112,12 +112,30 @@ namespace WindowsFormsApp1
             }
 
             string sqlQuery = @"
-            SELECT p.ID, p.Nombre, p.Descripcion, p.Existencia, p.Precio, 
-                   ROUND(SUM(c.Total), 2) AS Total, dc.Costo AS Costo
-            FROM producto p
-            LEFT JOIN detalle_compras dc ON p.ID = dc.Producto_ID
-            LEFT JOIN compras c ON dc.compras_ID = c.ID
-            GROUP BY p.ID, p.Nombre, p.Descripcion, p.Existencia, p.Precio";
+           SELECT 
+                        p.ID, 
+                        p.Nombre, 
+                        p.Descripcion, 
+                        p.Existencia, 
+                        p.Precio, 
+                        (SELECT dc.Costo 
+                         FROM detalle_compras dc 
+                         WHERE dc.Producto_ID = p.ID 
+                         ORDER BY dc.Compras_ID DESC 
+                         LIMIT 1) AS Costo,
+                        ROUND(SUM(c.Total), 2) AS Total 
+                    FROM 
+                        producto p
+                    LEFT JOIN 
+                        detalle_compras dc ON p.ID = dc.Producto_ID
+                    LEFT JOIN 
+                        compras c ON dc.Compras_ID = c.ID
+                    GROUP BY 
+                        p.ID, 
+                        p.Nombre, 
+                        p.Descripcion, 
+                        p.Existencia, 
+                        p.Precio;";
 
                 DataTable dataTable = new DataTable();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sqlQuery, connection);
@@ -142,39 +160,7 @@ namespace WindowsFormsApp1
            
         }
 
-        private int InsertarProducto(MySqlConnection connection, string nombreProducto, string descripcion, string precio, int cantidad, decimal costo)
-        {
-            MySqlCommand cmdInsertProducto = new MySqlCommand("INSERT INTO producto (Nombre, Descripcion, Existencia, Precio) VALUES (@nombre, @descripcion, @cantidad, @precio)", connection);
-            cmdInsertProducto.Parameters.AddWithValue("@nombre", nombreProducto);
-            cmdInsertProducto.Parameters.AddWithValue("@descripcion", descripcion);
-            cmdInsertProducto.Parameters.AddWithValue("@cantidad", cantidad);
-            cmdInsertProducto.Parameters.AddWithValue("@precio", precio);
-            cmdInsertProducto.ExecuteNonQuery();
-
-            // Obtener el ID del producto recién insertado
-            MySqlCommand cmdUltimoProducto = new MySqlCommand("SELECT LAST_INSERT_ID()", connection);
-            return Convert.ToInt32(cmdUltimoProducto.ExecuteScalar());
-        }
-
-        private void InsertarCompra(MySqlConnection connection, string fecha, decimal total, int proveedorID)
-        {
-            MySqlCommand cmdCompras = new MySqlCommand("INSERT INTO compras (Fecha, Total, proveedores_ID) VALUES (@fecha, @total, @proveedorID)", connection);
-            cmdCompras.Parameters.AddWithValue("@fecha", fecha);
-            cmdCompras.Parameters.AddWithValue("@total", total);
-            cmdCompras.Parameters.AddWithValue("@proveedorID", proveedorID);
-            cmdCompras.ExecuteNonQuery();
-        }
-
-        private void InsertarDetalleCompra(MySqlConnection connection, int compraID, int productoID, decimal costo, int cantidad)
-        {
-            MySqlCommand cmdDetalleCompras = new MySqlCommand("INSERT INTO detalle_compras (compras_ID, Producto_ID, Costo, Cantidad) VALUES (@compraID, @productoID, @costo, @cantidad)", connection);
-            cmdDetalleCompras.Parameters.AddWithValue("@compraID", compraID);
-            cmdDetalleCompras.Parameters.AddWithValue("@productoID", productoID);
-            cmdDetalleCompras.Parameters.AddWithValue("@costo", costo);
-            cmdDetalleCompras.Parameters.AddWithValue("@cantidad", cantidad);
-            cmdDetalleCompras.ExecuteNonQuery();
-        }
-
+      
         private void CalcularTotal()
         {
             if (!string.IsNullOrEmpty(textBox6.Text) && !string.IsNullOrEmpty(textBox4.Text))
@@ -190,9 +176,27 @@ namespace WindowsFormsApp1
         {
             try
             {
+                int numeroTransaccion = 1;
+
+               
+                if (File.Exists(logFilePath))
+                {
+                    var lastLine = File.ReadLines(logFilePath).LastOrDefault();
+                    if (lastLine != null)
+                    {
+                 
+                        var lastNumberStr = lastLine.Split(':').FirstOrDefault();
+                        if (int.TryParse(lastNumberStr, out int lastNumber))
+                        {
+                            numeroTransaccion = lastNumber + 1;
+                        }
+                    }
+                }
+
+              
                 using (StreamWriter sw = new StreamWriter(logFilePath, true))
                 {
-                    sw.WriteLine($"{DateTime.Now}: {mensaje}");
+                    sw.WriteLine($"{numeroTransaccion}: {DateTime.Now}: {mensaje}");
                 }
             }
             catch (Exception ex)
@@ -372,6 +376,16 @@ namespace WindowsFormsApp1
 
         private void inventarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+       
+                transaccionactiva = false;
+
+            }
             VentanaInventario abrir1 = new VentanaInventario();
             abrir1.Show();
             this.Hide();
@@ -379,7 +393,16 @@ namespace WindowsFormsApp1
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+
+                transaccionactiva = false;
+
+            }
             Proveedores abrir1 = new Proveedores();
             abrir1.Show();
             this.Hide();
@@ -387,7 +410,16 @@ namespace WindowsFormsApp1
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+
+                transaccionactiva = false;
+
+            }
             Form4 abrir1 = new Form4();
             abrir1.Show();
             this.Hide();
@@ -395,6 +427,16 @@ namespace WindowsFormsApp1
 
         private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
+
+                transaccionactiva = false;
+
+            }
             VentanaVentas abrir1 = new VentanaVentas();
             abrir1.Show();
             this.Hide();
@@ -402,7 +444,16 @@ namespace WindowsFormsApp1
 
         private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (transaccionactiva)
+            {
+                using (var cmdRollback = new MySqlCommand("ROLLBACK", connection))
+                {
+                    cmdRollback.ExecuteNonQuery();
+                }
             
+                transaccionactiva = false;
+
+            }
             Form1 abrir1 = new Form1();
             abrir1.Show();
             this.Hide();
@@ -527,24 +578,26 @@ namespace WindowsFormsApp1
         {
             try
             {
-           
                 if (comboBox1.SelectedIndex == -1)
                 {
                     MessageBox.Show("Por favor, seleccione un proveedor.");
-                    return; 
+                    return;
                 }
 
-             
                 int proveedorId = Convert.ToInt32(comboBox1.SelectedValue);
 
-                IniciarTransaccion();
-                transaccionactiva = true;
+                if (!transaccionactiva)
+                {
+                    IniciarTransaccion();
+                    transaccionactiva = true;
+                }
 
                 int cantidad = Convert.ToInt32(textBox4.Text);
-                decimal precio = Convert.ToDecimal(textBox5.Text);
-                decimal costoTotal = cantidad * precio;
+                decimal precio = Convert.ToDecimal(textBox5.Text);  
+                decimal costo = Convert.ToDecimal(textBox6.Text); 
+                decimal costoTotal = cantidad * costo;
 
-                // Insertar o actualizar en la tabla producto
+                // Verificar si el producto ya existe en la tabla producto
                 string sql = "SELECT ID FROM producto WHERE Nombre = @nombre";
                 MySqlCommand cmdCheck = new MySqlCommand(sql, connection, transaction);
                 cmdCheck.Parameters.AddWithValue("@nombre", textBox2.Text);
@@ -557,18 +610,18 @@ namespace WindowsFormsApp1
                     // El producto ya existe, obtenemos el ID
                     productoId = Convert.ToInt32(result);
 
-                    // Actualizar existencia si el producto ya existe
+                    // Actualizar existencia, descripción, y precio si el producto ya existe
                     sql = "UPDATE producto SET Descripcion = @descripcion, Precio = @precio, Existencia = Existencia + @cantidad WHERE ID = @id";
                     MySqlCommand cmdUpdate = new MySqlCommand(sql, connection, transaction);
                     cmdUpdate.Parameters.AddWithValue("@id", productoId);
                     cmdUpdate.Parameters.AddWithValue("@descripcion", textBox3.Text);
-                    cmdUpdate.Parameters.AddWithValue("@precio", precio);
+                    cmdUpdate.Parameters.AddWithValue("@precio", precio); // Asegurándonos de actualizar el precio
                     cmdUpdate.Parameters.AddWithValue("@cantidad", cantidad);
                     cmdUpdate.ExecuteNonQuery();
                 }
                 else
                 {
-                    // Insertar nuevo producto si no existe
+                    // Insertar un nuevo producto si no existe
                     sql = "INSERT INTO producto (Nombre, Descripcion, Precio, Existencia) VALUES (@nombre, @descripcion, @precio, @cantidad)";
                     MySqlCommand cmdInsert = new MySqlCommand(sql, connection, transaction);
                     cmdInsert.Parameters.AddWithValue("@nombre", textBox2.Text);
@@ -581,26 +634,27 @@ namespace WindowsFormsApp1
                     productoId = (int)cmdInsert.LastInsertedId;
                 }
 
-                // Insertar en la tabla compras, incluyendo el proveedores_ID
+                // Insertar en la tabla compras, incluyendo el ID del proveedor
                 sql = "INSERT INTO compras (Fecha, Total, proveedores_ID) VALUES (@fecha, @total, @proveedor_id)";
                 MySqlCommand cmdCompras = new MySqlCommand(sql, connection, transaction);
                 cmdCompras.Parameters.AddWithValue("@fecha", DateTime.Now);
                 cmdCompras.Parameters.AddWithValue("@total", costoTotal);
-                cmdCompras.Parameters.AddWithValue("@proveedor_id", proveedorId); // Aquí se añade el ID del proveedor
+                cmdCompras.Parameters.AddWithValue("@proveedor_id", proveedorId);
                 cmdCompras.ExecuteNonQuery();
 
                 long compraId = cmdCompras.LastInsertedId;
 
-                // Insertar en la tabla detalle_compras
+                // Insertar en la tabla detalle_compras, actualizando el costo
                 sql = "INSERT INTO detalle_compras (Producto_ID, Compras_ID, Cantidad, Costo) VALUES (@producto_id, @compras_id, @cantidad, @costo)";
                 MySqlCommand cmdDetalleCompras = new MySqlCommand(sql, connection, transaction);
                 cmdDetalleCompras.Parameters.AddWithValue("@producto_id", productoId);
                 cmdDetalleCompras.Parameters.AddWithValue("@compras_id", compraId);
                 cmdDetalleCompras.Parameters.AddWithValue("@cantidad", cantidad);
-                cmdDetalleCompras.Parameters.AddWithValue("@costo", precio);
+                cmdDetalleCompras.Parameters.AddWithValue("@costo", costo); 
                 cmdDetalleCompras.ExecuteNonQuery();
 
-                CargarDatos(); // Actualiza la interfaz de usuario, incluyendo el total actualizado
+                // Refrescar la interfaz de usuario con los datos actualizados
+                CargarDatos();
 
                 MessageBox.Show("Producto añadido al carrito de compras.");
             }
@@ -689,7 +743,7 @@ namespace WindowsFormsApp1
                     }
                     transaccionactiva = false; 
                     RegistrarTransaccion("Transacción revertida.");
-                    MessageBox.Show("Compras revertida exitosamente.");
+                    MessageBox.Show("Compras revertidas exitosamente.");
                 
             }
             catch (Exception ex)
