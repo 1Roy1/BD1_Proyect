@@ -54,11 +54,11 @@ namespace WindowsFormsApp1
         }
         private void CargarDatos()
         {
-            string servidor = "localhost";
+            string servidor = "127.0.0.1";
             string bd = "proyecto";
             string usuario = "root";
-            string password = "root1234";
-            string puerto = "3306";
+            string password = "";
+            string puerto = "4001";
             string cadenaConexion = "server=" + servidor + ";" + "port=" + puerto + ";" + "user id=" + usuario + ";" + "password=" + password + ";" + "database=" + bd + ";";
             MySqlConnection connection = new MySqlConnection(cadenaConexion);
             try

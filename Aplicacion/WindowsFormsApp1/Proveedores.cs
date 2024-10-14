@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
 {
     public partial class Proveedores : Form
     {
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root1234;database=proyecto";
+        String cadenaConexion = "server=127.0.0.1;port=4001;user id=root;password=;database=proyecto";
         public Proveedores()
         {
             InitializeComponent();

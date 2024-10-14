@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         private readonly string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logSubFolder, "transaction_log.txt");
         private bool transaccionactiva = false;
         int lista_id = 0;
-        string cadenaConexion = "server=localhost;port=3306;user id=root;password=root1234;database=proyecto";
+        String cadenaConexion = "server=127.0.0.1;port=4001;user id=root;password=;database=proyecto";
 
         public NuevoProducto()
         {

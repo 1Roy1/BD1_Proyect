@@ -97,7 +97,7 @@ namespace WindowsFormsApp1
                     cmdCommit.ExecuteNonQuery();
                 }
 
-                RegistrarTransaccion("Todos los registros de venta eliminados.");
+                RegistrarTransaccion("Transaccion revertida.");
             }
             catch (Exception ex)
             {
@@ -171,11 +171,11 @@ namespace WindowsFormsApp1
         }
         private void IniciarConexion()
         {
-            string servidor = "localhost";
+            string servidor = "127.0.0.1";
            string bd = "proyecto";
             string usuario = "root";
-            string password = "root1234";
-            string puerto = "3306";
+            string password = "";
+            string puerto = "4001";
             string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";
             _connection = new MySqlConnection(cadenaConexion);
 

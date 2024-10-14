@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
             try
             {
                 // Ruta del archivo .txt
-                string rutaArchivo = @"D:\BD1_Proyect\Aplicacion\WindowsFormsApp1\transaction_log.txt";
+                string rutaArchivo = @"C:\Users\USER\OneDrive\Documentos\GitHub\BD1_Proyect\Aplicacion\WindowsFormsApp1\obj\Debug\Bitacora\transaction_log.txt";
 
                 // Verificar si el archivo existe
                 if (System.IO.File.Exists(rutaArchivo))
